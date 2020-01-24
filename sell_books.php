@@ -61,14 +61,18 @@ if(empty($username)){
                          <input type="text" class="form-control mb-3" name="book-author" id="book-author">
                      </div>
                      <div class="form-group">
-                         <label for="book-description">Book Description<span class="text-danger">*</span></label>
+                         <label for="coustomer-name">Your Name<span class="text-danger">*</span></label>
+                         <input type="text" class="form-control mb-3" name="coustomer-name" id="coustomer-name">
+                     </div>
+                     <div class="form-group">
+                         <label for="book-description">Book Description<span class="text-danger">*</span><span class="book-description-count"> 0</span><span>/700</span></label>
                          <textarea class="form-control mb-3" name="book-description" id="book-description" rows="5"></textarea>
                      </div>
                      <div class="form-group">
-                         <label for="author-description">Author Description<span class="text-danger">*</span></label>
+                         <label for="author-description">Author Description<span class="text-danger">*</span><span class="author-description-count"> 0</span><span>/700</span></label>
                          <textarea class="form-control mb-3" name="author-description" id="author-description" rows="5"></textarea>
                      </div>
-                     <button class="btn btn-primary">Submit</button>
+                     <button class="btn btn-primary" type="submit">Submit</button>
                  </form>
                 
                </div>
@@ -76,12 +80,12 @@ if(empty($username)){
                 <div class="col-md-6" style="box-shadow:0px 0px 2px 2px #ccc;">
                  <div class="row mb-3">
                      <div class="col-md-3 p-2">
-                         <div class="book-image-container"><img src="./images/1.jpg" width="100%"></div>
+                         <div class="book-image-container">Book Image</div>
                      </div>
                      <div class="col-md-4 pt-4">
-                        <div><h4>Finding Moana</h4></div>
-                         <div><p>James Halemanu</p></div>
-                         <div><span class="text-primary">Sold by Sourav</span></div>
+                        <div><h4 class="book-title">Book Title</h4></div>
+                         <div><p class="book-author">Book Author</p></div>
+                         <div><span class="text-primary">Sold by </span><span class="text-primary coustomer-name">Customer Name</span></div>
                      </div>
                      <div class="col-md-5"></div>
                  </div>
@@ -89,7 +93,7 @@ if(empty($username)){
                      <div class="col-12">
                          <h5>Book Description</h5>
                          <div>
-                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                             <p class="book-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
                                  when an unknown printer took a galley of type and scrambled it to make a type 
                                  specimen book. It has survived not only five centuries, but also the leap into 
@@ -105,7 +109,7 @@ if(empty($username)){
                      <div class="col-12">
                          <h5>Author Description</h5>
                          <div>
-                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                             <p class="author-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
                                  when an unknown printer took a galley of type and scrambled it to make a type 
                                  specimen book. It has survived not only five centuries, but also the leap into 
@@ -124,11 +128,80 @@ if(empty($username)){
 
    <?php include_once("./design/footer.php");?>
    <script>
+    //book image upload 
+    $(document).ready(function(){
+        $("#book-image").on("change",function(){
+            $('.book-image-container').html("");
+            var file = this.files[0];
+            var url = URL.createObjectURL(file);
+            var img = new Image();
+            img.src=url;
+            img.onload = function(){
+                img.style.width="100%";
+                $('.book-image-container').append(img);
+            };
+        });
+    });
+
+    //book title
+    $(document).ready(function(){
+     $("#book-title").on("input",function(){
+         var text = this.value;
+         $(".book-title").html(text);
+     });
+    });
+   
+    //book author 
+    $(document).ready(function(){
+     $("#book-author").on("input",function(){
+         var text = this.value;
+         $(".book-author").html(text);
+     });
+    });
+   //coustomer name
    $(document).ready(function(){
-    $()
-   });
-   
-   
+     $("#coustomer-name").on("input",function(){
+         var text = this.value;
+         $(".coustomer-name").html(text);
+     });
+    });
+    
+    //book description
+    $(document).ready(function(){
+     $("#book-description").on("input",function(){
+         var text = this.value;
+         var length = this.value.length;
+         $(".book-description-count").html(length);
+         $(".book-description").html(text);
+     });
+    });
+    //author description
+    $(document).ready(function(){
+     $("#author-description").on("input",function(){
+         var text = this.value;
+         var length = this.value.length;
+         $(".author-description-count").html(length);
+         $(".author-description").html(text);
+     });
+    });
+
+    //submit product
+    $(document).ready(function(){
+        $(".book-sell").submit(function(e){
+            e.preventDefault();
+            $.ajax({
+             type : "POST",
+             url : "./php/sell_book.php",
+             data : new FormData(this),
+             contentType : false,
+             processData : false,
+             cache : false,
+             success: function(response){
+               alert(response);
+             }
+            });
+        });
+    });
    </script>
 <script src="./js/index.js"></script>
 </body>
