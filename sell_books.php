@@ -14,7 +14,7 @@ if(empty($username)){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>Sell Books</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet'>
     <script src="./js/jquery.min.js"></script>
@@ -61,16 +61,37 @@ if(empty($username)){
                          <input type="text" class="form-control mb-3" name="book-author" id="book-author">
                      </div>
                      <div class="form-group">
+                         <label for="book-category">Book Category<span class="text-danger">*</span></label>
+                         <select class="custom-select w-100" name="book-category" id="book-category">
+                             <option>Select Categoy</option>
+                             <option value="Arts&Music">Arts & Music</option>
+                             <option value="Biographies">Biographies</option>
+                             <option value="Business">Business</option>
+                             <option value="Engineering">Engineering</option>
+                             <option value="Medical">Medical</option>
+                             <option value="Sports">Sports</option>
+                             <option value="Others">Other</option>
+                         </select>
+                     </div>
+                     <div class="form-group">
                          <label for="coustomer-name">Your Name<span class="text-danger">*</span></label>
                          <input type="text" class="form-control mb-3" name="coustomer-name" id="coustomer-name">
                      </div>
                      <div class="form-group">
+                         <label for="mrp-price">MRP Price<span class="text-danger">*</span></label>
+                         <input type="number" class="form-control mb-3" name="mrp-price" id="mrp-price">
+                     </div>
+                     <div class="form-group">
+                         <label for="selling-price">Selling Price<span class="text-danger">*</span></label>
+                         <input type="number" class="form-control mb-3" name="selling-price" id="selling-price">
+                     </div>
+                     <div class="form-group">
                          <label for="book-description">Book Description<span class="text-danger">*</span><span class="book-description-count"> 0</span><span>/700</span></label>
-                         <textarea class="form-control mb-3" name="book-description" id="book-description" rows="5"></textarea>
+                         <textarea class="form-control mb-3" name="book-description" id="book-description" rows="5" maxlength="700"></textarea>
                      </div>
                      <div class="form-group">
                          <label for="author-description">Author Description<span class="text-danger">*</span><span class="author-description-count"> 0</span><span>/700</span></label>
-                         <textarea class="form-control mb-3" name="author-description" id="author-description" rows="5"></textarea>
+                         <textarea class="form-control mb-3" name="author-description" id="author-description" rows="5" maxlength="700"></textarea>
                      </div>
                      <button class="btn btn-primary" type="submit">Submit</button>
                  </form>

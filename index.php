@@ -41,19 +41,33 @@ border: 0;
 border-bottom: 1px dashed black;
 background: #70A8FF;
 }
+
+/* Gradient color1 - color2 - color1 */
+
+hr.style-one {
+border: 0;
+height: 1px;
+background: #333;
+background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc);
+background-image: -moz-linear-gradient(left, #ccc, #333, #ccc);
+background-image: -ms-linear-gradient(left, #ccc, #333, #ccc);
+background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
+}
 .book-view:hover{
   box-shadow: 0px 0px 2px 2px #ccc;  
 }
+
     </style>
 </head>
 <body>
     <?php
     include_once("./design/navbar.php");
     ?>
+
     <div class="container-fluid page">
      <div class=" container row mb-4">
          <div class="col-md-3 col-5 border-right p-4">
-          <div>
+           <div>
               <p class="mt-4">Books <span class="close">-</span></p>
               <hr>
               <a href="#" class="d-block my-2">Arts & Music</a>
@@ -166,61 +180,76 @@ background: #70A8FF;
               <div class="style-five mb-4"></div>
               <hr class="style-five"> 
 
-          </div>
+           </div>
         
          </div>
-         <div class="col-md-9 col-7" style="height:400px;">
+         <div class="col-md-9 col-7">
+            <h4>✵ SELLING BOOKS</h4> 
+            <hr class="style-one">
            <div class="row p-2">
-               <div class="col-md-3 book-view mb-3">
-                  <div class="card border-0 p-0">
-                        <div class="card-body p-1">
-                        <img class="card-img-top mb-2" src="./images/1.jpg" alt="Card image cap">
-                        <h5>FINDING MOANA</h5>
-                        <span>by James Halemanu</span>
-                        <p class="mb-0"><del>Rs.825</del> Rs.615 <span class="border ml-4">25% OFF</span></p>
-                        <div>
-                        <span class="fa fa-star text-warning" style="font-size:16px"></span>
-                        <span class="fa fa-star text-warning" style="font-size:16px"></span>
-                        <span class="fa fa-star text-warning" style="font-size:16px"></span>
-                        <span class="fa fa-star text-warning" style="font-size:16px"></span>
-                        <span class="fa fa-star-half-full text-warning" style="font-size:16px"></span>
-                        </div>
-                        </div>
-                   </div>
-            
-               </div>
-               <div class="col-md-3 book-view">
-               <div class="card border-0 p-0">
-                        <div class="card-body p-1">
-                        <img class="card-img-top mb-2" src="./images/1.jpg" alt="Card image cap">
-                        <h5>FINDING MOANA</h5>
-                        <span>by James Halemanu</span>
-                        <p class="mb-0"><del>Rs.825</del> Rs.615 <span class="border ml-4">25% OFF</span></p>
-                        <div>
-                        <span class="fa fa-star text-warning" style="font-size:16px"></span>
-                        <span class="fa fa-star text-warning" style="font-size:16px"></span>
-                        <span class="fa fa-star text-warning" style="font-size:16px"></span>
-                        <span class="fa fa-star text-warning" style="font-size:16px"></span>
-                        <span class="fa fa-star-half-full text-warning" style="font-size:16px"></span>
-                        </div>
-                        </div>
-                   </div>
-               </div>
-               <div class="col-md-3 book-view " style="height:300px"></div>
-               <div class="col-md-3 book-view " style="height:300px"></div>
-               <div class="col-md-3 book-view " style="height:300px"></div>
-               <div class="col-md-3 book-view " style="height:300px"></div>
-               <div class="col-md-3 book-view " style="height:300px"></div>
-               <div class="col-md-3 book-view " style="height:300px"></div>
+           <?php
+              $book_view = "SELECT * FROM sellbook";
+              $response = $db->query($book_view);
+              if($response){
+                  while($data=$response->fetch_assoc()){
+                      $id = $data['id'];
+                      echo "<div class='col-md-3 book-view mb-3' bookid='".$id."'>
+                               <div class='card border-0 p-0'>
+                                   <div class='card-body p-1'>";
+                                   $image = "data:image/png;base64,".base64_encode($data['book_image']);
+                                   $book_title = $data['book_title'];
+                                   $book_author = $data['book_author'];
+                                   $mrp_price = $data['mrp_price'];
+                                   $selling_price = $data['selling_price'];
+                                   $discount = number_format((($mrp_price-$selling_price)/$mrp_price)*100);
+                                     echo "<div class='mb-2'><img class='card-img-top' src='".$image."'bookid='".$id."'></div>";
+                                     echo "<h5>".$book_title."</h5>";
+                                     echo "<spna>by ".$book_author."</spna>";
+                                     echo "<p class='mb-0'><del>Rs.".$mrp_price."</del> Rs.".$selling_price ."<span class='border ml-3 p-1 rounded'>".$discount."% OFF</span></p>
+                                     <div class='mt-2'>
+                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
+                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
+                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
+                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
+                                     <span class='fa fa-star-half-full text-warning' style='font-size:16px'></span>
+                                     <span>(34)</span>
+                                     </div>
+                                     </div>
+                                </div>
+                            </div>";
+                  }        
+              }
+           ?>    
+           </div>
+               <h4>✸ DONATED BOOKS</h4>
+               <hr class="style-one">
+           <div class="row p-2">
                
            </div>
+
          </div>
      </div>
-      
-        
+     
+     
+
     </div>
 
    <?php include_once("./design/footer.php");?>
+   <script>
+   $(document).ready(function(){
+       $(".book-view").each(function(){
+           $(this).click(function(){
+               var bookid = $(this).attr("bookid");
+              // sessionStorage.setItem("sent", bookid);
+               window.open('./show_book_view_details.php?bookid='+bookid,'_blank');
+               //var width = 20;
+               //var height
+               //window.location.href = "http://localhost/main.php?width=" + width + "&height=" + height;
+               
+               });
+           });
+       });
+   </script>
 <script src="./js/index.js"></script>
 </body>
 </html>
