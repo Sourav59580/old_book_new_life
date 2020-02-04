@@ -1,3 +1,12 @@
+<?php
+require("./database/database.php");
+session_start();
+$username = $_SESSION['username'];
+if(empty($username)){
+    header("Location:home.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,12 +33,148 @@
     <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
+<div class="super_container">
+        <!-- Header -->
+        <header class="header">
+            <!-- Top Bar -->
+            <div class="top_bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col d-flex flex-row">
+                            <div class="top_bar_contact_item">
+                                <div class="top_bar_icon"><img
+                                        src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918577/phone.png"
+                                        alt=""></div>+91 9823 132 111
+                            </div>
+                            <div class="top_bar_contact_item">
+                                <div class="top_bar_icon"><img
+                                        src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918597/mail.png"
+                                        alt=""></div><a href="mailto:fastsales@gmail.com">contact@bbbootstrap.com</a>
+                            </div>
+                            <div class="top_bar_content ml-auto">
+                                <div class="top_bar_menu">
+                                    <ul class="standard_dropdown top_bar_dropdown">
+                                        <li> <a href="#">English<i class="fas fa-chevron-down"></i></a>
+                                            <ul>
+                                                <li><a href="#">Italian</a></li>
+                                                <li><a href="#">Spanish</a></li>
+                                                <li><a href="#">Japanese</a></li>
+                                            </ul>
+                                        </li>
+                                        <li> <a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a>
+                                            <ul>
+                                                <li><a href="#">EUR Euro</a></li>
+                                                <li><a href="#">GBP British Pound</a></li>
+                                                <li><a href="#">JPY Japanese Yen</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="top_bar_user">
+                                    <div class="user_icon"><img
+                                            src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg"
+                                            alt=""></div>
+                                    <div><a href="./signup.php" class="account">
+                                    <?php
+                                      if(empty($username)){
+                                          echo "Register";
+                                      }
+                                      else{
+                                          $get_username = "SELECT firstname FROM register WHERE email='$username'";
+                                          $response = $db->query($get_username);
+                                          $name = $response->fetch_assoc();
+                                          echo "Hello,".$name['firstname'];
+                                      }
+
+                                    ?>
+                                    </a></div>
+                                    <div><a href="./php/logout.php">Logout</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- Header Main -->
+            <div class="header_main shadow-sm">
+                <div class="container">
+                    <div class="row">
+                        <!-- Logo -->
+                        <div class="col-lg-2 col-sm-3 col-3 order-1">
+                            <div class="logo_container">
+                                <div class="logo"><a href="./index.php"><img src="./photos/logo.jpg" height="70px"/></a></div>
+                            </div>
+                        </div> <!-- Search -->
+                        <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+                            <div class="header_search">
+                                <div class="header_search_content">
+                                    <div class="header_search_form_container">
+                                        <form action="#" class="header_search_form clearfix"> <input type="search"
+                                                required="required" class="header_search_input"
+                                                placeholder="Search for products...">
+                                            <div class="custom_dropdown" style="display: none;">
+                                                <div class="custom_dropdown_list"> <span
+                                                        class="custom_dropdown_placeholder clc">All Categories</span> <i
+                                                        class="fas fa-chevron-down"></i>
+                                                    <ul class="custom_list clc">
+                                                        <li><a class="clc" href="#">All Categories</a></li>
+                                                        <li><a class="clc" href="#">Computers</a></li>
+                                                        <li><a class="clc" href="#">Laptops</a></li>
+                                                        <li><a class="clc" href="#">Cameras</a></li>
+                                                        <li><a class="clc" href="#">Hardware</a></li>
+                                                        <li><a class="clc" href="#">Smartphones</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div> <button type="submit" class="header_search_button trans_300"
+                                                value="Submit"><img
+                                                    src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918770/search.png"
+                                                    alt=""></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- Wishlist -->
+                        <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
+                            <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+                                <div class="wishlist d-flex flex-row align-items-center justify-content-end">
+                                    <div class="wishlist_icon"><img
+                                            src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918681/heart.png"
+                                            alt=""></div>
+                                    <div class="wishlist_content">
+                                        <div class="wishlist_text"><a href="#">Wishlist</a></div>
+                                        <div class="wishlist_count">0</div>
+                                    </div>
+                                </div> <!-- Cart -->
+                                <div class="cart">
+                                    <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                                        <div class="cart_icon"> <img
+                                                src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png"
+                                                alt="">
+                                            <div class="cart_count"><span>0</span></div>
+                                        </div>
+                                        <div class="cart_content">
+                                            <div class="cart_text"><a href="#">Cart</a></div>
+                                            <div class="cart_price">0.0</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+</div>
+
+
+
+
     <div class="container p-4 bg-light">
         <div class="row p-3 bg-white shadow-lg mb-3">
             <div class="col-md-5 border-right pl-4">
             <?php 
                require("./database/database.php");
                 $bookid = $_GET['bookid'];
+                $category = $_GET['category'];
                 $get_data = "SELECT * FROM sellbook WHERE id='$bookid'";
                 $response = $db->query($get_data);
                 if($response){
@@ -37,6 +182,7 @@
                    $image = "data:image/png;base64,".base64_encode($data['book_image']);
                    $book_title = $data['book_title'];
                    $book_author = $data['book_author'];
+                   $seller_name = $data['sellername'];
                    $mrp_price = $data['mrp_price'];
                    $selling_price = $data['selling_price'];
                    $discount = number_format((($mrp_price-$selling_price)/$mrp_price)*100);
@@ -53,29 +199,34 @@
                       <span class='fa fa-star text-warning' style='font-size:16px'></span>
                       <span class='fa fa-star text-warning' style='font-size:16px'></span>
                       <span class='fa fa-star-half-full text-warning' style='font-size:16px'></span>
-                      <span>(34)</span>
+                      <span>(34)</span>";
+                     echo "<span class='close text-primary' style='font-size:12px;'>Sold by ".$seller_name."</span>
                     </div>
                     <hr>";
                   echo "<p class='m-1'>MRP <del>Rs. ".$mrp_price."</del>   (Inclusive of all taxes)</p>";
                   echo "<h3 style='color:red;' >Rs. ".$selling_price."</h3><span class='border p-2 rounded mb-4'>".$discount."% OFF</span>
                        </div>
                        <div class='mt-4 ml-4 p-4'>
-                    <button class='btn btn-lg btn-dark rounded mb-4'><i class='fa fa-shopping-cart'> </i> ADD TO CART</button>
-                    <button class='btn btn-lg btn-danger rounded ml-4 mb-4'><i class='fa fa-shopping-bag'> </i> BUY NOW</button>
+                    <button class='btn btn-lg btn-dark rounded mb-4 cart-btn'><i class='fa fa-shopping-cart'> </i> ADD TO CART</button>
+                    <button class='btn btn-lg btn-danger rounded ml-4 mb-4 buy-btn'><i class='fa fa-shopping-bag'> </i> BUY NOW</button>
                     <div class='mt-4 row'>
                         <div class='col-2'>Delivery</div>
-                        <div class='col-5'>
+                        <div class='col-5 w-100'>
                             <form class='pincode-form'>
                                <div class='input-group mb-3 w-100'>
-                                   <input type='number' class='form-control' placeholder='Pincode' name='pincode'>
+                                   <input type='number' class='form-control' placeholder='Pincode' name='pincode' id='pincode'>
                                    <div class='input-group-append'>
                                      <button class='btn btn-dark' type='submit'>CHECK</button>
                                    </div>
                                  </div>
                             </form>
+                            <div class='text-primary pincode-address w-100'>
+                            
+                               
+                            </div>
                         </div>
                         <div class='col-5'>
-                            <p>Generally delivered in 11 - 13 days</p>
+                            <p class='delivary_status'></p>
                         </div>
                     </div>
                     
@@ -83,25 +234,163 @@
                 
             </div>
         </div>";
-        echo "<div class='row bg-white p-4 shadow-sm'>
-        <div class='col-12 p-4'>
-            <h4>Book Description</h4>
-            <p>".$book_description."</p>
-            </div>
-            <div class='col-12 p-4'>
-                <h4>Author Description</h4>
-                <p>".$author_description."</p>
+    
+        echo "<div class='row bg-white p-4 shadow-sm mb-3'>
+                <div class='col-12 p-4'>
+                 <h4>Book Description</h4>
+                 <p>".$book_description."</p>
                 </div>
-            </div>
-        </div>";
+                <div class='col-12 p-4'>
+                  <h4>Author Description</h4>
+                  <p>".$author_description."</p>
+                </div>
+              </div>";
+              $same_category_book = "SELECT * FROM sellbook WHERE book_category='$category'";
+              $response = $db->query($same_category_book);
+              if($response){
+              echo "<div class='row bg-white p-4 shadow-sm mb-3'>
+              <div class='col-12 p-2'>
+               <h3 class='mb-4'>Sponsored products related to this item</h3>
+                 <div class='row'>";
+         while($same_data = $response->fetch_assoc())
+         {
+             $image = "data:image/png;base64,".base64_encode($same_data['book_image']);
+             $price = $same_data['selling_price'];
+               echo "<div class='col-md-2 col-6 mb-3'>
+                       <div class='card'>
+                         <div class='card-body p-1'>
+                            <div class='mb-1'><img src='".$image."' width='100%'></div>
+                            <div class='rating'>
+                               <span class='fa fa-star text-warning' style='font-size:12px'></span>
+                               <span class='fa fa-star text-warning' style='font-size:12px'></span>
+                               <span class='fa fa-star text-warning' style='font-size:12px'></span>
+                               <span class='fa fa-star text-warning' style='font-size:12px'></span>
+                               <span class='fa fa-star-half-full text-warning' style='font-size:12px'></span>
+                            </div>
+                            <div class='mb-1'>
+                               <p class='mb-0'>165 reviews</p>
+                               <span class='text-danger'>₹ <span>".$price."</span></span>
+                            </div>
+                         </div>
+                        </div>
+                      </div>";  
+         }
+         echo " </div> 
+             </div>
+            </div>"; 
+        }
+        echo "<div class='row bg-white p-4 shadow-sm mb-3'>
+                 <div class='col-md-3 p-4'>
+                   <h4>Customer reviews</h4>
+                    <div class='customer-reviews'>
+                      <span class='fa fa-star checked text-warning' style='font-size:16px'></span>
+                      <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
+                      <span class='fa fa-star-o text-warning checked' style='font-size:16px'></span>
+                      <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
+                      <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
+                      <span class='ml-1'>3.7 out of 5</span>
+                    </div>
+                  </div>
+                  <div class='col-md-9'>
 
+                     <div>
+                       <i class='fa fa-user-circle-o' style='font-size:18px;'> </i><span> Sourav Santra</span>
+                        <div class='customer-reviews'>
+                          <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
+                          <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
+                          <span class='fa fa-star-o text-warning checked' style='font-size:16px'></span>
+                          <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
+                          <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
+                          <span class='font-weight-bold'> Must buy for AIIMS PREPARATION</span>
+                        </div>
+                        <div class='date_of_comment'><span>Reviewed in India on 24 July 2019</span></div>
+                        <p class='text-danger mb-1'>Verified Purchase</p>
+                        <div class='comment'>
+                        <span>Very good packaging and speedy delivery.. It is a quintessential book for AIIMS preparation.
+                        Explanations are descriptive as well as precise and updated according to latest edition of standard text books..
+                        Hats Off for the effort taken by Dr Pritesh Singh and others behind it</span>
+                        </div> 
+                     </div>
+                     <hr>
+                     <div>
+                       <i class='fa fa-user-circle-o' style='font-size:18px;'> </i><span> Sourav Santra</span>
+                        <div class='customer-reviews'>
+                        <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
+                        <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
+                        <span class='fa fa-star-o text-warning checked' style='font-size:16px'></span>
+                        <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
+                        <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
+                        <span class='font-weight-bold'> Must buy for AIIMS PREPARATION</span>
+                      </div>
+                      <div class='date_of_comment'><span>Reviewed in India on 24 July 2019</span></div>
+                      <p class='text-danger mb-1'>Verified Purchase</p>
+                      <div class='comment'>
+                      <span>Very good packaging and speedy delivery.. It is a quintessential book for AIIMS preparation.
+                      Explanations are descriptive as well as precise and updated according to latest edition of standard text books..
+                      Hats Off for the effort taken by Dr Pritesh Singh and others behind it</span>
+                      </div> 
+                     </div>
+                  </div>
+              </div>
+        </div>";
 
                 }
             ?> 
                 
                 
-                
-                
-        
+   <?php include_once("./design/footer.php");?>   
+   <script>
+   //cart item
+   $(document).ready(function(){
+     var id = sessionStorage.getItem("sent");
+     var email = sessionStorage.getItem("email");
+       $(".cart-btn").click(function(e){
+           //var id = sessionStorage.getItem("sent");
+           e.preventDefault();
+           $.ajax({
+               type : "POST",
+               url : "./php/cart.php",
+               data : {
+                   bookid : id,
+                   email : email
+               },
+               success : function(response){
+                  alert(response);
+               }     
+           });
+       });
+   });
+  //delivary 
+  $(document).ready(function(){
+   $(".pincode-form").submit(function(e){
+       e.preventDefault();
+       var pincode = $("#pincode").val();
+       $.ajax({
+       type : "GET",
+       url : 'https://api.postalpincode.in/pincode/'+pincode,
+       success : function(response){
+            console.log(response[0].PostOffice.length);
+            var length = response[0].PostOffice.length;
+            if(length>0)
+            {
+                $(".delivary_status").html("Generally delivered in 11 - 13 days");
+                for(var i=0;i<=length;i++)
+            {
+                console.log(response[0].PostOffice[i].Name);
+                var a = document.createElement("A");
+                a.className = 'ml-2';
+                var text = document.createTextNode(response[0].PostOffice[i].Name);
+                a.append(text);
+                $(".pincode-address").append(a);    
+            }
+            }
+            
+            //console.log(response[0].PostOffice[i].Name);
+       }
+   });
+   })
+  });
+
+   </script>     
 </body>
 </html>

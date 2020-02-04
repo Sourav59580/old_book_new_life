@@ -54,7 +54,12 @@ background-image: -ms-linear-gradient(left, #ccc, #333, #ccc);
 background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
 }
 .book-view:hover{
-  box-shadow: 0px 0px 2px 2px #ccc;  
+  box-shadow: 0px 0px 2px 2px #ccc; 
+  transform:scale(1.1);
+  z-index: 1;
+  transition:1s;
+  cursor: pointer;
+  background: white; 
 }
 
     </style>
@@ -66,7 +71,7 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
 
     <div class="container-fluid page">
      <div class=" container row mb-4">
-         <div class="col-md-3 col-5 border-right p-4">
+         <div class="col-md-2 col-5 border-right p-4">
            <div>
               <p class="mt-4">Books <span class="close">-</span></p>
               <hr>
@@ -183,7 +188,7 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
            </div>
         
          </div>
-         <div class="col-md-9 col-7">
+         <div class="col-md-8 col-7 border-right">
             <h4>✵ SELLING BOOKS</h4> 
             <hr class="style-one">
            <div class="row p-2">
@@ -193,7 +198,8 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
               if($response){
                   while($data=$response->fetch_assoc()){
                       $id = $data['id'];
-                      echo "<div class='col-md-3 book-view mb-3' bookid='".$id."'>
+                      $category = $data['book_category'];
+                      echo "<div class='col-md-3 book-view mb-3' bookid='".$id."' email='".$username."' category='".$category."' >
                                <div class='card border-0 p-0'>
                                    <div class='card-body p-1'>";
                                    $image = "data:image/png;base64,".base64_encode($data['book_image']);
@@ -226,7 +232,13 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
            <div class="row p-2">
                
            </div>
+         </div>
 
+         <div class="col-md-2">
+            <p>✸ Recommended books</p>
+            <hr class="style-one">
+
+         
          </div>
      </div>
      
@@ -240,8 +252,11 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
        $(".book-view").each(function(){
            $(this).click(function(){
                var bookid = $(this).attr("bookid");
-              // sessionStorage.setItem("sent", bookid);
-               window.open('./show_book_view_details.php?bookid='+bookid,'_blank');
+               var email = $(this).attr("email");
+               var category = $(this).attr("category");
+               sessionStorage.setItem("sent", bookid);
+               sessionStorage.setItem("email",email);
+               window.open('./show_book_view_details.php?bookid='+bookid +'&category='+category,'_blank');
                //var width = 20;
                //var height
                //window.location.href = "http://localhost/main.php?width=" + width + "&height=" + height;
