@@ -149,11 +149,35 @@ if(empty($username)){
                                         <div class="cart_icon"> <img
                                                 src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png"
                                                 alt="">
-                                            <div class="cart_count"><span>0</span></div>
+                                            <div class="cart_count"><span class="total_cart">
+                                            <?php
+                                                   $get_data = "SELECT COUNT(bookid) AS result FROM cart WHERE email='$username'";
+                                                   $response = $db->query($get_data);
+                                                   if($response){
+                                                       $data = $response->fetch_assoc();
+                                                       echo $data['result'];
+                                                   }
+                                                   else{
+                                                       echo "0";
+                                                   }
+                                                 ?>
+                                            </span></div>
                                         </div>
                                         <div class="cart_content">
-                                            <div class="cart_text"><a href="#">Cart</a></div>
-                                            <div class="cart_price">0.0</div>
+                                            <div class="cart_text"><a href="./cart.php">Cart</a></div>
+                                            <div class="cart_price">
+                                            <?php
+                                                   $get_data = "SELECT SUM(sell_price) AS result FROM cart WHERE email='$username'";
+                                                   $response = $db->query($get_data);
+                                                   if($response){
+                                                       $data = $response->fetch_assoc();
+                                                       echo $data['result'];
+                                                   }
+                                                   else{
+                                                       echo "0";
+                                                   }
+                                                 ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -204,7 +228,7 @@ if(empty($username)){
                     </div>
                     <hr>";
                   echo "<p class='m-1'>MRP <del>Rs. ".$mrp_price."</del>   (Inclusive of all taxes)</p>";
-                  echo "<h3 style='color:red;' >Rs. ".$selling_price."</h3><span class='border p-2 rounded mb-4'>".$discount."% OFF</span>
+                  echo "<h3 style='color:red;' >Rs. <span class='sell_price'>".$selling_price."</span></h3><span class='border p-2 rounded mb-4'>".$discount."% OFF</span>
                        </div>
                        <div class='mt-4 ml-4 p-4'>
                     <button class='btn btn-lg btn-dark rounded mb-4 cart-btn'><i class='fa fa-shopping-cart'> </i> ADD TO CART</button>
@@ -344,6 +368,9 @@ if(empty($username)){
    $(document).ready(function(){
      var id = sessionStorage.getItem("sent");
      var email = sessionStorage.getItem("email");
+     var cart= $(".total_cart").html();
+     var cart_price = parseInt($(".cart_price").html());
+     var sell_price = parseInt($(".sell_price").html());
        $(".cart-btn").click(function(e){
            //var id = sessionStorage.getItem("sent");
            e.preventDefault();
@@ -352,10 +379,18 @@ if(empty($username)){
                url : "./php/cart.php",
                data : {
                    bookid : id,
-                   email : email
+                   email : email,
+                   sell_price : sell_price
                },
                success : function(response){
-                  alert(response);
+                   if(response.trim()=='success'){
+                    cart = parseInt(cart)+1;
+                    $(".total_cart").html(cart);
+                    $(".cart_price").html(cart_price+sell_price);
+                   }
+                  else{
+                    alert(response);
+                  }
                }     
            });
        });

@@ -64,7 +64,7 @@ if(empty($username)){
                          <label for="book-category">Book Category<span class="text-danger">*</span></label>
                          <select class="custom-select w-100" name="book-category" id="book-category">
                              <option>Select Categoy</option>
-                             <option value="Arts&Music">Arts & Music</option>
+                             <option value="ArtsMusic">Arts & Music</option>
                              <option value="Biographies">Biographies</option>
                              <option value="Business">Business</option>
                              <option value="Engineering">Engineering</option>

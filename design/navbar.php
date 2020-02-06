@@ -115,11 +115,50 @@
                                         <div class="cart_icon"> <img
                                                 src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png"
                                                 alt="">
-                                            <div class="cart_count"><span>3</span></div>
+                                            <div class="cart_count"><span class="total_cart">
+                                                <?php
+                                                if(empty($username))
+                                                {
+                                                    echo "0";
+                                                }
+                                                else{
+                                                    
+                                                    $get_data = "SELECT COUNT(bookid) AS result FROM cart WHERE email='$username'";
+                                                    $response = $db->query($get_data);
+                                                    if($response){
+                                                        $data = $response->fetch_assoc();
+                                                        echo $data['result'];
+                                                    }
+                                                    else{
+                                                        echo "0";
+                                                    }
+                                                }
+                                                   
+
+                                                 ?>
+                                            </span></div>
                                         </div>
                                         <div class="cart_content">
-                                            <div class="cart_text"><a href="#">Cart</a></div>
-                                            <div class="cart_price">$185</div>
+                                            <div class="cart_text"><a href="./cart.php">Cart</a></div>
+                                            <div class="cart_price">
+                                            <?php
+                                            if(empty($username)){
+                                                echo "0";
+                                            }
+                                            else{
+                                                $get_data = "SELECT SUM(sell_price) AS result FROM cart WHERE email='$username'";
+                                                   $response = $db->query($get_data);
+                                                   if($response){
+                                                       $data = $response->fetch_assoc();
+                                                       echo $data['result'];
+                                                   }
+                                                   else{
+                                                       echo "0";
+                                                   }
+                                            }
+
+                                            ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

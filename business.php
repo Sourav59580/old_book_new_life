@@ -80,7 +80,7 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
             <hr class="style-one">
            <div class="row p-2">
            <?php
-              $book_view = "SELECT * FROM sellbook";
+              $book_view = "SELECT * FROM sellbook WHERE book_category='Business'";
               $response = $db->query($book_view);
               if($response){
                   while($data=$response->fetch_assoc()){
