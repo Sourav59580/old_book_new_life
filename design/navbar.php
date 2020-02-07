@@ -106,8 +106,25 @@
                                             src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918681/heart.png"
                                             alt=""></div>
                                     <div class="wishlist_content">
-                                        <div class="wishlist_text"><a href="#">Wishlist</a></div>
-                                        <div class="wishlist_count">10</div>
+                                        <div class="wishlist_text"><a href="./wishlist_page.php">Wishlist</a></div>
+                                        <div class="wishlist_count">
+                                        <?php
+                                                if(empty($username)){
+                                                    echo "0";
+                                                }
+                                                else{
+                                                    $get_data = "SELECT COUNT(bookid) AS result FROM wishlist WHERE email='$username'";
+                                                    $response = $db->query($get_data);
+                                                    if($response){
+                                                        $data = $response->fetch_assoc();
+                                                        echo $data['result'];
+                                                    }
+                                                    else{
+                                                        echo "0";
+                                                    }
+                                                }
+                                        ?>
+                                        </div>
                                     </div>
                                 </div> <!-- Cart -->
                                 <div class="cart">
@@ -117,12 +134,10 @@
                                                 alt="">
                                             <div class="cart_count"><span class="total_cart">
                                                 <?php
-                                                if(empty($username))
-                                                {
+                                                if(empty($username)){
                                                     echo "0";
                                                 }
                                                 else{
-                                                    
                                                     $get_data = "SELECT COUNT(bookid) AS result FROM cart WHERE email='$username'";
                                                     $response = $db->query($get_data);
                                                     if($response){
@@ -133,8 +148,6 @@
                                                         echo "0";
                                                     }
                                                 }
-                                                   
-
                                                  ?>
                                             </span></div>
                                         </div>

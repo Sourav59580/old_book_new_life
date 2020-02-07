@@ -140,8 +140,22 @@ if(empty($username)){
                                             src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918681/heart.png"
                                             alt=""></div>
                                     <div class="wishlist_content">
-                                        <div class="wishlist_text"><a href="#">Wishlist</a></div>
-                                        <div class="wishlist_count">0</div>
+                                        <div class="wishlist_text"><a href="./wishlist_page.php">Wishlist</a></div>
+                                        <div class="wishlist_count">
+                                        <?php
+                                        $get_data = "SELECT COUNT(bookid) AS result FROM wishlist WHERE email='$username'";
+                                        $response = $db->query($get_data);
+                                        if($response){
+                                            $data = $response->fetch_assoc();
+                                            echo $data['result'];
+                                        }
+                                        else{
+                                            echo "0";
+                                        }
+
+                                        ?>
+                                        
+                                        </div>
                                     </div>
                                 </div> <!-- Cart -->
                                 <div class="cart">
@@ -215,7 +229,7 @@ if(empty($username)){
                    echo "<img src='".$image."'class='w-75'></div>";
                    echo "<div class='col-md-7 pt-4 px-0'>
                    <div class='p-4 mb-4 bg-white'>
-                   <h3>".$book_title."<i class='fa fa-heart-o close'></i></h3>";
+                   <h3>".$book_title."<span class='fa fa-heart-o close wishcart'></span></h3>";
                    echo "<h4>By ".$book_author."</h4>
                    <div class='mt-3'>
                       <span class='fa fa-star text-warning' style='font-size:16px'></span>
@@ -395,7 +409,38 @@ if(empty($username)){
            });
        });
    });
-  //delivary 
+
+   //wish list item
+   $(document).ready(function(){
+       $(".wishcart").click(function(){
+        var id = sessionStorage.getItem("sent");
+        var email = sessionStorage.getItem("email");
+        var wishlist_count = parseInt($(".wishlist_count").html());
+          // alert();
+        $.ajax({
+            type : "POST",
+            url : "./php/wish.php",
+            data : {
+              bookid : id,
+              email : email
+            },
+            success : function(response){
+                if(response.trim()=="success"){
+                 $(".wishcart").removeClass('fa-heart-o');
+                 $(".wishcart").addClass("fa-heart");
+                 $(".wishcart").css('color','red');
+                 $(".wishlist_count").html(wishlist_count+1);
+                }
+                else{
+                    alert(response);
+                }
+            }
+
+        });
+       });
+   });
+
+  //delivary pincode
   $(document).ready(function(){
    $(".pincode-form").submit(function(e){
        e.preventDefault();
@@ -418,8 +463,7 @@ if(empty($username)){
                 a.append(text);
                 $(".pincode-address").append(a);    
             }
-            }
-            
+            }  
             //console.log(response[0].PostOffice[i].Name);
        }
    });

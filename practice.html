@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet'>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <link href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    
+    <div class="container">
+
+    </div>
+    <button class="btn"> click me</button>
+
+    <div class="container-fluid">
+
+    </div>
+    <button class="btn button"> click me</button>
+    <script>
+        $(document).ready(function(){
+            $(".button").click(function(){
+                var container = document.querySelector(".container-fluid");
+                var row = document.createElement("DIV");
+                row.className = "row p-4 cart-product-container";
+        
+                var col2 = document.createElement("DIV");
+                col2.className='col-md-2 col-6 mb-2';
+                var img = document.createElement("IMG");
+                img.src='./images/1.jpg';
+                img.style.width ='100%';
+                col2.append(img);
+                row.append(col2);
+
+                var col8 = document.createElement("DIV");
+                col8.className ='col-md-8 col-6 mb-2';
+                var hed1 = document.createElement("H4");
+                hed1.append("FINDING MOANA BY JAMES HALEMANU");
+                col8.append(hed1);
+                
+                var sell_price = document.createElement("H4");
+                sell_price.className='text-danger';
+                var india_inr = document.createElement("I");
+                india_inr.className='fa fa-inr mr-1';
+                sell_price.append(india_inr);
+                sell_price.append("900");
+                col8.append(sell_price);
+
+                var span = document.createElement("SPAN");
+                span.className='border p-1 rounded mb-4';
+                span.append("20 % OFF");
+                col8.append(span);
+
+                var para = document.createElement("P");
+                para.className='m-1';
+                para.append("MRP ");
+                var del = document.createElement("DEL");
+                del.append("Rs. 1000 ");
+                para.append(del);
+                para.append("(Inclusive of all taxes)");
+                col8.append(para);
+
+                var hed2 = document.createElement("H4");
+                hed2.className = 'd-md-none d-block text-danger';
+                var inr = document.createElement("I");
+                inr.className = 'fa fa-inr mr-1';
+                hed2.append(inr);
+                hed2.append('900');
+                col8.append(hed2);
+                var qhed = document.createElement("H5");
+                qhed.append('Quantity : ');
+                col8.append(qhed);
+                var btndiv =  document.createElement("DIV");
+                btndiv.className = 'btn-group mb-4 w-100';
+                var btn1 = document.createElement("BUTTON");
+                btn1.className = 'btn btn-danger';
+                var minus = document.createElement("I");
+                minus.className = 'fa fa-minus';
+                btn1.append(minus);
+                btndiv.append(btn1);
+
+                var btn2 = document.createElement("BUTTON");
+                btn2.className = 'btn px-4 btn-dark';
+                btn2.append("1");
+                btndiv.append(btn2);
+
+                var btn3 = document.createElement("BUTTON");
+                btn3.className = 'btn btn-info';
+                var plus = document.createElement("I");
+                plus.className = 'fa fa-plus';
+                btn3.append(plus);
+                btndiv.append(btn3);
+                col8.append(btndiv);
+
+                var btn4 = document.createElement("BUTTON");
+                btn4.className = 'btn btn-secondary mr-4 my-3 delete-btn';
+                var trash = document.createElement("I");
+                trash.className = 'fa fa-trash mr-1';
+                btn4.append(trash);
+                btn4.append("DELETE");
+                col8.append(btn4);
+
+                var btn5 = document.createElement("BUTTON");
+                btn5.className = 'btn btn-primary move-btn';
+                var save = document.createElement("I");
+                save.className = 'fa fa-save mr-1';
+                btn5.append(save);
+                btn5.append("MOVE TO CART");
+                col8.append(btn5);
+                row.append(col8);
+
+                var col_md_2 = document.createElement("DIV");
+                col_md_2.className='col-md-2 d-md-block d-none';
+                row.append(col_md_2);
+                
+                container.append(row);
+                var hr = document.createElement("HR");
+                container.append(hr); 
+            });
+        });
+
+        $(document).ready(function(){
+            $(".btn1").click(function(){
+                var container = document.querySelector(".container");
+                var row = document.createElement("DIV");
+                row.className = "row p-4 cart-product-container";
+        
+                var col2 = document.createElement("DIV");
+                col2.className='col-md-2 col-6 mb-2';
+                var img = document.createElement("IMG");
+                img.src='./images/1.jpg';
+                img.style.width ='100%';
+                col2.append(img);
+                row.append(col2);
+
+                var col8 = document.createElement("DIV");
+                col8.className ='col-md-8 col-6 mb-2';
+                var hed1 = document.createElement("H4");
+                hed1.append("FINDING MOANA BY JAMES HALEMANU");
+                col8.append(hed1);
+                var hed2 = document.createElement("H4");
+                hed2.className = 'd-md-none d-block text-danger';
+                var inr = document.createElement("I");
+                inr.className = 'fa fa-inr mr-1';
+                hed2.append(inr);
+                hed2.append('900');
+                col8.append(hed2);
+                var qhed = document.createElement("H5");
+                qhed.append('Quantity : ');
+                col8.append(qhed);
+                var btndiv =  document.createElement("DIV");
+                btndiv.className = 'btn-group mb-4 w-100';
+                var btn1 = document.createElement("BUTTON");
+                btn1.className = 'btn btn-danger';
+                var minus = document.createElement("I");
+                minus.className = 'fa fa-minus';
+                btn1.append(minus);
+                btndiv.append(btn1);
+
+                var btn2 = document.createElement("BUTTON");
+                btn2.className = 'btn px-4 btn-dark';
+                btn2.append("1");
+                btndiv.append(btn2);
+
+                var btn3 = document.createElement("BUTTON");
+                btn3.className = 'btn btn-info';
+                var plus = document.createElement("I");
+                plus.className = 'fa fa-plus';
+                btn3.append(plus);
+                btndiv.append(btn3);
+                col8.append(btndiv);
+
+                var btn4 = document.createElement("BUTTON");
+                btn4.className = 'btn btn-secondary mr-4 my-3 delete-btn';
+                var trash = document.createElement("I");
+                trash.className = 'fa fa-trash mr-1';
+                btn4.append(trash);
+                btn4.append("DELETE");
+                col8.append(btn4);
+
+                var btn5 = document.createElement("BUTTON");
+                btn5.className = 'btn btn-success save-btn';
+                var save = document.createElement("I");
+                save.className = 'fa fa-save mr-1';
+                btn5.append(save);
+                btn5.append("SAVE FOR LATER");
+                col8.append(btn5);
+                row.append(col8);
+
+                var col_md_2 = document.createElement("DIV");
+                col_md_2.className='col-md-2 d-md-block d-none';
+                var hed3 = document.createElement("H4");
+                hed3.className='text-danger';
+                var india_inr = document.createElement("I");
+                india_inr.className='fa fa-inr mr-1';
+                hed3.append(india_inr);
+                hed3.append("900");
+                col_md_2.append(hed3);
+                row.append(col_md_2);
+                
+                container.append(row);
+                var hr = document.createElement("HR");
+                container.append(hr); 
+            });
+        });
+
+        var container = document.querySelector(".container-fluid");
+                            var row = document.createElement("DIV");
+                            row.className = "row p-4 cart-product-container";
+        
+                            var col2 = document.createElement("DIV");
+                            col2.className='col-md-2 col-6 mb-2';
+                            var img = document.createElement("IMG");
+                            img.src=image;
+                            img.style.width ='100%';
+                            col2.append(img);
+                            row.append(col2);
+
+                            var col8 = document.createElement("DIV");
+                            col8.className ='col-md-8 col-6 mb-2';
+                            var hed1 = document.createElement("H4");
+                            hed1.append(title+" BY "+author);
+                            col8.append(hed1);
+                
+                            var sell_price = document.createElement("H4");
+                            sell_price.className='text-danger';
+                            var india_inr = document.createElement("I");
+                            india_inr.className='fa fa-inr mr-1';
+                            sell_price.append(india_inr);
+                            sell_price.append(sell_price);
+                            col8.append(sell_price);
+
+                            var span = document.createElement("SPAN");
+                            span.className='border p-1 rounded mb-4';
+                            span.append("20 % OFF");
+                            col8.append(span);
+
+                            var para = document.createElement("P");
+                            para.className='m-1';
+                            para.append("MRP ");
+                            var del = document.createElement("DEL");
+                            del.append("Rs. 1000 ");
+                            para.append(del);
+                            para.append("(Inclusive of all taxes)");
+                            col8.append(para);
+
+                            var hed2 = document.createElement("H4");
+                            hed2.className = 'd-md-none d-block text-danger';
+                            var inr = document.createElement("I");
+                            inr.className = 'fa fa-inr mr-1';
+                            hed2.append(inr);
+                            hed2.append('900');
+                            col8.append(hed2);
+                var qhed = document.createElement("H5");
+                qhed.append('Quantity : ');
+                col8.append(qhed);
+                var btndiv =  document.createElement("DIV");
+                btndiv.className = 'btn-group mb-4 w-100';
+                var btn1 = document.createElement("BUTTON");
+                btn1.className = 'btn btn-danger';
+                var minus = document.createElement("I");
+                minus.className = 'fa fa-minus';
+                btn1.append(minus);
+                btndiv.append(btn1);
+
+                var btn2 = document.createElement("BUTTON");
+                btn2.className = 'btn px-4 btn-dark';
+                btn2.append("1");
+                btndiv.append(btn2);
+
+                var btn3 = document.createElement("BUTTON");
+                btn3.className = 'btn btn-info';
+                var plus = document.createElement("I");
+                plus.className = 'fa fa-plus';
+                btn3.append(plus);
+                btndiv.append(btn3);
+                col8.append(btndiv);
+
+                var btn4 = document.createElement("BUTTON");
+                btn4.className = 'btn btn-secondary mr-4 my-3 delete-btn';
+                var trash = document.createElement("I");
+                trash.className = 'fa fa-trash mr-1';
+                btn4.append(trash);
+                btn4.append("DELETE");
+                col8.append(btn4);
+
+                var btn5 = document.createElement("BUTTON");
+                btn5.className = 'btn btn-primary move-btn';
+                var save = document.createElement("I");
+                save.className = 'fa fa-save mr-1';
+                btn5.append(save);
+                btn5.append("MOVE TO CART");
+                col8.append(btn5);
+                row.append(col8);
+
+                var col_md_2 = document.createElement("DIV");
+                col_md_2.className='col-md-2 d-md-block d-none';
+                row.append(col_md_2);
+                
+                container.append(row);
+                var hr = document.createElement("HR");
+                container.append(hr);
+
+    </script>
+</body>
+</html>
