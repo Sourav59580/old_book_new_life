@@ -1,5 +1,5 @@
 <div>
-              <p class="mt-4">Books <span class="close">-</span></p>
+              <p class="">Books <span class="close">-</span></p>
               <hr>
               <a href="./arts_and_Music.php" class="d-block my-2">Arts & Music</a>
               <a href="./biographies.php" class="d-block my-2">Biographies</a>

@@ -76,20 +76,18 @@ if (empty($username)) {
                            <button type='btn' class='btn btn-danger'><i class='fa fa-trash'></i></button>
                          </div>
                          <button type='btn' class='btn btn-secondary mr-4 my-3 delete-btn' price='" . $selling_price . "' email='" . $username . "' bookid='" . $cart_item[$i] . "'><i class='fa fa-trash mr-1'></i>DELETE</button>
-                         <button type='btn' class='btn btn-success save-btn' price='" . $selling_price . "' email='" . $username . "' bookid='" . $cart_item[$i] . "'><i class='fa fa-save mr-1'></i>SAVE FOR LATER</button>
+                         <button type='btn' class='btn btn-success save-btn' author='".$book_author."' title='".$book_title."' mrp='".$mrp_price."' src='".$image."' price='" . $selling_price . "' email='" . $username . "' bookid='" . $cart_item[$i] . "'><i class='fa fa-save mr-1'></i>SAVE FOR LATER</button>
                        </div>
                        <div class='col-md-2 d-md-block d-none'><h4 class='text-danger'><i class='fa fa-inr mr-1'> </i>" . $selling_price . "</h4></div>
-                     </div><hr>
-                     <div class='after_move_to_cart'>
-
-
-                    </div>
-                     
+                     </div><hr>                     
                      ";
                 }
             }
             ?>
-            
+            <div class='after_move_to_cart'>
+
+
+            </div>
 
 
             <div class="row px-4">
@@ -104,7 +102,7 @@ if (empty($username)) {
         <div class="row px-4">
             <div class="col-md-2 col-12">
                 <h4>Saved For Later
-                    <span class="wishlist_count font-weight-bold text-dark"> (<?php
+                    <span class="wishlist_count font-weight-bold text-dark"> (<span id="save_item_number"><?php
 
                                                                                 if (empty($username)) {
                                                                                     echo "0";
@@ -118,7 +116,7 @@ if (empty($username)) {
                                                                                         echo "0";
                                                                                     }
                                                                                 }
-                                                                                ?>)
+                                                                                ?></span>)
                     </span>
                 </h4>
             </div>
@@ -169,7 +167,10 @@ if (empty($username)) {
             }
         }
         ?>
+        <div class="after_cart_to_save_for_later">
 
+
+        </div>
 
 
     </div>
@@ -178,33 +179,32 @@ if (empty($username)) {
     <?php include_once("./design/footer.php"); ?>
 
     <script>
+        
         //delete save later product
-        $(document).ready(function(){
-            $(".delete-save-btn").each(function(){
-                $(this).click(function(){
+        $(document).ready(function() {
+            $(".delete-save-btn").each(function() {
+                $(this).click(function() {
                     alert();
                     var bookid = $(this).attr('bookid');
                     var email = $(this).attr('email');
                     var parent = $(this).parent().parent();
                     $.ajax({
-                     type : "POST",
-                     url : './php/delete_save_later_product.php',
-                     data : {
-                         bookid : bookid,
-                         email : email
-                     },
-                     success : function(response){
-                      if(response.trim()=="success")
-                      {
-                          parent.css("display","none");
-                          //some work panding......
-                          
-                      }
-                      else {
-                          alert(response);
-                      }
-                     }
-                    });  
+                        type: "POST",
+                        url: './php/delete_save_later_product.php',
+                        data: {
+                            bookid: bookid,
+                            email: email
+                        },
+                        success: function(response) {
+                            if (response.trim() == "success") {
+                                parent.css("display", "none");
+                                //some work panding......
+
+                            } else {
+                                alert(response);
+                            }
+                        }
+                    });
                 });
             });
         });
@@ -235,9 +235,10 @@ if (empty($username)) {
                             if (response.trim() == 'success') {
                                 $(".total_cart").html(cart + 1);
                                 $(".cart_price").html(total_price + price);
-                                parent.css('display','none');
+                                parent.css('display', 'none');
                                 //some work panding.....
-
+                                var save_item_number=parseInt($("#save_item_number").html());
+                                $("#save_item_number").html(save_item_number - 1);
                                 // move to cart
                                 var container = document.querySelector(".after_move_to_cart");
                                 var row = document.createElement("DIV");
@@ -254,7 +255,7 @@ if (empty($username)) {
                                 var col8 = document.createElement("DIV");
                                 col8.className = 'col-md-8 col-6 mb-2';
                                 var hed1 = document.createElement("H4");
-                                hed1.append(title+" BY "+author);
+                                hed1.append(title + " BY " + author);
                                 col8.append(hed1);
                                 var hed2 = document.createElement("H4");
                                 hed2.className = 'd-md-none d-block text-danger';
@@ -338,6 +339,11 @@ if (empty($username)) {
                     var parent = $(this).parent().parent();
                     var cart = parseInt($(".total_cart").html());
                     var price = $(this).attr('price');
+                    var mrp = $(this).attr('mrp');
+                    var discount = Math.floor(((mrp-price)/mrp)*100);
+                    var title = $(this).attr('title');
+                    var author = $(this).attr('author');
+                    var src = $(this).attr('src');
                     var total_price = parseInt($(".cart_price").html());
                     $.ajax({
                         type: "POST",
@@ -351,6 +357,107 @@ if (empty($username)) {
                                 parent.css('display', 'none');
                                 $(".total_cart").html(cart - 1);
                                 $(".cart_price").html(total_price - price);
+                                var save_item_number=parseInt($("#save_item_number").html());
+                                $("#save_item_number").html(save_item_number+1);
+                              
+                                // dynamically show cart product to save for later product
+
+                                var container = document.querySelector(".after_cart_to_save_for_later");
+                                var row = document.createElement("DIV");
+                                row.className = "row p-4 cart-product-container";
+
+                                var col2 = document.createElement("DIV");
+                                col2.className = 'col-md-2 col-6 mb-2';
+                                var img = document.createElement("IMG");
+                                img.src = src;
+                                img.style.width = '100%';
+                                col2.append(img);
+                                row.append(col2);
+
+                                var col8 = document.createElement("DIV");
+                                col8.className = 'col-md-8 col-6 mb-2';
+                                var hed1 = document.createElement("H4");
+                                hed1.append("FINDING MOANA BY JAMES HALEMANU");
+                                col8.append(hed1);
+
+                                var sell_price = document.createElement("H4");
+                                sell_price.className = 'text-danger';
+                                var india_inr = document.createElement("I");
+                                india_inr.className = 'fa fa-inr mr-1';
+                                sell_price.append(india_inr);
+                                sell_price.append(price);
+                                col8.append(sell_price);
+
+                                var span = document.createElement("SPAN");
+                                span.className = 'border p-1 rounded mb-4';
+                                span.append(discount+" % OFF");
+                                col8.append(span);
+
+                                var para = document.createElement("P");
+                                para.className = 'm-1';
+                                para.append("MRP ");
+                                var del = document.createElement("DEL");
+                                del.append("Rs. "+mrp);
+                                para.append(del);
+                                para.append("(Inclusive of all taxes)");
+                                col8.append(para);
+
+                                var hed2 = document.createElement("H4");
+                                hed2.className = 'd-md-none d-block text-danger';
+                                var inr = document.createElement("I");
+                                inr.className = 'fa fa-inr mr-1';
+                                hed2.append(inr);
+                                hed2.append(price);
+                                col8.append(hed2);
+                                var qhed = document.createElement("H5");
+                                qhed.append('Quantity : ');
+                                col8.append(qhed);
+                                var btndiv = document.createElement("DIV");
+                                btndiv.className = 'btn-group mb-4 w-100';
+                                var btn1 = document.createElement("BUTTON");
+                                btn1.className = 'btn btn-danger';
+                                var minus = document.createElement("I");
+                                minus.className = 'fa fa-minus';
+                                btn1.append(minus);
+                                btndiv.append(btn1);
+
+                                var btn2 = document.createElement("BUTTON");
+                                btn2.className = 'btn px-4 btn-dark';
+                                btn2.append("1");
+                                btndiv.append(btn2);
+
+                                var btn3 = document.createElement("BUTTON");
+                                btn3.className = 'btn btn-info';
+                                var plus = document.createElement("I");
+                                plus.className = 'fa fa-plus';
+                                btn3.append(plus);
+                                btndiv.append(btn3);
+                                col8.append(btndiv);
+
+                                var btn4 = document.createElement("BUTTON");
+                                btn4.className = 'btn btn-secondary mr-4 my-3 delete-btn';
+                                var trash = document.createElement("I");
+                                trash.className = 'fa fa-trash mr-1';
+                                btn4.append(trash);
+                                btn4.append("DELETE");
+                                col8.append(btn4);
+
+                                var btn5 = document.createElement("BUTTON");
+                                btn5.className = 'btn btn-primary move-btn';
+                                var save = document.createElement("I");
+                                save.className = 'fa fa-save mr-1';
+                                btn5.append(save);
+                                btn5.append("MOVE TO CART");
+                                col8.append(btn5);
+                                row.append(col8);
+
+                                var col_md_2 = document.createElement("DIV");
+                                col_md_2.className = 'col-md-2 d-md-block d-none';
+                                row.append(col_md_2);
+
+                                container.append(row);
+                                var hr = document.createElement("HR");
+                                container.append(hr);
 
 
                             } else {
