@@ -8,7 +8,7 @@
    $response = $db->query($table_check);
    if($response)
    {
-    $insert_data = "INSERT INTO cart(bookid,sell_price,email) VALUES('$bookid','$sell_price','$email')";
+    $insert_data = "INSERT INTO cart(bookid,sell_price,email,quantity) VALUES('$bookid','$sell_price','$email',1)";
     $response = $db->query($insert_data);
     if($response){
         $delete_product = "DELETE FROM save_later WHERE email='$email' AND bookid='$bookid'";
@@ -31,11 +31,12 @@
         bookid INT(10),
         sell_price FLOAT(20),
         email VARCHAR(50),
+        quantity INT(10),
         PRIMARY KEY(id)
        )";
        $response = $db->query($create_table);
        if($response){
-           $insert_data = "INSERT INTO cart(bookid,sell_price,email) VALUES('$bookid','$sell_price','$email')";
+           $insert_data = "INSERT INTO cart(bookid,sell_price,email,quantity) VALUES('$bookid','$sell_price','$email',1)";
            $response = $db->query($insert_data);
            if($response){
             $delete_product = "DELETE FROM save_later WHERE email='$email' AND bookid='$bookid'";

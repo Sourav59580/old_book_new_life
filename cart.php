@@ -24,6 +24,8 @@ if (empty($username)) {
     <link href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -61,24 +63,30 @@ if (empty($username)) {
                     $book_author = $data['book_author'];
                     $seller_name = $data['sellername'];
                     $mrp_price = $data['mrp_price'];
-                    $selling_price = $data['selling_price'];
-
+                    $sell_price = $data['selling_price'];
+                    $quantity = 1;
+                    $get_quantity = "SELECT quantity FROM cart WHERE bookid='$cart_item[$i]' AND email='$username'";
+                    $get_response = $db->query($get_quantity);
+                    if ($data = $get_response->fetch_assoc()) {
+                        $quantity = $data['quantity'];
+                    }
+                    $selling_price = $sell_price * $quantity;
                     echo "<div class='row p-4 cart-product-container'>
                        <div class='col-md-2 col-6 mb-2'><img src='" . $image . "' width='100%'></div>
                        <div class='col-md-8 col-6 mb-2'>
                          <h4>" . $book_title . " By " . $book_author . "</h4>
-                         <h4 class='d-md-none d-block text-danger'><i class='fa fa-inr mr-1'></i>" . $selling_price . "</h4>
+                         <h4 class='d-md-none d-block text-danger'><i class='fa fa-inr mr-1'></i><span class='change-price'>" . $selling_price . "</span></h4>
                          <h5>Quantity : </h5>
                          <div class='btn-group mb-4 w-100' role='group'>
-                           <button type='btn' class='btn btn-danger'><i class='fa fa-minus'></i></button>
-                           <button type='btn' class='btn px-4 btn-dark'>1</button>
-                           <button type='btn' class='btn btn-info'><i class='fa fa-plus'></i></button>
+                           <button type='btn' class='btn btn-danger decrease-qty' price='" . $sell_price . "' email='" . $username . "' bookid='" . $cart_item[$i] . "'><i class='fa fa-minus '></i></button>
+                           <button type='btn' class='btn px-4 btn-dark total-qty'>" . $quantity . "</button>
+                           <button type='btn' class='btn btn-info increase-qty' price='" . $sell_price . "' email='" . $username . "' bookid='" . $cart_item[$i] . "'><i class='fa fa-plus'></i></button>
                            <button type='btn' class='btn btn-danger'><i class='fa fa-trash'></i></button>
                          </div>
                          <button type='btn' class='btn btn-secondary mr-4 my-3 delete-btn' price='" . $selling_price . "' email='" . $username . "' bookid='" . $cart_item[$i] . "'><i class='fa fa-trash mr-1'></i>DELETE</button>
-                         <button type='btn' class='btn btn-success save-btn' author='".$book_author."' title='".$book_title."' mrp='".$mrp_price."' src='".$image."' price='" . $selling_price . "' email='" . $username . "' bookid='" . $cart_item[$i] . "'><i class='fa fa-save mr-1'></i>SAVE FOR LATER</button>
+                         <button type='btn' class='btn btn-success save-btn' author='" . $book_author . "' title='" . $book_title . "' mrp='" . $mrp_price . "' src='" . $image . "' price='" . (($selling_price) / $quantity) . "' email='" . $username . "' bookid='" . $cart_item[$i] . "'><i class='fa fa-save mr-1'></i>SAVE FOR LATER</button>
                        </div>
-                       <div class='col-md-2 d-md-block d-none'><h4 class='text-danger'><i class='fa fa-inr mr-1'> </i>" . $selling_price . "</h4></div>
+                       <div class='col-md-2 d-md-block d-none'><h4 class='text-danger'><i class='fa fa-inr mr-1'> </i><span class='desktop_change_price'>" . $selling_price . "</span></h4></div>
                      </div><hr>                     
                      ";
                 }
@@ -104,19 +112,19 @@ if (empty($username)) {
                 <h4>Saved For Later
                     <span class="wishlist_count font-weight-bold text-dark"> (<span id="save_item_number"><?php
 
-                                                                                if (empty($username)) {
-                                                                                    echo "0";
-                                                                                } else {
-                                                                                    $get_data = "SELECT COUNT(bookid) AS result FROM save_later WHERE email='$username'";
-                                                                                    $response = $db->query($get_data);
-                                                                                    if ($response) {
-                                                                                        $data = $response->fetch_assoc();
-                                                                                        echo $data['result'];
-                                                                                    } else {
-                                                                                        echo "0";
-                                                                                    }
-                                                                                }
-                                                                                ?></span>)
+                                                                                                            if (empty($username)) {
+                                                                                                                echo "0";
+                                                                                                            } else {
+                                                                                                                $get_data = "SELECT COUNT(bookid) AS result FROM save_later WHERE email='$username'";
+                                                                                                                $response = $db->query($get_data);
+                                                                                                                if ($response) {
+                                                                                                                    $data = $response->fetch_assoc();
+                                                                                                                    echo $data['result'];
+                                                                                                                } else {
+                                                                                                                    echo "0";
+                                                                                                                }
+                                                                                                            }
+                                                                                                            ?></span>)
                     </span>
                 </h4>
             </div>
@@ -179,7 +187,139 @@ if (empty($username)) {
     <?php include_once("./design/footer.php"); ?>
 
     <script>
-        
+        //increase qty
+        $(document).ready(function() {
+            $(".increase-qty").each(function() {
+                $(this).click(function() {
+                    var bookid = $(this).attr('bookid');
+                    var email = $(this).attr('email');
+                    var selling_price = parseInt($(this).attr('price'));
+                    var a = parseInt($(this).parent().children('.total-qty').html());
+                    var parent = $(this).parent().children('.total-qty');
+                    var b = parseInt($(this).parent().parent().children('H4').children('.change-price').html());
+                    var price_parent = $(this).parent().parent().children('H4').children('.change-price');
+
+                    var c = parseInt($(this).parent().parent().parent().children("DIV").children("H4").children('.desktop_change_price').html());
+                    var desktop_price_parent = $(this).parent().parent().parent().children("DIV").children("H4").children('.desktop_change_price');
+
+                    var total_price = parseInt($(".cart_price").html());
+                    $.ajax({
+                        type: "POST",
+                        url: "./php/increase_qty.php",
+                        data: {
+                            bookid: bookid,
+                            email: email,
+                            selling_price: selling_price
+                        },
+                        success: function(response) {
+                            if (response.trim() == 'update') {
+                                parent.html(a + 1);
+                                price_parent.html(b + selling_price);
+                                desktop_price_parent.html(c + selling_price);
+                                $(".cart_price").html(total_price + selling_price);
+                            } else
+                                alert(response);
+                        }
+                    });
+                });
+            });
+        });
+
+        //decreace qty
+        $(document).ready(function() {
+            $('.decrease-qty').each(function() {
+                $(this).click(function() {
+                    
+                    var mainParent = $(this).parent().parent().parent();
+                    var bookid = $(this).attr('bookid');
+                    var email = $(this).attr('email');
+                    var selling_price = parseInt($(this).attr('price'));
+                    var a = parseInt($(this).parent().children('.total-qty').html());
+                    var parent = $(this).parent().children('.total-qty');
+                    var b = parseInt($(this).parent().parent().children('H4').children('.change-price').html());
+                    var price_parent = $(this).parent().parent().children('H4').children('.change-price');
+
+                    var c = parseInt($(this).parent().parent().parent().children("DIV").children("H4").children('.desktop_change_price').html());
+                    var desktop_price_parent = $(this).parent().parent().parent().children("DIV").children("H4").children('.desktop_change_price');
+
+                    var total_price = parseInt($(".cart_price").html());
+
+                    $.ajax({
+                        type: "POST",
+                        url: "./php/decrease_qty.php",
+                        data: {
+                            bookid: bookid,
+                            email: email,
+                            selling_price: selling_price
+                        },
+                        success: function(response) {
+                            if (response.trim() == 'update') {
+                                parent.html(a - 1);
+                                price_parent.html(b - selling_price);
+                                desktop_price_parent.html(c - selling_price);
+                                $(".cart_price").html(total_price - selling_price);
+                            } else if (response.trim() == 'not decrease') {
+
+                                swal({
+                                        title: "Are you sure?",
+                                        text: "You will not be able to recover this imaginary file!",
+                                        type: "warning",
+                                        showCancelButton: true,
+                                        confirmButtonColor: "#DD6B55",
+                                        confirmButtonText: "Yes, delete it!",
+                                        cancelButtonText: "No, cancel plx!",
+                                        closeOnConfirm: false,
+                                        closeOnCancel: false
+                                    },
+                                    function(isConfirm) {
+                                        if (isConfirm) {
+                                            $.ajax({
+                                                type: "POST",
+                                                url: './php/delete_product.php',
+                                                data: {
+                                                    bookid: bookid,
+                                                    email: email,
+                                                },
+                                                success: function(response) {
+                                                    if (response.trim() == 'success') {
+                                                        mainParent.css("display","none");
+                                                        swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                                                    } else {
+                                                        swal({
+                                                            type: "error",
+                                                            title: "Sorry, something went wrong",
+                                                            text: "Please try again later",
+                                                            timer: 2000,
+                                                            showConfirmButton: false
+                                                        });
+                                                    }
+                                                }
+                                            });
+
+                                        } else {
+                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                        }
+                                    });
+
+                            } else {
+                                swal({
+                                    type: "error",
+                                    title: "Sorry, something went wrong",
+                                    text: "Please try again later",
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+                            }
+
+                        }
+                    });
+
+
+
+                });
+            });
+        });
+
         //delete save later product
         $(document).ready(function() {
             $(".delete-save-btn").each(function() {
@@ -237,7 +377,7 @@ if (empty($username)) {
                                 $(".cart_price").html(total_price + price);
                                 parent.css('display', 'none');
                                 //some work panding.....
-                                var save_item_number=parseInt($("#save_item_number").html());
+                                var save_item_number = parseInt($("#save_item_number").html());
                                 $("#save_item_number").html(save_item_number - 1);
                                 // move to cart
                                 var container = document.querySelector(".after_move_to_cart");
@@ -340,7 +480,7 @@ if (empty($username)) {
                     var cart = parseInt($(".total_cart").html());
                     var price = $(this).attr('price');
                     var mrp = $(this).attr('mrp');
-                    var discount = Math.floor(((mrp-price)/mrp)*100);
+                    var discount = Math.floor(((mrp - price) / mrp) * 100);
                     var title = $(this).attr('title');
                     var author = $(this).attr('author');
                     var src = $(this).attr('src');
@@ -357,9 +497,9 @@ if (empty($username)) {
                                 parent.css('display', 'none');
                                 $(".total_cart").html(cart - 1);
                                 $(".cart_price").html(total_price - price);
-                                var save_item_number=parseInt($("#save_item_number").html());
-                                $("#save_item_number").html(save_item_number+1);
-                              
+                                var save_item_number = parseInt($("#save_item_number").html());
+                                $("#save_item_number").html(save_item_number + 1);
+
                                 // dynamically show cart product to save for later product
 
                                 var container = document.querySelector(".after_cart_to_save_for_later");
@@ -390,14 +530,14 @@ if (empty($username)) {
 
                                 var span = document.createElement("SPAN");
                                 span.className = 'border p-1 rounded mb-4';
-                                span.append(discount+" % OFF");
+                                span.append(discount + " % OFF");
                                 col8.append(span);
 
                                 var para = document.createElement("P");
                                 para.className = 'm-1';
                                 para.append("MRP ");
                                 var del = document.createElement("DEL");
-                                del.append("Rs. "+mrp);
+                                del.append("Rs. " + mrp);
                                 para.append(del);
                                 para.append("(Inclusive of all taxes)");
                                 col8.append(para);

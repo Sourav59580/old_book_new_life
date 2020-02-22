@@ -87,5 +87,8 @@ if(empty($username)){
             </div>
         </div>
     </div>
+    <script src="./js/index.js"></script>
+</body>
+</html>
 
    
