@@ -24,6 +24,31 @@ if (empty($username)) {
     <link href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/index.css">
+    <style>
+
+
+#story-container .nav-link.active{
+    color:red;
+    background-image:url(./images/hover.png);
+    background-repeat:no-repeat;
+    background-position:bottom;
+    padding-bottom:15px;
+    background-size:0 0;
+    -webkit-animation:hover 1s;
+    -o-animation: hover 1s;
+    -moz-animation: hover 1s;
+    animation:hover 1s;
+    animation-fill-mode:forwards;
+ }
+ @keyframes hover{
+  0%{
+      background-size:0 0;
+  }
+  100%{
+      background-size:90% 15px;
+  }
+ }
+    </style>
 </head>
 
 <body>
@@ -31,30 +56,39 @@ if (empty($username)) {
     include_once("./design/navbar.php");
     ?>
 
-    <div class="container-fluid" style="height:150px;margin-top:-25px;background-color:deeppink">
-        <div class="row" style="background-color: deeppink;">
-            <div class="col-md-3 col-sm-6">
-                <img src="./photos/32701-7-students-learning.png" width="100%">
-            </div>
-            <div class="col-md-1 d-md-block d-none"></div>
-            <div class="col-md-5 col-sm-6 py-4">
-                <h2 class="text-warning p-0">50 <span class="text-dark"> Libraries</span></h2>
-                <h2 class="text-warning p-0">50 <span class="text-dark"> Government Schools</span></h2>
-                <h2 class="text-warning p-0">5000 <span class="text-dark"> Children!</span></h2>
-                <div class=" my-2">
-                    <hr>
-                    <h5 class="text-warning">Support 'The Kids' Sustainable School Challenge'</h5>
-                    <hr>
+    <div class="container-fluid p-0" style="margin-top:-25px;">
+        <img src="./photos/blog-banner (1).jpg" class="w-100">
+        <div class="" style="position:fixed;bottom:0px;right:10px;">
+          <img src="./photos/21-woman-girl-png-image.png" width="250px">
+        </div>
+    </div>
+    <div class="container-fluid" style="height: 900px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 id="story-header" class="mb-4 mt-5">Blogs/Articles</h2>
+                <ul class="nav nav-tabs border-0" id="story-container">
+                    <li class="nav-item"><a href="#overview" class="nav-link active border-0"
+                            data-toggle="tab">Overview</a></li>
+                    <li class="nav-item"><a href="#founder" class="nav-link border-0" data-toggle="tab">Create blog</a></li>
+                    <li class="nav-item"><a href="#mission" class="nav-link border-0" data-toggle="tab">Our Mission</a></li>
+                </ul>
+                <div class="tab-content py-4">
+                    <div id="overview" class="tab-pane wow slideInLeft active">
+                   
+
+                    </div>
+                    <div id="founder" class="tab-pane animated slideInRight faster">
+                        
+                    </div>
+                    <div id="mission" class="tab-pane animated zoomIn">
+                       
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3 d-md-block d-none">
-                <img src="./photos/32793-5-students-learning-transparent-background.png" class="w-100">
             </div>
         </div>
     </div>
-    <div class="container-fluid" style="height: 500px;">
 
-    
     </div>
 
     <?php include_once("./design/footer.php") ?>

@@ -98,7 +98,7 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
                                      echo "<div class='mb-2'><img class='card-img-top' src='".$image."'bookid='".$id."'></div>";
                                      echo "<h5>".$book_title."</h5>";
                                      echo "<spna>by ".$book_author."</spna>";
-                                     echo "<p class='mb-0'><del>Rs.".$mrp_price."</del> Rs.".$selling_price ."<span class='border ml-3 p-1 rounded'>".$discount."% OFF</span></p>
+                                     echo "<p class='mb-0'><del>Rs.".$mrp_price."</del> Rs.".$selling_price ."</p><span class='border text-danger p-1 rounded'>".$discount."% OFF</span>
                                      <div class='mt-2'>
                                      <span class='fa fa-star text-warning' style='font-size:16px'></span>
                                      <span class='fa fa-star text-warning' style='font-size:16px'></span>

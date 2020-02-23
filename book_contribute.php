@@ -33,27 +33,27 @@ if (empty($username)) {
 
     <div class="container-fluid" style="height:150px;margin-top:-25px;background-color:deeppink">
         <div class="row" style="background-color: deeppink;">
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-3 col-sm-6 d-flex align-items-center">
                 <img src="./photos/32701-7-students-learning.png" width="100%">
             </div>
             <div class="col-md-1 d-md-block d-none"></div>
             <div class="col-md-5 col-sm-6 py-4">
-                <h2 class="text-warning p-0">50 <span class="text-dark"> Libraries</span></h2>
-                <h2 class="text-warning p-0">50 <span class="text-dark"> Government Schools</span></h2>
-                <h2 class="text-warning p-0">5000 <span class="text-dark"> Children!</span></h2>
+                <h3 class="text-warning p-0">50 <span class="text-dark"> Libraries</span></h3>
+                <h3 class="text-warning p-0">50 <span class="text-dark"> Government Schools</span></h3>
+                <h3 class="text-warning p-0">5000 <span class="text-dark"> Children!</span></h3>
                 <div class=" my-2">
                     <hr>
                     <h5 class="text-warning">Support 'The Kids' Sustainable School Challenge'</h5>
                     <hr>
                 </div>
             </div>
-            <div class="col-md-3 d-md-block d-none">
+            <div class="col-md-3 d-md-block d-none d-md-flex align-items-center">
                 <img src="./photos/32793-5-students-learning-transparent-background.png" class="w-100">
             </div>
         </div>
     </div>
     <div class="container-fluid" style="height: 500px;">
-
+        
     
     </div>
 
