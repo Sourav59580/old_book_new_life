@@ -135,7 +135,7 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
                var category = $(this).attr("category");
                sessionStorage.setItem("sent", bookid);
                //sessionStorage.setItem("email",email);
-               window.open('./show_book_view_details.php?bookid='+bookid +'&category='+category,'_blank');
+               window.open('./local_show_book_view_details.php?bookid='+bookid +'&category='+category,'_blank');
                //var width = 20;
                //var height
                //window.location.href = "http://localhost/main.php?width=" + width + "&height=" + height;

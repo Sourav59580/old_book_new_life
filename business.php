@@ -3,7 +3,7 @@ require("./database/database.php");
 session_start();
 $username = $_SESSION['username'];
 if(empty($username)){
-    header("Location:home.php");
+    header("Location:local_business.php");
     exit;
 }
 ?>

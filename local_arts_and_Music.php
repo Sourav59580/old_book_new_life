@@ -1,11 +1,5 @@
 <?php
 require("./database/database.php");
-session_start();
-$username = $_SESSION['username'];
-if(empty($username)){
-    header("Location:local_medical.php");
-    exit;
-}
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +8,7 @@ if(empty($username)){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>Home:Arts and Music</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet'>
     <script src="./js/jquery.min.js"></script>
@@ -80,13 +74,13 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
             <hr class="style-one">
            <div class="row p-2">
            <?php
-              $book_view = "SELECT * FROM sellbook WHERE book_category='Medical'";
+              $book_view = "SELECT * FROM sellbook WHERE book_category='ArtsMusic'";
               $response = $db->query($book_view);
               if($response){
                   while($data=$response->fetch_assoc()){
                       $id = $data['id'];
                       $category = $data['book_category'];
-                      echo "<div class='col-md-3 book-view mb-3' bookid='".$id."' email='".$username."' category='".$category."' >
+                      echo "<div class='col-md-3 book-view mb-3' bookid='".$id."' category='".$category."' >
                                <div class='card border-0 p-0'>
                                    <div class='card-body p-1'>";
                                    $image = "data:image/png;base64,".base64_encode($data['book_image']);
@@ -139,11 +133,11 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
        $(".book-view").each(function(){
            $(this).click(function(){
                var bookid = $(this).attr("bookid");
-               var email = $(this).attr("email");
+               
                var category = $(this).attr("category");
                sessionStorage.setItem("sent", bookid);
-               sessionStorage.setItem("email",email);
-               window.open('./show_book_view_details.php?bookid='+bookid +'&category='+category,'_blank');
+              
+               window.open('./local_show_book_view_details.php?bookid='+bookid +'&category='+category,'_blank');
                //var width = 20;
                //var height
                //window.location.href = "http://localhost/main.php?width=" + width + "&height=" + height;

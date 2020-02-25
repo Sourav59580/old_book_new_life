@@ -15,7 +15,7 @@ if (empty($username)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>Articals</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet'>
     <script src="./js/jquery.min.js"></script>
@@ -78,7 +78,7 @@ if (empty($username)) {
                             <div class="container artical-container">
                                 <div class="row mb-2">
                                     <div class="col-md-3"></div>
-                                    <div class="col-md-6 border">
+                                    <div class="col-md-6">
                                         <img src="./images/programming-hero(moc).png" class="w-100">
                                     </div>
                                     <div class="col-md-3"></div>
@@ -125,18 +125,17 @@ if (empty($username)) {
                                 <div class="file_upload">
                                     <button class="btn btn-danger mb-4" data-toggle="collapse" data-target="#file-upload-form">Showcase Image Upload</button>
                                     <div class="collapse mb-4" id='file-upload-form'>
-                                    <form>
-                                        <input type="file" class="form-control w-50">
-                                    </form>
+                                        <form>
+                                            <input type="file" class="form-control w-50">
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="showcase animated slideInUp text-center" style="width:100%;">
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="comment">Write here:<span class="count-word mr-2"><span>(Total word:<span>0</span>)</span></label>
-                                            <textarea class="form-control" rows="15" id="comment" style=" background-color: transparent;outline: none;"></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary  mb-4">Submit</button>
+                                    <form method="post">
+                                        <textarea id="mytextarea" name="mytextarea">
+                                         Hello, World!
+                                       </textarea>
+                                       <button class="btn btn-primary mt-4">Submit</button>
                                     </form>
                                 </div>
 
@@ -145,11 +144,11 @@ if (empty($username)) {
                         </div>
                         <div id="mission" class="tab-pane animated zoomIn">
 
-                          <div class="container text-center">
-                              <img src="./images/7-business-woman-girl-png-image.png" class="w-50">
-                              <br>
-                              <img src="./images/vision-pic.jpg" class="w-25" style="z-index: -1;">
-                          </div>
+                            <div class="container text-center">
+                                <img src="./images/7-business-woman-girl-png-image.png" class="w-50">
+                                <br>
+                                <img src="./images/vision-pic.jpg" class="w-25" style="z-index: -1;">
+                            </div>
 
                         </div>
                     </div>
@@ -165,6 +164,12 @@ if (empty($username)) {
     <script src="./js/wow.min.js"></script>
     <script>
         new WOW().init();
+    </script>
+    <script src="https://cdn.tiny.cloud/1/w89h8f9glte9hogcmv1c8z8hi9rzowavktabxzk5xwvahguz/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
     </script>
 </body>
 

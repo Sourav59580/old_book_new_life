@@ -1,20 +1,10 @@
-<?php
-require("./database/database.php");
-session_start();
-$username = $_SESSION['username'];
-if(empty($username)){
-    header("Location:local_contact.php");
-    exit;
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>Contact</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet'>
     <script src="./js/jquery.min.js"></script>
@@ -47,9 +37,9 @@ if(empty($username)){
             </div>
             
             <div class="col-md-6">
-                 <img src="./images/contact-us-concept-landing-page_52683-12759 (2).jpg" width="100%"> 
+                <!-- <img src="./images/contact-us-concept-landing-page_52683-12759 (2).jpg" width="100%"> -->
                 
-                <!-- <div class="position-absolute w-75 p-5 bg-white mb-4 rounded"
+                <div class="position-absolute w-75 p-5 bg-white mb-4 rounded"
                     style=" z-index:1;box-shadow: 0px 0px 10px 0px #B4B4B4;margin-top:30%;">
                     <form>
                         <input type="text" placeholder="Your Name...." class="form-control mb-4" style="outline: none;"
@@ -60,7 +50,7 @@ if(empty($username)){
                         <input type="submit" value="SEND" class="btn border-0 form-control text-center text-light font-weight-bold"
                             style="background-color: #FE3B48;">
                     </form>
-                </div> -->
+                </div>
             </div>
         </div>
         <div class="row" style=" background-color:#FE3B48;">

@@ -3,7 +3,7 @@ require("./database/database.php");
 session_start();
 $username = $_SESSION['username'];
 if (empty($username)) {
-    header("Location:home.php");
+    header("Location:local_cart.php");
     exit;
 }
 ?>
@@ -47,7 +47,7 @@ if (empty($username)) {
             <?php
             $get_cart_data = "SELECT * FROM cart WHERE email='$username'";
             $cart_item = [];
-            $response = $db->query($get_cart_data);
+            if($response = $db->query($get_cart_data)){
             $i = 0;
             while ($cart = $response->fetch_assoc()) {
                 $cart_item[$i] = $cart['bookid'];
@@ -91,6 +91,7 @@ if (empty($username)) {
                      ";
                 }
             }
+        }
             ?>
             <div class='after_move_to_cart'>
 

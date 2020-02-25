@@ -1,13 +1,3 @@
-<?php
-require("./database/database.php");
-session_start();
-$username = $_SESSION['username'];
-if (empty($username)) {
-    header("Location:local_sell_books.php");
-    exit;
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -215,36 +205,12 @@ if (empty($username)) {
 
         //submit product
         $(document).ready(function() {
-            $(".book-sell").submit(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    type: "POST",
-                    url: "./php/sell_book.php",
-                    data: new FormData(this),
-                    contentType: false,
-                    processData: false,
-                    cache: false,
-                    success: function(response) {
-                        if (response.trim() == 'success') {
-                            swal({
-                                type: "success",
-                                title: "Update Successful",
-                                text: "Congratulations! Your product has been successfully update.",
-                                timer: 2000,
-                                showConfirmButton: false
-                            });
-                            $('.book-sell').trigger('reset');
-                            window.location.href='./index.php';
-                        } else {
-                            swal({
-                                type: "error",
-                                title: "Sorry, something went wrong",
-                                text: "Please try again later",
-                                timer: 3000,
-                                showConfirmButton: false
-                            });
-                        }
-                    }
+            $(".book-sell").submit(function() {
+                swal({
+                    type: "error",
+                    title: "Sorry, please login first",
+                    timer: 2000,
+                    showConfirmButton: false
                 });
             });
         });
