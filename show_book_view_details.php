@@ -147,7 +147,7 @@ if (empty($username)) {
                                 </div> <!-- Cart -->
                                 <div class="cart">
                                     <div class="cart_container d-flex flex-row align-items-center justify-content-end">
-                                        <div class="cart_icon"> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png" alt="">
+                                       <a href="./cart.php"> <div class="cart_icon"> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png" alt="">
                                             <div class="cart_count"><span class="total_cart">
                                                     <?php
                                                     $get_data = "SELECT COUNT(bookid) AS result FROM cart WHERE email='$username'";
@@ -160,7 +160,7 @@ if (empty($username)) {
                                                     }
                                                     ?>
                                                 </span></div>
-                                        </div>
+                                        </div></a>
                                         <div class="cart_content">
                                             <div class="cart_text"><a href="./cart.php">Cart</a></div>
                                             <div class="cart_price">
@@ -361,8 +361,41 @@ if (empty($username)) {
                 <script>
                     //buy product
                     $(document).ready(function() {
-                        $(".buy-btn").click(function() {
-                            
+                        $(".buy-btn").each(function() {
+                            $(this).click(function(){
+                                var id = sessionStorage.getItem("sent");
+                                var email = sessionStorage.getItem("email");
+                                var sell_price = parseInt($(".sell_price").html());
+                                $.ajax({
+                                    type : "POST",
+                                    url : "./php/buy.php",
+                                    data : {
+                                        bookid : id,
+                                        email : email,
+                                        sell_price: sell_price
+                                    },
+                                    success : function(response){
+                                        if(response.trim()=='success')
+                                        { 
+                                            $.ajax({
+                                                type : "POST",
+                                                url : "./php/totalsell.php",
+                                                data :{
+                                                    bookid : id
+                                                },
+                                                success : function(response){
+                                                  alert(response);
+                                                }
+                                            });
+
+                                        }
+                                        else
+                                        {
+                                            alert(response);
+                                        }
+                                    }
+                                });
+                            });  
                         });
                     });
                     //cart item
