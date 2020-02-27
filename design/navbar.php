@@ -46,7 +46,17 @@
 
                                         ?>
                                     </a></div>
-                                <div><a href="./php/logout.php">Logout</a></div>
+                                <div>
+                                    <?php
+                                      if(empty($username))
+                                      {
+                                          echo "<a href='./signin.php'>Login</a>";
+                                      }
+                                      else{
+                                          echo "<a href='./php/logout.php'>Logout</a>";
+                                      }
+                                    ?>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,11 +1,5 @@
 <?php
 require("./database/database.php");
-session_start();
-$username = $_SESSION['username'];
-if (empty($username)) {
-    header("Location:home.php");
-    exit;
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +11,7 @@ if (empty($username)) {
     <title><?php
             require("./database/database.php");
             $bookid = $_GET['bookid'];
-            $get_data = "SELECT * FROM sellbook WHERE id='$bookid'";
+            $get_data = "SELECT * FROM contributebook WHERE id='$bookid'";
             $response = $db->query($get_data);
             if ($response) {
                 $data = $response->fetch_assoc();
@@ -131,15 +125,18 @@ if (empty($username)) {
                                         <div class="wishlist_text"><a href="./wishlist_page.php">Wishlist</a></div>
                                         <div class="wishlist_count">
                                             <?php
-                                            $get_data = "SELECT COUNT(bookid) AS result FROM wishlist WHERE email='$username'";
-                                            $response = $db->query($get_data);
-                                            if ($response) {
-                                                $data = $response->fetch_assoc();
-                                                echo $data['result'];
-                                            } else {
+                                            if (empty($username)) {
                                                 echo "0";
+                                            } else {
+                                                $get_data = "SELECT COUNT(bookid) AS result FROM wishlist WHERE email='$username'";
+                                                $response = $db->query($get_data);
+                                                if ($response) {
+                                                    $data = $response->fetch_assoc();
+                                                    echo $data['result'];
+                                                } else {
+                                                    echo "0";
+                                                }
                                             }
-
                                             ?>
 
                                         </div>
@@ -147,10 +144,35 @@ if (empty($username)) {
                                 </div> <!-- Cart -->
                                 <div class="cart">
                                     <div class="cart_container d-flex flex-row align-items-center justify-content-end">
-                                       <a href="./cart.php"> <div class="cart_icon"> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png" alt="">
-                                            <div class="cart_count"><span class="total_cart">
-                                                    <?php
-                                                    $get_data = "SELECT COUNT(bookid) AS result FROM cart WHERE email='$username'";
+                                        <a href="./cart.php">
+                                            <div class="cart_icon"> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png" alt="">
+                                                <div class="cart_count"><span class="total_cart">
+                                                        <?php
+                                                        if (empty($username)) {
+                                                            echo "0";
+                                                        } else {
+                                                            $get_data = "SELECT COUNT(bookid) AS result FROM cart WHERE email='$username'";
+                                                            $response = $db->query($get_data);
+                                                            if ($response) {
+                                                                $data = $response->fetch_assoc();
+                                                                echo $data['result'];
+                                                            } else {
+                                                                echo "0";
+                                                            }
+                                                        }
+
+                                                        ?>
+                                                    </span></div>
+                                            </div>
+                                        </a>
+                                        <div class="cart_content">
+                                            <div class="cart_text"><a href="./cart.php">Cart</a></div>
+                                            <div class="cart_price">
+                                                <?php
+                                                if (empty($username)) {
+                                                    echo "0";
+                                                } else {
+                                                    $get_data = "SELECT SUM(sell_price) AS result FROM cart WHERE email='$username'";
                                                     $response = $db->query($get_data);
                                                     if ($response) {
                                                         $data = $response->fetch_assoc();
@@ -158,20 +180,6 @@ if (empty($username)) {
                                                     } else {
                                                         echo "0";
                                                     }
-                                                    ?>
-                                                </span></div>
-                                        </div></a>
-                                        <div class="cart_content">
-                                            <div class="cart_text"><a href="./cart.php">Cart</a></div>
-                                            <div class="cart_price">
-                                                <?php
-                                                $get_data = "SELECT SUM(sell_price) AS result FROM cart WHERE email='$username'";
-                                                $response = $db->query($get_data);
-                                                if ($response) {
-                                                    $data = $response->fetch_assoc();
-                                                    echo $data['result'];
-                                                } else {
-                                                    echo "0";
                                                 }
                                                 ?>
                                             </div>
@@ -196,7 +204,7 @@ if (empty($username)) {
                 require("./database/database.php");
                 $bookid = $_GET['bookid'];
                 $category = $_GET['category'];
-                $get_data = "SELECT * FROM sellbook WHERE id='$bookid'";
+                $get_data = "SELECT * FROM contributebook WHERE id='$bookid'";
                 $response = $db->query($get_data);
                 if ($response) {
                     $data = $response->fetch_assoc();
@@ -206,7 +214,6 @@ if (empty($username)) {
                     $seller_name = $data['sellername'];
                     $mrp_price = $data['mrp_price'];
                     $selling_price = $data['selling_price'];
-                    $discount = number_format((($mrp_price - $selling_price) / $mrp_price) * 100);
                     $book_description = $data['book_description'];
                     $author_description = $data['author_description'];
                     echo "<img src='" . $image . "'class='w-75'></div>";
@@ -224,9 +231,9 @@ if (empty($username)) {
                     echo "<span class='close text-primary' style='font-size:12px;'>Sold by " . $seller_name . "</span>
                     </div>
                     <hr>";
-                    echo "<p class='m-1'>MRP <del>Rs. " . $mrp_price . "</del>   (Inclusive of all taxes)</p>";
-                    echo "<h3 style='color:red;' >Rs. <span class='sell_price'>" . $selling_price . "</span></h3><span class='border p-2 rounded mb-4'>" . $discount . "% OFF</span>
-                       </div>
+
+                    echo "<h3 style='color:red;' >Rs. <span class='sell_price'>" . $selling_price . "</span></h3><span class='text-success'>(Cash on Delivery Charge)</span>
+                    </div>
                        <div class='mt-4 ml-4 p-4'>
                     <button class='btn btn-lg btn-dark rounded mb-4 cart-btn'><i class='fa fa-shopping-cart'> </i> ADD TO CART</button>
                     <button class='btn btn-lg btn-danger rounded ml-4 mb-4 buy-btn'><i class='fa fa-shopping-bag'> </i> BUY NOW</button>
@@ -362,118 +369,41 @@ if (empty($username)) {
                     //buy product
                     $(document).ready(function() {
                         $(".buy-btn").each(function() {
-                            $(this).click(function(){
-                                var id = sessionStorage.getItem("sent");
-                                var email = sessionStorage.getItem("email");
-                                var sell_price = parseInt($(".sell_price").html());
-                                $.ajax({
-                                    type : "POST",
-                                    url : "./php/buy.php",
-                                    data : {
-                                        bookid : id,
-                                        email : email,
-                                        sell_price: sell_price
-                                    },
-                                    success : function(response){
-                                        if(response.trim()=='success')
-                                        { 
-                                            $.ajax({
-                                                type : "POST",
-                                                url : "./php/totalsell.php",
-                                                data :{
-                                                    bookid : id
-                                                },
-                                                success : function(response){
-                                                  alert(response);
-                                                }
-                                            });
-
-                                        }
-                                        else
-                                        {
-                                            alert(response);
-                                        }
-                                    }
+                            $(this).click(function() {
+                                swal({
+                                    type: "error",
+                                    title: "Sorry, please login",
+                                    timer: 2000,
+                                    showConfirmButton: false
                                 });
-                            });  
+                                window.location.href='./signin.php';
+                            });
                         });
                     });
                     //cart item
                     $(document).ready(function() {
-                        var id = sessionStorage.getItem("sent");
-                        var email = sessionStorage.getItem("email");
-                        var cart = $(".total_cart").html();
-                        var cart_price = parseInt($(".cart_price").html());
-                        var sell_price = parseInt($(".sell_price").html());
-                        var status = "sellbook";
                         $(".cart-btn").click(function(e) {
-                            //var id = sessionStorage.getItem("sent");
-                            e.preventDefault();
-                            $.ajax({
-                                type: "POST",
-                                url: "./php/cart.php",
-                                data: {
-                                    bookid: id,
-                                    email: email,
-                                    status : status,
-                                    sell_price: sell_price
-                                },
-                                success: function(response) {
-                                    if (response.trim() == 'success') {
-                                        cart = parseInt(cart) + 1;
-                                        $(".total_cart").html(cart);
-                                        $(".cart_price").html(cart_price + sell_price);
-                                        swal({
-                                            type: "success",
-                                            title: "Shopping Cart",
-                                            text: "Success You have added 1 item to your shopping cart",
-                                            timer: 2000,
-                                            showConfirmButton: false
-                                        });
-
-                                    } else if (response.trim() == 'update') {
-                                        $(".cart_price").html(cart_price + sell_price);
-                                        swal({
-                                            type: "success",
-                                            title: "Update Cart Quantity",
-                                            text: "Success You have updated 1 item to your shopping cart",
-                                            timer: 2000,
-                                            showConfirmButton: false
-                                        });
-                                    } else {
-                                        alert(response);
-                                    }
-                                }
-                            });
+                            swal({
+                                    type: "error",
+                                    title: "Sorry, please login",
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+                                window.location.href='./signin.php';
                         });
                     });
 
                     //wish list item
                     $(document).ready(function() {
                         $(".wishcart").click(function() {
-                            var id = sessionStorage.getItem("sent");
-                            var email = sessionStorage.getItem("email");
-                            var wishlist_count = parseInt($(".wishlist_count").html());
-                            // alert();
-                            $.ajax({
-                                type: "POST",
-                                url: "./php/wish.php",
-                                data: {
-                                    bookid: id,
-                                    email: email
-                                },
-                                success: function(response) {
-                                    if (response.trim() == "success") {
-                                        $(".wishcart").removeClass('fa-heart-o');
-                                        $(".wishcart").addClass("fa-heart");
-                                        $(".wishcart").css('color', 'red');
-                                        $(".wishlist_count").html(wishlist_count + 1);
-                                    } else {
-                                        alert(response);
-                                    }
-                                }
-
-                            });
+                            swal({
+                                    type: "error",
+                                    title: "Sorry, please login",
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+                                window.location.href='./signin.php';
+                            
                         });
                     });
 

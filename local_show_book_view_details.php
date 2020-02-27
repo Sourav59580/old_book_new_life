@@ -370,11 +370,11 @@ require("./database/database.php");
                         $(".buy-btn").click(function() {
                             swal({
                                 type: "error",
-                                title: "Sorry, please login first",
+                                title: "Sorry, please login",
                                 timer: 2000,
                                 showConfirmButton: false
                             });
-
+                            window.location.href='./signin.php';
                         });
                     });
                     //cart item
@@ -383,10 +383,11 @@ require("./database/database.php");
                             $(this).click(function() {
                                 swal({
                                     type: "error",
-                                    title: "Sorry, please login first",
+                                    title: "Sorry, please login",
                                     timer: 2000,
                                     showConfirmButton: false
                                 });
+                                window.location.href='./signin.php';
                             })
                         });
                     });
@@ -397,10 +398,11 @@ require("./database/database.php");
                            $(this).click(function(){
                             swal({
                                     type: "error",
-                                    title: "Sorry, please login first",
+                                    title: "Sorry, please login",
                                     timer: 2000,
                                     showConfirmButton: false
                                 });
+                                window.location.href='./signin.php';
                            });
                            
                         });

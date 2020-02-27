@@ -1,11 +1,5 @@
 <?php
 require("./database/database.php");
-session_start();
-$username = $_SESSION['username'];
-if (empty($username)) {
-    header("Location:local_book_contribute.php");
-    exit;
-}
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +49,7 @@ if (empty($username)) {
         </div>
         <!--start container of page coding-->
         <div class="container-fluid">
-            
+
             <div class="row p-3">
                 <div class="col-md-5 p-4 mb-2" style="box-shadow:0px 0px 2px 2px #ccc;">
                     <h4 class="my-2">Book Details Upload : </h4>
@@ -90,8 +84,8 @@ if (empty($username)) {
                             <label for="coustomer-name">Your Name<span class="text-danger">*</span></label>
                             <input type="text" class="form-control mb-3" name="coustomer-name" id="coustomer-name" required='required'>
                         </div>
-                        
-                        
+
+
                         <div class="form-group">
                             <label for="book-description">Book Description<span class="text-danger">*</span><span class="book-description-count"> 0</span><span>/700</span></label>
                             <textarea class="form-control mb-3" name="book-description" id="book-description" rows="5" maxlength="700"></textarea>
@@ -227,35 +221,14 @@ if (empty($username)) {
         $(document).ready(function() {
             $(".book-sell").submit(function(e) {
                 e.preventDefault();
-                $.ajax({
-                    type: "POST",
-                    url: "./php/contribute_book.php",
-                    data: new FormData(this),
-                    contentType: false,
-                    processData: false,
-                    cache: false,
-                    success: function(response) {
-                        if (response.trim() == 'success') {
-                            swal({
-                                type: "success",
-                                title: "Update Successful",
-                                text: "Congratulations! Your product has been successfully update.",
-                                timer: 2000,
-                                showConfirmButton: false
-                            });
-                            $('.book-sell').trigger('reset');
-                            window.location.href='./index.php';
-                        } else {
-                            swal({
-                                type: "error",
-                                title: "Sorry, something went wrong",
-                                text: "Please try again later",
-                                timer: 3000,
-                                showConfirmButton: false
-                            });
-                        }
-                    }
+                swal({
+                    type: "error",
+                    title: "Sorry, please login",
+                    timer: 2000,
+                    showConfirmButton: false
                 });
+                window.location.href = './signin.php';
+
             });
         });
     </script>

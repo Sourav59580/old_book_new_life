@@ -47,14 +47,16 @@ if (empty($username)) {
             <?php
             $get_cart_data = "SELECT * FROM cart WHERE email='$username'";
             $cart_item = [];
+            $cart_status = [];
             if($response = $db->query($get_cart_data)){
             $i = 0;
             while ($cart = $response->fetch_assoc()) {
                 $cart_item[$i] = $cart['bookid'];
+                $cart_status[$i] = $cart['status_type'];
                 $i++;
             }
             for ($i = 0; $i < count($cart_item); $i++) {
-                $get_data = "SELECT * FROM sellbook WHERE id='$cart_item[$i]'";
+                $get_data = "SELECT * FROM $cart_status[$i] WHERE id='$cart_item[$i]'";
                 $response = $db->query($get_data);
                 if ($response) {
                     $data = $response->fetch_assoc();
@@ -65,7 +67,7 @@ if (empty($username)) {
                     $mrp_price = $data['mrp_price'];
                     $sell_price = $data['selling_price'];
                     $quantity = 1;
-                    $get_quantity = "SELECT quantity FROM cart WHERE bookid='$cart_item[$i]' AND email='$username'";
+                    $get_quantity = "SELECT quantity FROM cart WHERE bookid='$cart_item[$i]' AND email='$username' AND status_type='$cart_status[$i]'";
                     $get_response = $db->query($get_quantity);
                     if ($data = $get_response->fetch_assoc()) {
                         $quantity = $data['quantity'];
@@ -78,13 +80,13 @@ if (empty($username)) {
                          <h4 class='d-md-none d-block text-danger'><i class='fa fa-inr mr-1'></i><span class='change-price'>" . $selling_price . "</span></h4>
                          <h5>Quantity : </h5>
                          <div class='btn-group mb-4 w-100' role='group'>
-                           <button type='btn' class='btn btn-danger decrease-qty' price='" . $sell_price . "' email='" . $username . "' bookid='" . $cart_item[$i] . "'><i class='fa fa-minus '></i></button>
+                           <button type='btn' class='btn btn-danger decrease-qty' price='" . $sell_price . "' email='" . $username . "' bookid='" . $cart_item[$i] . "' status='".$cart_status[$i]."'><i class='fa fa-minus '></i></button>
                            <button type='btn' class='btn px-4 btn-dark total-qty'>" . $quantity . "</button>
-                           <button type='btn' class='btn btn-info increase-qty' price='" . $sell_price . "' email='" . $username . "' bookid='" . $cart_item[$i] . "'><i class='fa fa-plus'></i></button>
+                           <button type='btn' class='btn btn-info increase-qty' price='" . $sell_price . "' email='" . $username . "' bookid='" . $cart_item[$i] . "' status='".$cart_status[$i]."'><i class='fa fa-plus'></i></button>
                            <button type='btn' class='btn btn-danger'><i class='fa fa-trash'></i></button>
                          </div>
-                         <button type='btn' class='btn btn-secondary mr-4 my-3 delete-btn' price='" . $selling_price . "' email='" . $username . "' bookid='" . $cart_item[$i] . "'><i class='fa fa-trash mr-1'></i>DELETE</button>
-                         <button type='btn' class='btn btn-success save-btn' author='" . $book_author . "' title='" . $book_title . "' mrp='" . $mrp_price . "' src='" . $image . "' price='" . (($selling_price) / $quantity) . "' email='" . $username . "' bookid='" . $cart_item[$i] . "'><i class='fa fa-save mr-1'></i>SAVE FOR LATER</button>
+                         <button type='btn' class='btn btn-secondary mr-4 my-3 delete-btn' price='" . $selling_price . "' email='" . $username . "' bookid='" . $cart_item[$i] . "' status='".$cart_status[$i]."'><i class='fa fa-trash mr-1'></i>DELETE</button>
+                         <button type='btn' class='btn btn-success save-btn' author='" . $book_author . "' title='" . $book_title . "' mrp='" . $mrp_price . "' src='" . $image . "' price='" . (($selling_price) / $quantity) . "' email='" . $username . "' bookid='" . $cart_item[$i] . "' status='".$cart_status[$i]."'><i class='fa fa-save mr-1'></i>SAVE FOR LATER</button>
                        </div>
                        <div class='col-md-2 d-md-block d-none'><h4 class='text-danger'><i class='fa fa-inr mr-1'> </i><span class='desktop_change_price'>" . $selling_price . "</span></h4></div>
                      </div><hr>                     
@@ -136,14 +138,17 @@ if (empty($username)) {
         <?php
         $get_savelater_data = "SELECT * FROM save_later WHERE email='$username'";
         $savelater_item = [];
+        $savelater_status = [];
         $response = $db->query($get_savelater_data);
+        if($response){
         $i = 0;
         while ($savelater = $response->fetch_assoc()) {
             $savelater_item[$i] = $savelater['bookid'];
+            $savelater_status[$i] = $savelater['status_type'];
             $i++;
         }
         for ($i = 0; $i < count($savelater_item); $i++) {
-            $get_data = "SELECT * FROM sellbook WHERE id='$savelater_item[$i]'";
+            $get_data = "SELECT * FROM $savelater_status[$i] WHERE id='$savelater_item[$i]'";
             $response = $db->query($get_data);
             if ($response) {
                 $data = $response->fetch_assoc();
@@ -168,13 +173,14 @@ if (empty($username)) {
                            <button type='btn' class='btn btn-info'><i class='fa fa-plus'></i></button>
                            <button type='btn' class='btn btn-danger'><i class='fa fa-trash'></i></button>
                          </div>
-                         <button type='btn' class='btn btn-secondary mr-4 my-3 delete-save-btn' price='" . $selling_price . "' email='" . $username . "' bookid='" . $savelater_item[$i] . "'><i class='fa fa-trash mr-1'></i>REMOVE</button>
-                         <button type='btn' class='btn btn-primary move-btn' title='" . $book_title . "' author='" . $book_author . "' image='" . $image . "' price='" . $selling_price . "' email='" . $username . "' bookid='" . $savelater_item[$i] . "'><i class='fa fa-save mr-1'></i>MOVE TO CART</button>
+                         <button type='btn' class='btn btn-secondary mr-4 my-3 delete-save-btn' price='" . $selling_price . "' email='" . $username . "' bookid='" . $savelater_item[$i] . "' status='".$savelater_status[$i]."'><i class='fa fa-trash mr-1'></i>REMOVE</button>
+                         <button type='btn' class='btn btn-primary move-btn' title='" . $book_title . "' author='" . $book_author . "' image='" . $image . "' price='" . $selling_price . "' email='" . $username . "' bookid='" . $savelater_item[$i] . "' status='".$savelater_status[$i]."'><i class='fa fa-save mr-1'></i>MOVE TO CART</button>
                        </div>
                        <div class='col-md-2 d-md-block d-none'></div>
                      </div><hr>";
             }
         }
+    }
         ?>
         <div class="after_cart_to_save_for_later">
 
@@ -194,6 +200,7 @@ if (empty($username)) {
                 $(this).click(function() {
                     var bookid = $(this).attr('bookid');
                     var email = $(this).attr('email');
+                    var status = $(this).attr('status');
                     var selling_price = parseInt($(this).attr('price'));
                     var a = parseInt($(this).parent().children('.total-qty').html());
                     var parent = $(this).parent().children('.total-qty');
@@ -210,6 +217,7 @@ if (empty($username)) {
                         data: {
                             bookid: bookid,
                             email: email,
+                            status : status,
                             selling_price: selling_price
                         },
                         success: function(response) {
@@ -234,6 +242,7 @@ if (empty($username)) {
                     var mainParent = $(this).parent().parent().parent();
                     var bookid = $(this).attr('bookid');
                     var email = $(this).attr('email');
+                    var status = $(this).attr('status');
                     var selling_price = parseInt($(this).attr('price'));
                     var a = parseInt($(this).parent().children('.total-qty').html());
                     var parent = $(this).parent().children('.total-qty');
@@ -251,6 +260,7 @@ if (empty($username)) {
                         data: {
                             bookid: bookid,
                             email: email,
+                            status : status,
                             selling_price: selling_price
                         },
                         success: function(response) {
@@ -280,6 +290,7 @@ if (empty($username)) {
                                                 data: {
                                                     bookid: bookid,
                                                     email: email,
+                                                    status : status
                                                 },
                                                 success: function(response) {
                                                     if (response.trim() == 'success') {
@@ -359,6 +370,7 @@ if (empty($username)) {
                     var email = $(this).attr('email');
                     var image = $(this).attr('image');
                     var title = $(this).attr('title');
+                    var status = $(this).attr('status');
                     var author = $(this).attr('author');
                     var parent = $(this).parent().parent();
                     var cart = parseInt($(".total_cart").html());
@@ -370,7 +382,8 @@ if (empty($username)) {
                         data: {
                             bookid: bookid,
                             email: email,
-                            sell_price: price
+                            sell_price: price,
+                            status : status
                         },
                         success: function(response) {
                             if (response.trim() == 'success') {
@@ -485,13 +498,15 @@ if (empty($username)) {
                     var title = $(this).attr('title');
                     var author = $(this).attr('author');
                     var src = $(this).attr('src');
+                    var status = $(this).attr('status');
                     var total_price = parseInt($(".cart_price").html());
                     $.ajax({
                         type: "POST",
                         url: './php/save_later.php',
                         data: {
                             bookid: bookid,
-                            email: email
+                            email: email,
+                            status : status
                         },
                         success: function(response) {
                             if (response.trim() == 'success') {
@@ -620,6 +635,7 @@ if (empty($username)) {
                     e.preventDefault();
                     var bookid = $(this).attr('bookid');
                     var email = $(this).attr('email');
+                    var status = $(this).attr('status');
                     var parent = $(this).parent().parent();
                     var cart = parseInt($(".total_cart").html());
                     var price = $(this).attr('price');
@@ -629,7 +645,8 @@ if (empty($username)) {
                         url: './php/delete_product.php',
                         data: {
                             bookid: bookid,
-                            email: email
+                            email: email,
+                            status : status
                         },
                         success: function(response) {
                             if (response.trim() == 'success') {

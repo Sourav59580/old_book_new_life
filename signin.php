@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
@@ -16,17 +17,18 @@
     <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/animate.min.css">
 </head>
+
 <body>
     <?php
     include_once("./design/navbar.php");
     ?>
-    <div class="container p-4">
-    <div class="container bg-white p-4" style="box-shadow:0px 0px 2px 2px #ccc;margin-top:10px;">
-        <h3 style="font-family: 'Righteous', cursive;">SIGNIN</h3>
-        <hr>
+    <div class="container p-4" style="background-image: linear-gradient(180deg, #2af598 0%, #009efd 100%);;margin-top:-25px;">
         <div class="row">
-            <div class="col-md-6">
-                <form class="signin-form">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 bg-white p-4 rounded shadow-sm">
+                <h3 style="font-family: 'Righteous', cursive;">SIGNIN</h3>
+                <hr>
+                <form class="signin-form mb-3">
                     <div class="form-group mb-3">
                         <label for="email">Email<sup class="text-danger">*</sup></label>
                         <input type="email" name="email" placeholder="er@gmail.com" class="form-control bg-light" id="email"></input>
@@ -37,43 +39,53 @@
                     </div>
                     <button class="btn btn-primary py-2">Login now</button>
                 </form>
+                <p>If you have no account please register with us <a href="signup.php">Create a new account</a></p>
+                    
             </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-5">
-                <h4>NEW CUSTOMER</h4>
-                <p>If you have no account please register with us</p>
-                <a href="signup.php" class="btn btn-danger">Create a new account</a>
-            </div>
+            <div class="col-md-3"></div>
         </div>
-    </div>
+        <!-- <div class="container bg-white p-4" style="box-shadow:0px 0px 2px 2px #ccc;margin-top:10px;">
+
+
+            <div class="row">
+                <div class="col-md-6">
+
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <h4>NEW CUSTOMER</h4>
+                    
+                </div>
+            </div>
+        </div> -->
     </div>
 
     <script>
-     $(document).ready(function(){
-      $(".signin-form").submit(function(e){
-          e.preventDefault();
-        $.ajax({
-            type : "POST",
-            url : "./php/login.php",
-            data : new FormData(this),
-            processData : false,
-            contentType : false,
-            cache : false,
-            success : function(response){
-              if(response.trim()=="success"){
-               window.location.assign('./index.php');
-               $(".account").html()
-              }
-              else{
-                  alert(response);
-              }
-            }
+        $(document).ready(function() {
+            $(".signin-form").submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "./php/login.php",
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function(response) {
+                        if (response.trim() == "success") {
+                            window.location.assign('./index.php');
+                            $(".account").html()
+                        } else {
+                            alert(response);
+                        }
+                    }
+                });
+            });
         });
-      });
-     });
     </script>
 
-   <?php include_once("./design/footer.php");?>
-<script src="./js/index.js"></script>
+    <?php include_once("./design/footer.php"); ?>
+    <script src="./js/index.js"></script>
 </body>
+
 </html>

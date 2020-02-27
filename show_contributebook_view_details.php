@@ -3,7 +3,7 @@ require("./database/database.php");
 session_start();
 $username = $_SESSION['username'];
 if (empty($username)) {
-    header("Location:home.php");
+    header("Location:local_show_contributebook_view_details.php");
     exit;
 }
 ?>
@@ -17,7 +17,7 @@ if (empty($username)) {
     <title><?php
             require("./database/database.php");
             $bookid = $_GET['bookid'];
-            $get_data = "SELECT * FROM sellbook WHERE id='$bookid'";
+            $get_data = "SELECT * FROM contributebook WHERE id='$bookid'";
             $response = $db->query($get_data);
             if ($response) {
                 $data = $response->fetch_assoc();
@@ -196,7 +196,7 @@ if (empty($username)) {
                 require("./database/database.php");
                 $bookid = $_GET['bookid'];
                 $category = $_GET['category'];
-                $get_data = "SELECT * FROM sellbook WHERE id='$bookid'";
+                $get_data = "SELECT * FROM contributebook WHERE id='$bookid'";
                 $response = $db->query($get_data);
                 if ($response) {
                     $data = $response->fetch_assoc();
@@ -206,7 +206,6 @@ if (empty($username)) {
                     $seller_name = $data['sellername'];
                     $mrp_price = $data['mrp_price'];
                     $selling_price = $data['selling_price'];
-                    $discount = number_format((($mrp_price - $selling_price) / $mrp_price) * 100);
                     $book_description = $data['book_description'];
                     $author_description = $data['author_description'];
                     echo "<img src='" . $image . "'class='w-75'></div>";
@@ -224,9 +223,9 @@ if (empty($username)) {
                     echo "<span class='close text-primary' style='font-size:12px;'>Sold by " . $seller_name . "</span>
                     </div>
                     <hr>";
-                    echo "<p class='m-1'>MRP <del>Rs. " . $mrp_price . "</del>   (Inclusive of all taxes)</p>";
-                    echo "<h3 style='color:red;' >Rs. <span class='sell_price'>" . $selling_price . "</span></h3><span class='border p-2 rounded mb-4'>" . $discount . "% OFF</span>
-                       </div>
+                    
+                    echo "<h3 style='color:red;' >Rs. <span class='sell_price'>" . $selling_price . "</span></h3><span class='text-success'>(Cash on Delivery Charge)</span>
+                    </div>
                        <div class='mt-4 ml-4 p-4'>
                     <button class='btn btn-lg btn-dark rounded mb-4 cart-btn'><i class='fa fa-shopping-cart'> </i> ADD TO CART</button>
                     <button class='btn btn-lg btn-danger rounded ml-4 mb-4 buy-btn'><i class='fa fa-shopping-bag'> </i> BUY NOW</button>
@@ -366,6 +365,7 @@ if (empty($username)) {
                                 var id = sessionStorage.getItem("sent");
                                 var email = sessionStorage.getItem("email");
                                 var sell_price = parseInt($(".sell_price").html());
+                            
                                 $.ajax({
                                     type : "POST",
                                     url : "./php/buy.php",
@@ -405,7 +405,7 @@ if (empty($username)) {
                         var cart = $(".total_cart").html();
                         var cart_price = parseInt($(".cart_price").html());
                         var sell_price = parseInt($(".sell_price").html());
-                        var status = "sellbook";
+                        var status = "contributebook";
                         $(".cart-btn").click(function(e) {
                             //var id = sessionStorage.getItem("sent");
                             e.preventDefault();

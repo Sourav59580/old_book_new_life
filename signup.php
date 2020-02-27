@@ -21,13 +21,15 @@
     <?php
     include_once("./design/navbar.php");
     ?>
-    <div class="container-fluid p-4">
-    <div class="container bg-white p-4" style="box-shadow:0px 0px 5px 3px #ccc;margin-top:10px;">
-    <h3 style="font-family: 'Righteous', cursive;">SIGNUP</h3>
-    <hr>
+    <div class="container-fluid p-4" style="margin-top:-25px;background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);">
+    <div class="container" >
+    
      <div class="row">
-         <div class="col-md-6 signup-container">
-            <form class="signup-form">
+         <div class="col-md-3"></div>
+         <div class="col-md-6 signup-container bg-white p-4 rounded" style="margin-top:10px;background-image: linear-gradient(to right, #92fe9d 0%, #00c9ff 100%);">
+         <h3 style="font-family: 'Righteous', cursive;">SIGNUP</h3>
+         <hr>
+            <form class="signup-form mb-3">
                 <div class="form-group mb-3">
                     <label for="firstname">Firstname<sup class="text-danger">*</sup></label>
                     <input type="text" name="firstname" placeholder="Mr. raj" class="form-control bg-light" id="firstname"></input>
@@ -53,13 +55,10 @@
             <div class="alert alert-success d-none success-msg" role="alert">
              Signup success,please login...
              </div>
+
+             <p>If you have a account please login <a href="./signin.php" >Login now</a></p>
          </div>
-         <div class="col-md-1"></div>
-         <div class="col-md-5">
-             <h4>OLD USER</h4>
-             <p>If you have a account please login</p>
-             <a href="./signin.php" class="btn btn-danger">Login now</a>
-         </div>
+         <div class="col-md-3"></div>
      </div>
     </div>
 

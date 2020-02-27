@@ -53,6 +53,14 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
   cursor: pointer;
   background: white; 
 }
+.contributebook-view:hover {
+            box-shadow: 0px 0px 2px 2px #ccc;
+            transform: scale(1.1);
+            z-index: 1;
+            transition: 1s;
+            cursor: pointer;
+            background: white;
+        }
 
     </style>
 </head>
@@ -108,9 +116,39 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
            </div>
                <h4>✸ DONATED BOOKS</h4>
                <hr class="style-one">
-           <div class="row p-2">
-               
-           </div>
+               <div class="row p-2">
+                    <?php
+                    $book_view = "SELECT * FROM contributebook";
+                    $response = $db->query($book_view);
+                    if ($response) {
+                        while ($data = $response->fetch_assoc()) {
+                            $id = $data['id'];
+                            $category = $data['book_category'];
+                            echo "<div class='col-md-3 contributebook-view mb-3' bookid='" . $id . "' category='" . $category . "' >
+                               <div class='card border-0 p-0'>
+                                   <div class='card-body p-1'>";
+                            $image = "data:image/png;base64," . base64_encode($data['book_image']);
+                            $book_title = $data['book_title'];
+                            $book_author = $data['book_author'];
+                            echo "<div class='mb-2'><img class='card-img-top' src='" . $image . "'bookid='" . $id . "'></div>";
+                            echo "<h5>" . $book_title . "</h5>";
+                            echo "<spna>by " . $book_author . "</spna>";
+                            echo "<p class='mb-0 text-danger'>Rs. FREE</p>
+                                     <div class='mt-2'>
+                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
+                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
+                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
+                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
+                                     <span class='fa fa-star-half-full text-warning' style='font-size:16px'></span>
+                                     <span>(34)</span>
+                                     </div>
+                                     </div>
+                                </div>
+                            </div>";
+                        }
+                    }
+                    ?>
+                </div>
          </div>
 
          <div class="col-md-2">
@@ -143,6 +181,24 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
                });
            });
        });
+
+        //contribute book view
+        $(document).ready(function() {
+            $(".contributebook-view").each(function() {
+                $(this).click(function() {
+                    var bookid = $(this).attr("bookid");
+                    var email = $(this).attr("email");
+                    var category = $(this).attr("category");
+                    sessionStorage.setItem("sent", bookid);
+                    sessionStorage.setItem("email", email);
+                    window.open('./local_show_contributebook_view_details.php?bookid=' + bookid + '&category=' + category, '_blank');
+                    //var width = 20;
+                    //var height
+                    //window.location.href = "http://localhost/main.php?width=" + width + "&height=" + height;
+
+                });
+            });
+        });
    </script>
 <script src="./js/index.js"></script>
 </body>
