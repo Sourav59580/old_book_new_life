@@ -266,6 +266,12 @@ if (empty($username)) {
                 });
             });
         });
+
+        function myBookView(){
+            var bookid = $(".searchBook").attr("bookid");
+            var category = $(".searchBook").attr("category");
+            window.open('./show_book_view_details.php?bookid=' + bookid + '&category=' + category, '_blank');
+        }
     </script>
     <script src="./js/index.js"></script>
 </body>

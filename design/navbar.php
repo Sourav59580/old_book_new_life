@@ -48,13 +48,11 @@
                                     </a></div>
                                 <div>
                                     <?php
-                                      if(empty($username))
-                                      {
-                                          echo "<a href='./signin.php'>Login</a>";
-                                      }
-                                      else{
-                                          echo "<a href='./php/logout.php'>Logout</a>";
-                                      }
+                                    if (empty($username)) {
+                                        echo "<a href='./signin.php'>Login</a>";
+                                    } else {
+                                        echo "<a href='./php/logout.php'>Logout</a>";
+                                    }
                                     ?>
                                 </div>
                             </div>
@@ -63,7 +61,7 @@
                 </div>
             </div>
         </div> <!-- Header Main -->
-        <div class="header_main">
+        <div class="header_main sticky-top">
             <div class="container">
                 <div class="row">
                     <!-- Logo -->
@@ -77,7 +75,7 @@
                             <div class="header_search_content">
                                 <div class="header_search_form_container">
                                     <form action="#" class="header_search_form clearfix"> <input type="search" required="required" class="header_search_input" placeholder="Search for products...">
-                                        <div class="custom_dropdown" style="display: none;">
+                                        <!-- <div class="custom_dropdown" style="display: none;">
                                             <div class="custom_dropdown_list"> <span class="custom_dropdown_placeholder clc">All Categories</span> <i class="fas fa-chevron-down"></i>
                                                 <ul class="custom_list clc">
                                                     <li><a class="clc" href="#">All Categories</a></li>
@@ -89,32 +87,61 @@
                                                 </ul>
                                             </div>
                                             <ul class="search_list">
-
+                                                      
                                             </ul>
-                                        </div> <button type="submit" class="header_search_button trans_300" value="Submit"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918770/search.png" alt=""></button>
+                                        </div> <button type="submit" class="header_search_button trans_300" value="Submit"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918770/search.png" alt=""></button> -->
                                     </form>
+                                    <div class="list-group search-items">
+                                        
+                                        
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div> 
+
+                    </div>
                     <script>
                         $(document).ready(function(){
-                            $(".header_search_input").on("input",function(){
-                                var value = $(this).val();
-                                $.ajax({
-                                    type : "POST",
-                                    url : "./php/search.php",
-                                    data : {
-                                        value : value
-                                    },
-                                    success : function(response){
-                                        $(".search_list").html(response);
-       
+                         $(".header_search_input").on("input",function(){
+                            $(".search-items").css({display:"block"});
+                            $(".search-items").html("");
+                             var myvar = setTimeout(function(){
+                                 var value = $(".header_search_input").val();
+                                 $.ajax({
+                                     type : "POST",
+                                     url : "./php/search.php",
+                                     data : {
+                                           value : value
+                                     },
+                                     success : function(response){
+                                        $(".search-items").html(response);
+                                     } 
+                                 });
+                             },2000);
 
-                                    }
-                                });
+                             setTimeout(function(){
+                                 clearTimeout(myvar);
+                             },2000);
+                         });
+                        });
+                        $(document).ready(function() {
+                            $(".header_search_input").on("input",function() {
+                                var value = $(this).val();
+                                if(value!=""){
+                                $(".header_main").removeClass('sticky-top');
+                                $(".main_nav").removeClass('sticky-top');
+                                $(".main_nav_menu").removeClass('sticky-top');
+                                }
+                                else{
+                                $(".search-items").css({display:"none"});
+                                $(".header_main").addClass('sticky-top');
+                                $(".main_nav").addClass('sticky-top');
+                                $(".main_nav_menu").addClass('sticky-top'); 
+                                }
+                                                                
                             });
                         });
+                        
                     </script>
                     <!-- Wishlist -->
                     <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">

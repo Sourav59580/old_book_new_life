@@ -98,7 +98,7 @@ if (empty($username)) {
                         <!-- Logo -->
                         <div class="col-lg-2 col-sm-3 col-3 order-1">
                             <div class="logo_container">
-                                <div class="logo"><a href="./index.php"><img src="./photos/logo.jpg" height="70px" /></a></div>
+                                <div class="logo"><a href="#"><img src="./photos/logo.jpg" height="70px" /></a></div>
                             </div>
                         </div> <!-- Search -->
                         <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">

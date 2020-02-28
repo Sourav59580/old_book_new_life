@@ -199,6 +199,12 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
                 });
             });
         });
+        //search 
+        function myBookView(){
+            var bookid = $(".searchBook").attr("bookid");
+            var category = $(".searchBook").attr("category");
+            window.open('./local_show_book_view_details.php?bookid=' + bookid + '&category=' + category, '_blank');
+        }
    </script>
 <script src="./js/index.js"></script>
 </body>

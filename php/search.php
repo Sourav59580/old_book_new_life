@@ -3,14 +3,13 @@
 require_once("../database/database.php");
 $value = $_POST['value'];
 
-$getdata = "SELECT book_title FROM sellbook";
+$getdata = "SELECT * FROM sellbook WHERE book_title LIKE '$value%'";
 $response = $db->query($getdata);
-while($data=$response->fetch_assoc())
-{
-    if($data['book_title']=='$value')
-    {
-        echo "<li>".$data['book_title']."</li>";
-    }
+if($response){
+    $data=$response->fetch_assoc();
+    echo "<a href='#'class='list-group-item list-group-item-action searchBook' onclick='myBookView()' bookid='".$data['id']."' category='".$data['book_category']."'>".$data['book_title']."</a>";
+        
+    
     
 }
 
