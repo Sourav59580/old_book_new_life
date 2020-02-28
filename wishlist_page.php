@@ -27,7 +27,7 @@ if(empty($username)){
     <?php
     include_once("./design/navbar.php");
     ?>
-    <div class="container fluid">
+    <div class="container fluid" style="height:200px">
       <div class="container mb-4">
 
         <div class="row px-4">

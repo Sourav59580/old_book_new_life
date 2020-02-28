@@ -88,12 +88,35 @@
                                                     <li><a class="clc" href="#">Smartphones</a></li>
                                                 </ul>
                                             </div>
+                                            <ul class="search_list">
+
+                                            </ul>
                                         </div> <button type="submit" class="header_search_button trans_300" value="Submit"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918770/search.png" alt=""></button>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- Wishlist -->
+                    </div> 
+                    <script>
+                        $(document).ready(function(){
+                            $(".header_search_input").on("input",function(){
+                                var value = $(this).val();
+                                $.ajax({
+                                    type : "POST",
+                                    url : "./php/search.php",
+                                    data : {
+                                        value : value
+                                    },
+                                    success : function(response){
+                                        $(".search_list").html(response);
+       
+
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+                    <!-- Wishlist -->
                     <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
                         <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
                             <div class="wishlist d-flex flex-row align-items-center justify-content-end">
