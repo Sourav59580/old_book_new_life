@@ -432,12 +432,12 @@ if (empty($username)) {
                                         });
 
                                     } else if (response.trim() == 'update') {
-                                        $(".cart_price").html(cart_price + sell_price);
+                                       // $(".cart_price").html(cart_price + sell_price);
                                         swal({
-                                            type: "success",
-                                            title: "Update Cart Quantity",
-                                            text: "Success You have updated 1 item to your shopping cart",
-                                            timer: 2000,
+                                            type: "error",
+                                            title: "Oops...",
+                                            text: "An item already exists at your shopping cart with same name",
+                                            timer: 3000,
                                             showConfirmButton: false
                                         });
                                     } else {

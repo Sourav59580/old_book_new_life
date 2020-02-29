@@ -13,18 +13,18 @@ if ($response) {
     $flag = 0;
     while ($data = $response_bookid->fetch_assoc()) {
         if ($data['bookid'] == $bookid && $data['status_type'] ==$status) {
-            $flag = 1;
+            $flag = 1; 
             break;
         }
     }
     if ($flag == 1) {
-        $update_quantity = "UPDATE cart SET quantity=quantity+1, sell_price=sell_price+'$sell_price' WHERE bookid='$bookid' AND email='$email' AND status_type='$status'";
-        $response = $db->query($update_quantity);
-        if ($response) {
+       // $update_quantity = "UPDATE cart SET quantity=quantity+1, sell_price=sell_price+'$sell_price' WHERE bookid='$bookid' AND email='$email' AND status_type='$status'";
+       // $response = $db->query($update_quantity);
+        //if ($response) {
             echo "update";
-        } else {
-            echo "Failed to update";
-        }
+        //} else {
+        //    echo "Failed to update";
+        //}
     } else {
         $insert_data = "INSERT INTO cart(bookid,sell_price,email,quantity,status_type) VALUES('$bookid','$sell_price','$email',1,'$status')";
         $response = $db->query($insert_data);

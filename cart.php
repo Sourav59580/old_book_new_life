@@ -457,6 +457,8 @@ if (empty($username)) {
                                 save.className = 'fa fa-save mr-1';
                                 btn5.append(save);
                                 btn5.append("SAVE FOR LATER");
+      //lot of work pending here
+                                btn5.onclick = function(){alert('OnClick');}
                                 col8.append(btn5);
                                 row.append(col8);
 
