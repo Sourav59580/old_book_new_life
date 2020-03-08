@@ -358,21 +358,15 @@
                             </li>
                             <li><a href="./sell_books.php">Sell Books<i class="fas fa-chevron-down"></i></a></li>
                             <li><a href="./articles.php">Articles<i class="fas fa-chevron-down"></i></a></li>
-                            <!-- <li class="hassubs"> <a href="#">Pages<i class="fas fa-chevron-down"></i></a>
+                            <li class="hassubs"> <a href="#">Pages<i class="fas fa-chevron-down"></i></a>
                                             <ul>
-                                                <li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
-                                                <li><a href="product.html">Product<i
-                                                            class="fas fa-chevron-down"></i></a></li>
-                                                <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-                                                <li><a href="blog_single.html">Blog Post<i
-                                                            class="fas fa-chevron-down"></i></a></li>
-                                                <li><a href="regular.html">Regular Post<i
-                                                            class="fas fa-chevron-down"></i></a></li>
-                                                <li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
-                                                <li><a href="contact.html">Contact<i
+                                                <li><a href="./order.php">Your Orders<i class="fas fa-chevron-down"></i></a></li>
+                                                <li><a href="./blog.php">Your Blog<i class="fas fa-chevron-down"></i></a></li>
+                                                <li><a href="./cart.php">Cart<i class="fas fa-chevron-down"></i></a></li>
+                                                <li><a href="./contact.php">Contact<i
                                                             class="fas fa-chevron-down"></i></a></li>
                                             </ul>
-                                        </li> -->
+                                        </li>
 
                             <li><a href="contact.php">Contact<i class="fas fa-chevron-down"></i></a></li>
                         </ul>

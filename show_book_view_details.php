@@ -147,20 +147,22 @@ if (empty($username)) {
                                 </div> <!-- Cart -->
                                 <div class="cart">
                                     <div class="cart_container d-flex flex-row align-items-center justify-content-end">
-                                       <a href="./cart.php"> <div class="cart_icon"> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png" alt="">
-                                            <div class="cart_count"><span class="total_cart">
-                                                    <?php
-                                                    $get_data = "SELECT COUNT(bookid) AS result FROM cart WHERE email='$username'";
-                                                    $response = $db->query($get_data);
-                                                    if ($response) {
-                                                        $data = $response->fetch_assoc();
-                                                        echo $data['result'];
-                                                    } else {
-                                                        echo "0";
-                                                    }
-                                                    ?>
-                                                </span></div>
-                                        </div></a>
+                                        <a href="./cart.php">
+                                            <div class="cart_icon"> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png" alt="">
+                                                <div class="cart_count"><span class="total_cart">
+                                                        <?php
+                                                        $get_data = "SELECT COUNT(bookid) AS result FROM cart WHERE email='$username'";
+                                                        $response = $db->query($get_data);
+                                                        if ($response) {
+                                                            $data = $response->fetch_assoc();
+                                                            echo $data['result'];
+                                                        } else {
+                                                            echo "0";
+                                                        }
+                                                        ?>
+                                                    </span></div>
+                                            </div>
+                                        </a>
                                         <div class="cart_content">
                                             <div class="cart_text"><a href="./cart.php">Cart</a></div>
                                             <div class="cart_price">
@@ -299,10 +301,13 @@ if (empty($username)) {
              </div>
             </div>";
                     }
-                    echo "<div class='row bg-white p-4 shadow-sm mb-3'>
+                    echo "<div class='row bg-white p-4 shadow-sm mb-1'>
                  <div class='col-md-3 p-4'>
+
+                  <button class='btn btn-md mb-3 feedback-btn' email='".$username."'>Give your feedback</button>
+
                    <h4>Customer reviews</h4>
-                    <div class='customer-reviews'>
+                    <div class='customer-reviews mb-3'>
                       <span class='fa fa-star checked text-warning' style='font-size:16px'></span>
                       <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
                       <span class='fa fa-star-o text-warning checked' style='font-size:16px'></span>
@@ -310,10 +315,18 @@ if (empty($username)) {
                       <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
                       <span class='ml-1'>3.7 out of 5</span>
                     </div>
+                    
+                    <div class='d-block mb-2 bg-warning w-100' style='height:20px'></div>
+                    <div class='d-block mb-2 bg-warning w-75' style='height:20px'></div>
+                    <div class='d-block mb-2 bg-warning w-50' style='height:20px'></div>
+                    <div class='d-block mb-2 bg-warning w-25' style='height:20px'></div>
+                    
                   </div>
-                  <div class='col-md-9'>
+                  <div class='col-md-9'>";
 
-                     <div>
+
+
+                    echo " <div>
                        <i class='fa fa-user-circle-o' style='font-size:18px;'> </i><span> Sourav Santra</span>
                         <div class='customer-reviews'>
                           <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
@@ -355,47 +368,82 @@ if (empty($username)) {
         </div>";
                 }
                 ?>
+                <div class="container bg-light px-4">
+                <div class="row bg-white p-4 shadow-sm mb-3">
+                    <div class="col-md-12">
+                        <h4>Customer questions & answers</h4>
+                        <form>
+                            <div class="input-group mb-3 w-75">
+                                <input type="text" class="form-control" placeholder="Have a question? Write here">
+                                <div class="input-group-append" style="cursor: pointer">
+                                    <span class="input-group-text" id="basic-addon2"><i class="fa fa-send-o"></i></span>
+                                </div>
+                            </div>
 
 
+                        </form>
+                        <div>
+                            <h6><span>Q: </span> Is the product good or bad?</h6>
+                            <p class="mb-3"><span>A:</span> The new iQOO UI introduces semi-open icons, low-saturation color matching and smooth transition animations. It also has a Monster mode with enhanced CPU performance for performance enthusiasts</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="m-0">Sourav Santra</p>
+                                    <p><i class="fa fa-user mr-1"></i>Manager</p>
+                                </div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-2 mb-2 d-flex flex-end">
+                                    <p class="mr-3" style="cursor: pointer"><span class="fa fa-thumbs-down mr-1"></span>644</p>
+                                    <p style="cursor: pointer"><span class="fa fa-thumbs-up mr-1"></span>4</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                </div>
                 <?php include_once("./design/footer.php"); ?>
                 <script>
+                //feedback page
+                $(document).ready(function(){
+                    $(".feedback-btn").click(function(){
+                        var email = $(this).attr('email');
+                        window.location.href='./feedback.php';
+                    });
+                });
                     //buy product
                     $(document).ready(function() {
                         $(".buy-btn").each(function() {
-                            $(this).click(function(){
+                            $(this).click(function() {
                                 var id = sessionStorage.getItem("sent");
                                 var email = sessionStorage.getItem("email");
                                 var sell_price = parseInt($(".sell_price").html());
                                 $.ajax({
-                                    type : "POST",
-                                    url : "./php/buy.php",
-                                    data : {
-                                        bookid : id,
-                                        email : email,
+                                    type: "POST",
+                                    url: "./php/buy.php",
+                                    data: {
+                                        bookid: id,
+                                        email: email,
                                         sell_price: sell_price
                                     },
-                                    success : function(response){
-                                        if(response.trim()=='success')
-                                        { 
+                                    success: function(response) {
+                                        if (response.trim() == 'success') {
                                             $.ajax({
-                                                type : "POST",
-                                                url : "./php/totalsell.php",
-                                                data :{
-                                                    bookid : id
+                                                type: "POST",
+                                                url: "./php/totalsell.php",
+                                                data: {
+                                                    bookid: id
                                                 },
-                                                success : function(response){
-                                                  alert(response);
+                                                success: function(response) {
+                                                    alert(response);
                                                 }
                                             });
 
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             alert(response);
                                         }
                                     }
                                 });
-                            });  
+                            });
                         });
                     });
                     //cart item
@@ -415,7 +463,7 @@ if (empty($username)) {
                                 data: {
                                     bookid: id,
                                     email: email,
-                                    status : status,
+                                    status: status,
                                     sell_price: sell_price
                                 },
                                 success: function(response) {
@@ -432,7 +480,7 @@ if (empty($username)) {
                                         });
 
                                     } else if (response.trim() == 'update') {
-                                       // $(".cart_price").html(cart_price + sell_price);
+                                        // $(".cart_price").html(cart_price + sell_price);
                                         swal({
                                             type: "error",
                                             title: "Oops...",
