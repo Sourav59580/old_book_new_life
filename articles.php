@@ -118,27 +118,7 @@ if (empty($username)) {
 
                             <div class="container d-flex flex-column justify-content-center align-items-center p-4 border">
                                 <h4>You Want to create your own blog and published,then it's best option for you</h4>
-                                <button class="btn btn-primary" data-toggle="collapse" data-target='#writing-container'>Creat now</button>
-                            </div>
-                            <div class="container collapse mb-4" id="writing-container" style="overflow: hidden;">
-                                <hr>
-                                <div class="file_upload">
-                                    <button class="btn btn-danger mb-4" data-toggle="collapse" data-target="#file-upload-form">Showcase Image Upload</button>
-                                    <div class="collapse mb-4" id='file-upload-form'>
-                                        <form>
-                                            <input type="file" class="form-control w-50">
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="showcase animated slideInUp text-center" style="width:100%;">
-                                    <form method="post">
-                                        <textarea id="mytextarea" name="mytextarea">
-                                         Hello, World!
-                                       </textarea>
-                                       <button class="btn btn-primary mt-4">Submit</button>
-                                    </form>
-                                </div>
-
+                                <a href='create_new_blog.php' class="btn btn-primary">Creat now</a>
                             </div>
 
                         </div>
