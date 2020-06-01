@@ -116,7 +116,7 @@ if (empty($username)) {
                         </div>
                         <div id="founder" class="tab-pane animated slideInRight">
 
-                            <div class="container d-flex flex-column justify-content-center align-items-center p-4 border">
+                            <div class="container d-flex flex-column justify-content-center align-items-center p-4">
                                 <h4>You Want to create your own blog and published,then it's best option for you</h4>
                                 <a href='create_new_blog.php' class="btn btn-primary">Creat now</a>
                             </div>
