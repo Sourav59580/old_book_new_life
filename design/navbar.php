@@ -219,7 +219,7 @@
                 </div>
             </div>
         </div> <!-- Menu -->
-        <div class="page_menu sticky-top">
+        <div class="page_menu">
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -246,22 +246,20 @@
                                 </li>
                                 <li class="page_menu_item"> <a href="./index.php">Home<i class="fa fa-angle-down"></i></a>
                                 </li>
-                                <li class="page_menu_item has-children"> <a href="./book_contribute.php">Contribute<i class="fa fa-angle-down"></i></a>
-                                    <ul class="page_menu_selection">
+                                <li class="page_menu_item"> <a href="./book_contribute.php">Contribute Book<i class="fa fa-angle-down"></i></a>
+                                    <!-- <ul class="page_menu_selection">
                                         <li><a href="./book_contribute.php">BOOK</a></li>
-                                        <li><a href="./pdf_contribute.php">PDF</a></li>
-                                        <li><a href="./docs_contributes.php">DOCs</a></li>
-                                        <li><a href="./word_powerpoint_contributes.php">WORD/POWER POINT</a></li>
-                                    </ul>
+                                        <li><a href="./word_powerpoint_contributes.php">PDF/DOCs/WORD/POWER POINT</a></li>
+                                    </ul> -->
                                 </li>
-                                <li class="page_menu_item has-children"> <a href="#">E-book-downloads</a>
+                                <!-- <li class="page_menu_item has-children"> <a href="#">E-book-downloads</a> -->
                                     <!-- <ul class="page_menu_selection">
                                             <li><a href="#">Featured Brands<i class="fa fa-angle-down"></i></a></li>
                                             <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
                                             <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
                                             <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
                                         </ul> -->
-                                </li>
+                                <!-- </li> -->
                                 <li class="page_menu_item"> <a href="./sell_books.php">Sell Books</a></li>
                                 <li class="page_menu_item"><a href="./articles.php">Articles</a></li>
                                 <li class="page_menu_item"><a href="./contact.php">Contact</a></li>
@@ -309,9 +307,9 @@
                     <div class="main_nav_menu sticky-top">
                         <ul class="standard_dropdown main_nav_dropdown">
                             <li><a href="index.php">Home<i class="fas fa-chevron-down"></i></a></li>
-                            <li class="hassubs"> <a href="./book_contribute.php">Contribute<i class="fas fa-chevron-down"></i></a>
-                                <ul>
-                                    <li> <a href="./book_contribute.php">Book<i class="fas fa-chevron-down"></i></a>
+                            <li class="hassubs"> <a href="./book_contribute.php">Contribute Book</a>
+                                <!-- <ul>
+                                    <li> <a href="./book_contribute.php">Book<i class="fas fa-chevron-down"></i></a> -->
                                         <!-- <ul>
                                                         <li><a href="#">Arts & Music<i class="fas fa-chevron-down"></i></a>
                                                         </li>
@@ -328,13 +326,13 @@
                                                         <li><a href="#">Sports<i class="fas fa-chevron-down"></i></a>
                                                         </li>
                                                     </ul> -->
-                                    </li>
+                                    <!-- </li>
                                     <li><a href="./pdf_contribute.php">PDF<i class="fas fa-chevron-down"></i></a></li>
                                     <li><a href="./docs_contributes.php">DOCs<i class="fas fa-chevron-down"></i></a></li>
                                     <li><a href="./word_powerpoint_contributes.php">WORD/POWER POINT<i class="fas fa-chevron-down"></i></a></li>
-                                </ul>
+                                </ul> -->
                             </li>
-                            <li class="hassubs"> <a href="#">E-book-Downloads</a>
+                            <!-- <li class="hassubs"> <a href="#">E-book-Downloads</a> -->
                                 <!-- <ul>
                                                 <li> <a href="#">Arts & Music<i class="fas fa-chevron-down"></i></a> -->
                                 <!-- <ul>
@@ -355,7 +353,7 @@
                                                 <li><a href="#">Medical<i class="fas fa-chevron-down"></i></a></li>
                                                 <li><a href="#">Sports<i class="fas fa-chevron-down"></i></a></li>
                                             </ul> -->
-                            </li>
+                            <!-- </li> -->
                             <li><a href="./sell_books.php">Sell Books<i class="fas fa-chevron-down"></i></a></li>
                             <li><a href="./articles.php">Articles<i class="fas fa-chevron-down"></i></a></li>
                             <li class="hassubs"> <a href="#">Pages<i class="fas fa-chevron-down"></i></a>

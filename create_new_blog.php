@@ -39,7 +39,7 @@
                         <p>Hello Summernote</p>
                     </div>
                     <div class='container text-center'>
-                    <button class='btn btn-info m-4'>Publish</button>
+                    <button class='btn btn-info m-4 publish'>Publish</button>
                     </div>
 
                     
@@ -56,6 +56,8 @@
         </div>
     </div>
 
+    <div class="container showcase"></div>
+
     <script>
     $(document).ready(function() {
         $('#summernote').summernote();
@@ -66,19 +68,27 @@
     $("#nav-profile-tab").click(function(){
         var markupStr = $('#summernote').summernote('code');
         $(".text").html(markupStr);
-        //console.log(markupStr);
-        
-        // $.ajax({
-        //   type : "POST",
-        //   url : './post.php',
-        //   data : {
-        //     markupStr : markupStr
-        //   },
-        //   success : function(response){
-        //     alert(response);
-        //   }
-        // })
+        console.log(markupStr);        
     });
+
+    //publish
+    $(document).ready(function() {
+        $(".publish").click(function(){
+            var markupStr = $('#summernote').summernote('code');
+
+            //var blogString = markupStr
+            $.ajax({
+                type : "POST",
+                url : "./php/artical.php",
+                data : {
+                    blogString : markupStr
+                },
+                success : function (response) {
+                    alert(response)
+                  }
+            })
+        })
+      })
   </script>
 
 </body>

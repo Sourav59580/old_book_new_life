@@ -2,9 +2,49 @@
 require("../database/database.php");
 
 
-ECHO  $_GET['xyz'];
+//ECHO  $_GET['xyz'];
 
-    ECHO $_POST['file'];//post method
+//ECHO $_POST['file'];//post method
+if (isset($_POST['blogString'])) {
+    $blogstring = $_POST['blogString'];
+    
+    $get_table = "SELECT * FROM artical";
+    $response = $db->query($get_table);
+    if($response){
+        $insert_data = "INSERT INTO artical(blogstring)VALUES('$blogstring')";
+        $response = $db->query($insert_data);
+        if($response){
+            echo "success";
+        }else{
+            echo "Failed";
+        }
+    }else{
+        $create_table = "CREATE TABLE artical(
+            id INT(10) NOT NULL AUTO_INCREMENT,
+            blogstring MEDIUMTEXT,
+            PRIMARY KEY(id)
+        )";
+        $response = $db->query($create_table);
+        if($response){
+            $insert_data = "INSERT INTO artical(blogstring)VALUES('$blogstring')";
+            $response = $db->query($insert_data);
+            if($response){
+                echo "success";
+            }else{
+                echo "Failed";
+            }
+
+        }else{
+            echo "Table create failed";
+        }
+    }
+
+}
+
+
+
+//$string = $_POST['string'];
+//echo $string;
 
 
 // $artical_title = $_POST['title'];
