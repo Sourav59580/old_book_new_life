@@ -81,12 +81,9 @@ if (empty($username)) {
                                     $response=$db->query($getArtical);
                                     while($data =$response->fetch_assoc()){
                                         echo 
-                                        "<div class='container w-75 bg-white shadow-sm' style='float: left'>".$data['blogstring']."</div>";
+                                        "<div class='container w-75 bg-white shadow-sm mb-4' style='float: left'>".$data['blogstring']."</div>";
                                         
                                     }
-
-
-
 
                                 ?>
                             </div>
