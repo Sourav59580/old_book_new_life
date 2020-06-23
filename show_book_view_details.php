@@ -49,24 +49,13 @@ if (empty($username)) {
                                 <div class="top_bar_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918577/phone.png" alt=""></div>+91 9823 132 111
                             </div>
                             <div class="top_bar_contact_item">
-                                <div class="top_bar_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918597/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">contact@bbbootstrap.com</a>
+                                <div class="top_bar_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918597/mail.png" alt=""></div><a href="mailto:oldbooknewlife@gmail.com">contact@oldbooknewlife.com</a>
                             </div>
                             <div class="top_bar_content ml-auto">
                                 <div class="top_bar_menu">
                                     <ul class="standard_dropdown top_bar_dropdown">
-                                        <li> <a href="#">English<i class="fas fa-chevron-down"></i></a>
-                                            <ul>
-                                                <li><a href="#">Italian</a></li>
-                                                <li><a href="#">Spanish</a></li>
-                                                <li><a href="#">Japanese</a></li>
-                                            </ul>
-                                        </li>
-                                        <li> <a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a>
-                                            <ul>
-                                                <li><a href="#">EUR Euro</a></li>
-                                                <li><a href="#">GBP British Pound</a></li>
-                                                <li><a href="#">JPY Japanese Yen</a></li>
-                                            </ul>
+                                        <li> <a>English<i class="fas fa-chevron-down"></i></a>                                 </li>
+                                        <li> <a >₹ INR<i class="fas fa-chevron-down"></i></a>                    
                                         </li>
                                     </ul>
                                 </div>
@@ -98,7 +87,7 @@ if (empty($username)) {
                         <!-- Logo -->
                         <div class="col-lg-2 col-sm-3 col-3 order-1">
                             <div class="logo_container">
-                                <div class="logo"><a href="#"><img src="./photos/oldbooknewlifeLogo.svg" height="70px" /></a></div>
+                                <div class="logo pt-3"><a href="#"><img src="./photos/oldbooknewlifeLogo.svg" height="90px" /></a></div>
                             </div>
                         </div> <!-- Search -->
                         <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
@@ -427,6 +416,8 @@ if (empty($username)) {
                                     },
                                     success: function(response) {
                                         if (response.trim() == 'success') {
+                                           
+                                           //total book count
                                             $.ajax({
                                                 type: "POST",
                                                 url: "./php/totalsell.php",
@@ -434,7 +425,9 @@ if (empty($username)) {
                                                     bookid: id
                                                 },
                                                 success: function(response) {
-                                                    alert(response);
+                                                    if (response.trim() == 'success') {
+                                                        window.location = './deliveryAddress.php?bookid='+id+'email='+email;
+                                                    }
                                                 }
                                             });
 
