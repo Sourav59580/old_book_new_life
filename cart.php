@@ -104,7 +104,7 @@ if (empty($username)) {
             <div class="row px-4">
                 <div class="col-md-2"></div>
                 <div class="col-md-8"></div>
-                <div class="col-md-2"><button class="btn btn-lg btn-warning">Proceed to Buy</button></div>
+                <div class="col-md-2"><a href='./select_address.php' class="btn btn-lg btn-warning">Proceed to Buy<a></div>
             </div>
             <hr>
         </div>

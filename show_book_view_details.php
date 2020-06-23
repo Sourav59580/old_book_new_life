@@ -98,7 +98,7 @@ if (empty($username)) {
                         <!-- Logo -->
                         <div class="col-lg-2 col-sm-3 col-3 order-1">
                             <div class="logo_container">
-                                <div class="logo"><a href="#"><img src="./photos/logo.jpg" height="70px" /></a></div>
+                                <div class="logo"><a href="#"><img src="./photos/oldbooknewlifeLogo.svg" height="70px" /></a></div>
                             </div>
                         </div> <!-- Search -->
                         <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
@@ -534,14 +534,15 @@ if (empty($username)) {
                                 type: "GET",
                                 url: 'https://api.postalpincode.in/pincode/' + pincode,
                                 success: function(response) {
-                                    $(".pincode-address").html("");
+                                    if((response[0].PostOffice)!=null){
+                                        $(".pincode-address").html("");
                                     $(".delivary_status").html("");
                                     console.log(response[0].PostOffice.length);
                                     var length = response[0].PostOffice.length;
                                     if (length > 0) {
                                         $(".delivary_status").html("Generally delivered in 11 - 13 days");
                                         for (var i = 0; i <= length; i++) {
-                                            console.log(response[0].PostOffice[i].Name);
+                                            //console.log(response[0].PostOffice[i].Name);
                                             var a = document.createElement("A");
                                             a.className = 'ml-2';
                                             var text = document.createTextNode(response[0].PostOffice[i].Name);
@@ -549,6 +550,11 @@ if (empty($username)) {
                                             $(".pincode-address").append(a);
                                         }
                                     }
+
+                                    }else{
+                                        $(".pincode-address").html("<span class='text-danger'>Invalid PIN Codes !</span>")
+                                    }
+                                    
                                     //console.log(response[0].PostOffice[i].Name);
                                 }
                             });
