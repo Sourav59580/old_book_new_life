@@ -132,6 +132,7 @@ if (empty($username)) {
     var url_string = window.location;
     var url = new URL(url_string);
     var bookid = url.searchParams.get("bookid");
+    var sellprice = url.searchParams.get("sell_price");
     var email = sessionStorage.getItem("email");
     var emailId = sessionStorage.getItem("email");
     $(document).ready(function() {
@@ -164,7 +165,7 @@ if (empty($username)) {
                 },
                 success: function(response) {
                     if(response.trim() == 'success'){
-                        window.location = './payment.php?email='+email+'&bookid='+bookid;
+                        window.location = './payment.php?email='+email+'&bookid='+bookid+'&sellprice='+sellprice+'&name='+fullname+'&mobile='+mobile;
                     }else{
                         alert(response);
                     }

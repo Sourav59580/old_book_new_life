@@ -124,6 +124,9 @@ if (empty($username)) {
                 var url = new URL(url_string);
                 var bookid = url.searchParams.get("bookid");
                 var email = url.searchParams.get("email");
+                var name = url.searchParams.get("name");
+                var mobile = url.searchParams.get("mobile");
+                var sellprice = url.searchParams.get("sellprice");
                 //alert(bookid);
                 $.ajax({
                     type : "POST",
@@ -142,7 +145,31 @@ if (empty($username)) {
                 })
                 
             } else {
-                alert(document.getElementById("online").value)
+
+                var url_string = window.location;
+                var url = new URL(url_string);
+                var bookid = url.searchParams.get("bookid");
+                var email = url.searchParams.get("email");
+                var name = url.searchParams.get("name");
+                var mobile = url.searchParams.get("mobile");
+                var sellprice = url.searchParams.get("sellprice");
+               
+
+                $.ajax({
+                    type : "POST",
+                    url : "./php/onlinePayment.php",
+                    data : {
+                        bookid : bookid,
+                        email : email
+                    },
+                    success : function(response){
+                        if(response.trim()=='success'){
+                            window.location.href = './onlinePayment.php?name='+name+'&email='+email+'&mobile='+mobile+'&sellprice='+sellprice+'&bookid='+bookid;
+                        }else{
+                            alert(response);
+                        }
+                    }
+                })
             }
         })
 

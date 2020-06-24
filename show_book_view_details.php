@@ -426,7 +426,7 @@ if (empty($username)) {
                                                 },
                                                 success: function(response) {
                                                     if (response.trim() == 'success') {
-                                                        window.location = './deliveryAddress.php?bookid='+id+'&email='+email;
+                                                        window.location = './deliveryAddress.php?bookid='+id+'&email='+email+'&sell_price='+sell_price;
                                                     }
                                                 }
                                             });

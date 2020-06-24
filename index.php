@@ -25,52 +25,53 @@ if (empty($username)) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/index.css">
     <style>
-        /* Image in left corner of <hr> tag */
+    /* Image in left corner of <hr> tag */
 
-        div.style-five {
-            height: 60px;
-            background: #fff url('https://www.formget.com/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2014/12/style-five.png.webp') no-repeat scroll left;
-            background-size: 500px 75px;
-            margin-left: -20px;
+    div.style-five {
+        height: 60px;
+        background: #fff url('https://www.formget.com/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2014/12/style-five.png.webp') no-repeat scroll left;
+        background-size: 500px 75px;
+        margin-left: -20px;
 
-        }
+    }
 
-        hr.style-five {
-            width: 95%;
-            margin-top: -40px;
-            border: 0;
-            border-bottom: 1px dashed black;
-            background: #70A8FF;
-        }
+    hr.style-five {
+        width: 95%;
+        margin-top: -40px;
+        border: 0;
+        border-bottom: 1px dashed black;
+        background: #70A8FF;
+    }
 
-        /* Gradient color1 - color2 - color1 */
+    /* Gradient color1 - color2 - color1 */
 
-        hr.style-one {
-            border: 0;
-            height: 1px;
-            background: #333;
-            background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc);
-            background-image: -moz-linear-gradient(left, #ccc, #333, #ccc);
-            background-image: -ms-linear-gradient(left, #ccc, #333, #ccc);
-            background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
-        }
+    hr.style-one {
+        border: 0;
+        height: 1px;
+        background: #333;
+        background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc);
+        background-image: -moz-linear-gradient(left, #ccc, #333, #ccc);
+        background-image: -ms-linear-gradient(left, #ccc, #333, #ccc);
+        background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
+    }
 
-        .book-view:hover {
-            box-shadow: 0px 0px 2px 2px #ccc;
-            transform: scale(1.1);
-            z-index: 1;
-            transition: 1s;
-            cursor: pointer;
-            background: white;
-        }
-        .contributebook-view:hover {
-            box-shadow: 0px 0px 2px 2px #ccc;
-            transform: scale(1.1);
-            z-index: 1;
-            transition: 1s;
-            cursor: pointer;
-            background: white;
-        }
+    .book-view:hover {
+        box-shadow: 0px 0px 2px 2px #ccc;
+        transform: scale(1.1);
+        z-index: 1;
+        transition: 1s;
+        cursor: pointer;
+        background: white;
+    }
+
+    .contributebook-view:hover {
+        box-shadow: 0px 0px 2px 2px #ccc;
+        transform: scale(1.1);
+        z-index: 1;
+        transition: 1s;
+        cursor: pointer;
+        background: white;
+    }
     </style>
 </head>
 
@@ -126,7 +127,7 @@ if (empty($username)) {
                 </div>
                 <h4>✸ DONATED BOOKS</h4>
                 <hr class="style-one">
-  
+
                 <div class="row p-2">
                     <?php
                     $book_view = "SELECT * FROM contributebook";
@@ -160,7 +161,7 @@ if (empty($username)) {
                     }
                     ?>
                 </div>
-               
+
             </div>
 
             <div class="col-md-2">
@@ -192,7 +193,7 @@ if (empty($username)) {
                 $get_book = "SELECT * FROM sellbook WHERE id='$bookid'";
                 $response = $db->query($get_book);
                 $data = $response->fetch_assoc();
-                echo "<div class='row'><div class='col-12 mb-3' bookid='" . $id . "' email='" . $username . "' category='" . $category . "' >
+                echo "<div class='row mb-2'><div class='col-12 mb-3' bookid='" . $id . "' email='" . $username . "' category='" . $category . "' >
                        <div class='card border-0 p-0'>
                        <div class='card-body p-1'>";
                 $image = "data:image/png;base64," . base64_encode($data['book_image']);
@@ -217,6 +218,54 @@ if (empty($username)) {
         </div>
     </div></div>";
                 }
+                ?>
+                <?php
+
+                $email = $_SESSION['username'];
+                $getActiveBook = "SELECT * FROM buy WHERE email = '$email' AND delivery_status = 'Active'";
+                $response=$db->query($getActiveBook);
+                if($response){
+                    $specialId = [];
+                    $i = 0;
+                    while($getFetchData = $response->fetch_assoc()){
+                        $specialId[$i] = $getFetchData['bookid'];
+                    }
+                    for($i=0;$i<count($specialId);$i++){
+                        
+                        $getShowData = "SELECT * FROM sellbook WHERE id='$specialId[$i]'";
+                        $response = $db->query($getShowData);
+                $data = $response->fetch_assoc();
+                echo "<div class='row mb-2'><div class='col-12 mb-3' bookid='" . $id . "' email='" . $username . "' category='" . $category . "' >
+                       <div class='card border-0 p-0'>
+                       <div class='card-body p-1'>";
+                $image = "data:image/png;base64," . base64_encode($data['book_image']);
+                $book_title = $data['book_title'];
+                $book_author = $data['book_author'];
+                $mrp_price = $data['mrp_price'];
+                $selling_price = $data['selling_price'];
+                $discount = number_format((($mrp_price - $selling_price) / $mrp_price) * 100);
+                echo "<div class='mb-2'><img class='card-img-top' src='" . $image . "'bookid='" . $id . "'></div>";
+                echo "<h5>" . $book_title . "</h5>";
+                echo "<spna>by " . $book_author . "</spna>";
+                echo "<p class='mb-0'><del>Rs." . $mrp_price . "</del> Rs." . $selling_price . "</p><span class='border text-danger p-1 rounded'>" . $discount . "% OFF</span>
+                <div class='mt-2'>
+                  <span class='fa fa-star text-warning' style='font-size:16px'></span>
+                  <span class='fa fa-star text-warning' style='font-size:16px'></span>
+                  <span class='fa fa-star text-warning' style='font-size:16px'></span>
+                  <span class='fa fa-star text-warning' style='font-size:16px'></span>
+                  <span class='fa fa-star-half-full text-warning' style='font-size:16px'></span>
+                  <span>(34)</span>
+                </div>
+            </div>
+        </div>
+    </div></div>";
+
+                    }
+                    
+
+                }
+
+
 
 
                 ?>
@@ -229,49 +278,51 @@ if (empty($username)) {
 
 
     </div>
-    
+
 
     <?php include_once("./design/footer.php"); ?>
     <script>
-        $(document).ready(function() {
-            $(".book-view").each(function() {
-                $(this).click(function() {
-                    var bookid = $(this).attr("bookid");
-                    var email = $(this).attr("email");
-                    var category = $(this).attr("category");
-                    sessionStorage.setItem("sent", bookid);
-                    sessionStorage.setItem("email", email);
-                    window.open('./show_book_view_details.php?bookid=' + bookid + '&category=' + category, '_blank');
-                    //var width = 20;
-                    //var height
-                    //window.location.href = "http://localhost/main.php?width=" + width + "&height=" + height;
+    $(document).ready(function() {
+        $(".book-view").each(function() {
+            $(this).click(function() {
+                var bookid = $(this).attr("bookid");
+                var email = $(this).attr("email");
+                var category = $(this).attr("category");
+                sessionStorage.setItem("sent", bookid);
+                sessionStorage.setItem("email", email);
+                window.open('./show_book_view_details.php?bookid=' + bookid + '&category=' +
+                    category, '_blank');
+                //var width = 20;
+                //var height
+                //window.location.href = "http://localhost/main.php?width=" + width + "&height=" + height;
 
-                });
             });
         });
-        //contribute book view
-        $(document).ready(function() {
-            $(".contributebook-view").each(function() {
-                $(this).click(function() {
-                    var bookid = $(this).attr("bookid");
-                    var email = $(this).attr("email");
-                    var category = $(this).attr("category");
-                    sessionStorage.setItem("sent", bookid);
-                    sessionStorage.setItem("email", email);
-                    window.open('./show_contributebook_view_details.php?bookid=' + bookid + '&category=' + category, '_blank');
-                    //var width = 20;
-                    //var height
-                    //window.location.href = "http://localhost/main.php?width=" + width + "&height=" + height;
+    });
+    //contribute book view
+    $(document).ready(function() {
+        $(".contributebook-view").each(function() {
+            $(this).click(function() {
+                var bookid = $(this).attr("bookid");
+                var email = $(this).attr("email");
+                var category = $(this).attr("category");
+                sessionStorage.setItem("sent", bookid);
+                sessionStorage.setItem("email", email);
+                window.open('./show_contributebook_view_details.php?bookid=' + bookid +
+                    '&category=' + category, '_blank');
+                //var width = 20;
+                //var height
+                //window.location.href = "http://localhost/main.php?width=" + width + "&height=" + height;
 
-                });
             });
         });
+    });
 
-        function myBookView(){
-            var bookid = $(".searchBook").attr("bookid");
-            var category = $(".searchBook").attr("category");
-            window.open('./show_book_view_details.php?bookid=' + bookid + '&category=' + category, '_blank');
-        }
+    function myBookView() {
+        var bookid = $(".searchBook").attr("bookid");
+        var category = $(".searchBook").attr("category");
+        window.open('./show_book_view_details.php?bookid=' + bookid + '&category=' + category, '_blank');
+    }
     </script>
     <script src="./js/index.js"></script>
 </body>
