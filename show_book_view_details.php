@@ -87,7 +87,7 @@ if (empty($username)) {
                         <!-- Logo -->
                         <div class="col-lg-2 col-sm-3 col-3 order-1">
                             <div class="logo_container">
-                                <div class="logo pt-3"><a href="#"><img src="./photos/oldbooknewlifeLogo.svg" height="90px" /></a></div>
+                                <div class="logo pt-3"><a href="#"><img src="./photos/oldbooknewlifeLogo.svg" height="80px" /></a></div>
                             </div>
                         </div> <!-- Search -->
                         <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
@@ -426,7 +426,7 @@ if (empty($username)) {
                                                 },
                                                 success: function(response) {
                                                     if (response.trim() == 'success') {
-                                                        window.location = './deliveryAddress.php?bookid='+id+'email='+email;
+                                                        window.location = './deliveryAddress.php?bookid='+id+'&email='+email;
                                                     }
                                                 }
                                             });

@@ -133,6 +133,7 @@ if (empty($username)) {
     var url = new URL(url_string);
     var bookid = url.searchParams.get("bookid");
     var email = sessionStorage.getItem("email");
+    var emailId = sessionStorage.getItem("email");
     $(document).ready(function() {
         $(".deliveryAddressForm").submit(function(e) {
             //alert(sessionStorage.getItem("email"))
@@ -163,7 +164,7 @@ if (empty($username)) {
                 },
                 success: function(response) {
                     if(response.trim() == 'success'){
-                        window.location.href = './payment.php?bookid='+bookid+'email='+email;
+                        window.location = './payment.php?email='+email+'&bookid='+bookid;
                     }else{
                         alert(response);
                     }

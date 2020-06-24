@@ -49,10 +49,20 @@ if (empty($username)) {
             background-size: 90% 15px;
         }
     }
+
+    .custom-control-input:checked~.custom-control-label::before {
+        background-color: red !important;
+        border: red !important;
+    }
+
+    .custom-control-input:focus~.custom-control-label::before {
+        box-shadow: none !important;
+    }
     </style>
 </head>
+
 <body>
-<div class="container p-4">
+    <div class="container p-4">
         <div class="row">
             <div class="col-md-2 text-center">
                 <img src="./photos/oldbooknewlifeLogo.svg" height="90px" />
@@ -74,7 +84,71 @@ if (empty($username)) {
             <div class="col-md-4"></div>
         </div>
     </div>
-    <div class="container" s></div>
+    <div class="container py-4" style="padding-left:100px;padding-right:100px;">
+        <h3>PAYMENT</h3>
+        <hr>
+        <div class="row">
+            <div class="col-md-8">
+                <form class="paymentForm">
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item bg-info text-light">Select a payment method</li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" name="payment" id="online" value="Credit Card/Debit Card/Net
+                                    Banking" class="custom-control-input">
+                                <label class="custom-control-label" for="online">Credit Card/Debit Card/Net
+                                    Banking</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" name="payment" id="COD" value="Pay on Delivery"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="COD">Pay on Delivery (Cash)</label>
+                            </div>
+                        </li>
+                    </ul>
+                    <button type="submit" class="btn btn-warning float-right">Continue</button>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+    <script>
+    $(document).ready(function() {
+        $(".paymentForm").submit(function(e) {
+            e.preventDefault();
+            if (document.getElementById("COD").checked) {
+                // alert(document.getElementById("COD").value)
+                var url_string = window.location;
+                var url = new URL(url_string);
+                var bookid = url.searchParams.get("bookid");
+                var email = url.searchParams.get("email");
+                //alert(bookid);
+                $.ajax({
+                    type : "POST",
+                    url : "./php/codPaymeny.php",
+                    data : {
+                        bookid : bookid,
+                        email : email
+                    },
+                    success : function(response){
+                        if(response.trim()=='success'){
+                            window.location = "orderComplete.php?email="+email+"&bookid="+bookid;
+                        }else{
+                            alert(response);
+                        }
+                    }
+                })
+                
+            } else {
+                alert(document.getElementById("online").value)
+            }
+        })
+
+    })
+    </script>
 
 </body>
+
 </html>
