@@ -64,8 +64,7 @@ if (empty($username)) {
                         aria-valuemin="0" aria-valuemax="100"><span><i class="fa fa-check-circle text-success"
                                 aria-hidden="true"></i> SIGN IN</span> </div>
                     <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="30"
-                        aria-valuemin="0" aria-valuemax="100"><span><i class="fa fa-check-circle text-success"
-                                aria-hidden="true"></i> PLACE ORDER </span></div>
+                        aria-valuemin="0" aria-valuemax="100"><span>PLACE ORDER </span></div>
                     <div class="progress-bar bg-secondary" role="progressbar" style="width: 25%" aria-valuenow="20"
                         aria-valuemin="0" aria-valuemax="100">PAYMENT</div>
                     <div class="progress-bar bg-secondary" role="progressbar" style="width: 25%" aria-valuenow="20"
@@ -130,13 +129,14 @@ if (empty($username)) {
     </div>
 
     <script>
-     var url_string = window.location;
-     var url = new URL(url_string);
-     var bookid = url.searchParams.get("bookid");
-     var email = url.searchParams.get("email");
-     $(document).ready(function(){
-         $(".deliveryAddressForm").submit(function(e){
-             e.preventDefault();
+    var url_string = window.location;
+    var url = new URL(url_string);
+    var bookid = url.searchParams.get("bookid");
+    var email = sessionStorage.getItem("email");
+    $(document).ready(function() {
+        $(".deliveryAddressForm").submit(function(e) {
+            //alert(sessionStorage.getItem("email"))
+            e.preventDefault();
             var fullname = $("#fullname").val();
             var mobile = $("#mobile").val();
             var pincode = $("#pincode").val();
@@ -145,32 +145,33 @@ if (empty($username)) {
             var landmark = $("#landmark").val();
             var city = $("#city").val();
             var state = $("#state").val();
-            
-            $.ajax({
-                type : "POST",
-                url : "./php/delivery.php",
-                data : {
-                 bookid : bookid,
-                 email : email,
-                 fullname : fullname,
-                 mobile : mobile,
-                 pincode : pincode,
-                 house : house,
-                 street : street,
-                 landmark : landmark,
-                 city : city,
-                 state : state
-                },
-                beforeSend : function(){
 
+            $.ajax({
+                type: "POST",
+                url: "./php/delivery.php",
+                data: {
+                    bookid: bookid,
+                    email: email,
+                    fullname: fullname,
+                    mobile: mobile,
+                    pincode: pincode,
+                    house: house,
+                    street: street,
+                    landmark: landmark,
+                    city: city,
+                    state: state
                 },
-                success : function(response){
-                    alert(response);
+                success: function(response) {
+                    if(response.trim() == 'success'){
+                        window.location.href = './payment.php?bookid='+bookid+'email='+email;
+                    }else{
+                        alert(response);
+                    }
                 }
             })
 
-         })
-       })
+        })
+    })
     </script>
 
 
