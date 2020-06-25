@@ -204,13 +204,25 @@ if (empty($username)) {
 
                 '<?php $getId= "SELECT * FROM cart WHERE email= 'ssantra.cse18@chitkarauniversity.edu.in'"; $response=$db->query($getId); while($data= $response->fetch_assoc()){ ?>'+ sellprice.push('<?php echo $data['sell_price']; ?> ')+'<?php }  ?>' 
 
-                var bookids="";
-                for (var i=0;i< ids.length;i++)
-                {
-                   bookids+="&ids["+i+"]="+ids[i];
-                }
-                var bookidStr = encodeURIComponent(JSON.stringify(ids));
-                window.location = "./cartProductDeliveryAddress.php?bookids="+bookidStr;
+                $.ajax({
+                    type : "POST",
+                    url : "./php/buycartproduct.php",
+                    data : {
+                        bookids : JSON.stringify(ids),
+                        sellprices : JSON.stringify(sellprice),
+                        email : email 
+                    },
+                    success : function(response){
+                        if(response.trim()='success'){
+                            var bookidStr = encodeURIComponent(JSON.stringify(ids));
+                            var sellpriceStr = encodeURIComponent(JSON.stringify(sellprice));
+                            
+                            window.location = "./cartProductDeliveryAddress.php?bookids="+bookidStr+"&sellprices="+sellpriceStr+"&email="+email;
+                        }else{
+                            alert(response);
+                        }  
+                    }
+                })
                 
             })
         })
