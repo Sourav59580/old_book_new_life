@@ -104,7 +104,7 @@ if (empty($username)) {
             <div class="row px-4">
                 <div class="col-md-2"></div>
                 <div class="col-md-8"></div>
-                <div class="col-md-2"><a href='./select_address.php' class="btn btn-lg btn-warning">Proceed to Buy<a></div>
+                <div class="col-md-2"><button class="btn btn-lg btn-warning proceed-btn">Proceed to Buy</button></div>
             </div>
             <hr>
         </div>
@@ -194,6 +194,26 @@ if (empty($username)) {
     <?php include_once("./design/footer.php"); ?>
 
     <script>
+        //Proceed to buy
+        $(document).ready(function(){
+            $(".proceed-btn").click(function(){
+                var email = '<?php echo $_SESSION['username'] ;?>'
+                var ids = [];
+                var sellprice = [];
+                '<?php $getId= "SELECT * FROM cart WHERE email= 'ssantra.cse18@chitkarauniversity.edu.in'"; $response=$db->query($getId); while($data= $response->fetch_assoc()){ ?>'+ ids.push('<?php echo $data['bookid']; ?> ')+'<?php }  ?>' 
+
+                '<?php $getId= "SELECT * FROM cart WHERE email= 'ssantra.cse18@chitkarauniversity.edu.in'"; $response=$db->query($getId); while($data= $response->fetch_assoc()){ ?>'+ sellprice.push('<?php echo $data['sell_price']; ?> ')+'<?php }  ?>' 
+
+                var bookids="";
+                for (var i=0;i< ids.length;i++)
+                {
+                   bookids+="&ids["+i+"]="+ids[i];
+                }
+                var bookidStr = encodeURIComponent(JSON.stringify(ids));
+                window.location = "./cartProductDeliveryAddress.php?bookids="+bookidStr;
+                
+            })
+        })
         //increase qty
         $(document).ready(function() {
             $(".increase-qty").each(function() {
