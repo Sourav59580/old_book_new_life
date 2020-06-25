@@ -12,6 +12,7 @@ $landmark = $_POST['landmark'];
 $city = $_POST['city'];
 $state = $_POST['state'];
 $status = 'Active';
+
 // echo"$bookid + ' '+$email+' '+$fullname+' '+$mobile+' '+$house+' '+$street+' '+$landmark+' '+$city+' '+$state+' '+$status";
 
 // $getID = "SELECT id,email FROM buy WHERE bookid='$bookid' AND email='$email'";

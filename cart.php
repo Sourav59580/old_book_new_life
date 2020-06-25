@@ -213,7 +213,7 @@ if (empty($username)) {
                         email : email 
                     },
                     success : function(response){
-                        if(response.trim()='success'){
+                        if(response='success'){
                             var bookidStr = encodeURIComponent(JSON.stringify(ids));
                             var sellpriceStr = encodeURIComponent(JSON.stringify(sellprice));
                             

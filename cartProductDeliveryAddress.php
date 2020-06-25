@@ -3,18 +3,11 @@ require("./database/database.php");
 session_start();
 $username = $_SESSION['username'];
 if (empty($username)) {
-    header("Location:show_book_view_details.php");
+    header("Location:cart.php");
     exit;
 }
 ?>
 
-
-<?php
- 
- $obj = json_decode($_GET['bookids']);
-(count($obj));
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -151,8 +144,52 @@ if (empty($username)) {
         var sellpricesjson = url.searchParams.get('sellprices');
         var sellpricesobj = JSON.parse(sellpricesjson);
         var email = url.searchParams.get('email');
+        
+        var sellprice = 0;
+        for(var i=0;i<sellpricesobj.length;i++){
+            sellprice+= parseFloat(sellpricesobj[i]);
+        }
 
-        console.log(obj[1]);
+        $(document).ready(function() {
+        $(".deliveryAddressForm").submit(function(e) {
+            //alert(sessionStorage.getItem("email"))
+            e.preventDefault();
+            var fullname = $("#fullname").val();
+            var mobile = $("#mobile").val();
+            var pincode = $("#pincode").val();
+            var house = $("#house").val();
+            var street = $("#street").val();
+            var landmark = $("#landmark").val();
+            var city = $("#city").val();
+            var state = $("#state").val();
+
+            $.ajax({
+                type: "POST",
+                url: "./php/cartproductDelivery.php",
+                data: {
+                    bookid: JSON.stringify(bookidsobj),
+                    email: email,
+                    fullname: fullname,
+                    mobile: mobile,
+                    pincode: pincode,
+                    house: house,
+                    street: street,
+                    landmark: landmark,
+                    city: city,
+                    state: state
+                },
+                success: function(response) {
+                    //alert(response);
+                    if(response.trim() == 'success'){
+                        window.location = './cartproductPayment.php?email='+email+'&bookid='+bookidsjson+'&sellprice='+sellprice+'&name='+fullname+'&mobile='+mobile;
+                    }else{
+                        alert(response);
+                    }
+                }
+            })
+
+        })
+    })
 
     </script>
 </body>
