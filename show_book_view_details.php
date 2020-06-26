@@ -318,7 +318,7 @@ if (empty($username)) {
              </div>
             </div>";
                     }
-                    echo "<div class='row bg-white p-4 shadow-sm mb-3'>
+                    echo "<div class='row bg-white p-4 shadow-sm'>
                  <div class='col-md-3 p-4'>
                    <h4>Customer reviews</h4>
                     <div class='customer-reviews mb-3'>
@@ -365,9 +365,9 @@ if (empty($username)) {
         </div>";
                 }
                 ?>
-                <div class="container-fluid bg-light p-0">
-                <div class="row bg-white p-4 shadow-sm ">
-                    <div class="col-md-12">
+                <div class="bg-light px-4 mb-3">
+                <div class="row bg-white shadow-sm ">
+                    <div class="col-md-12 p-4">
                         <h4>Customer questions & answers</h4>
                         
                             <div class="input-group mb-3 w-75">
