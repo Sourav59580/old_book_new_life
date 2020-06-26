@@ -181,7 +181,7 @@ if (empty($username)) {
                 success: function(response) {
                     //alert(response);
                     if(response.trim() == 'success'){
-                        window.location = './cartproductPayment.php?email='+email+'&bookid='+bookidsjson+'&sellprice='+sellprice+'&name='+fullname+'&mobile='+mobile;
+                        window.location = './cartproductPayment.php?email='+email+'&bookid='+encodeURIComponent(JSON.stringify(bookidsobj))+'&sellprice='+sellprice+'&name='+fullname+'&mobile='+mobile;
                     }else{
                         alert(response);
                     }

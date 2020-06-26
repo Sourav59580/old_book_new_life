@@ -8,6 +8,7 @@ $postemail = $_POST['email'];
 $length = count($bookid_obj);
 $i=0;
 $status ="";
+
 for($i=0;$i<$length;$i++){
 
 $bookid = $bookid_obj[$i];
