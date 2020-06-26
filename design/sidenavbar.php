@@ -188,49 +188,116 @@
    <hr>
    <form class="rating-form">
       <div class="custom-control custom-radio">
-         <input type="radio" class="custom-control-input star" id="five_star" name="star" value="five_star">
+         <input type="radio" class="custom-control-input star" id="five_star" name="star" value="5">
          <label class="custom-control-label" for="five_star"><span class="fa fa-star text-warning" style="font-size:16px"></span>
             <span class="fa fa-star text-warning" style="font-size:16px"></span>
             <span class="fa fa-star text-warning" style="font-size:16px"></span>
             <span class="fa fa-star text-warning" style="font-size:16px"></span>
             <span class="fa fa-star-half-full text-warning" style="font-size:16px"></span></label>
-         <span class="close" style="font-size:13px">2444</span>
+         <span class="close" style="font-size:13px">
+         <?php
+            $get_quantity = "SELECT COUNT(rating) AS result FROM `sellbook` WHERE rating=5";
+            $response=$db->query($get_quantity);
+            if($response)
+            {
+               $data = $response->fetch_assoc();
+               echo $data['result'];
+
+            }
+            else{
+               echo "0";
+            }
+
+         ?>
+         </span>
       </div>
       <div class="custom-control custom-radio">
-         <input type="radio" class="custom-control-input star" id="four_star" name="star" value="four_star">
+         <input type="radio" class="custom-control-input star" id="four_star" name="star" value="4">
          <label class="custom-control-label" for="four_star"><span class="fa fa-star text-warning" style="font-size:16px"></span>
             <span class="fa fa-star text-warning" style="font-size:16px"></span>
             <span class="fa fa-star text-warning" style="font-size:16px"></span>
             <span class="fa fa-star text-warning" style="font-size:16px"></span>
             <span class="fa fa-star-o" style="font-size:16px"></span></label>
-         <span class="close" style="font-size:13px">2444</span>
+         <span class="close" style="font-size:13px"><?php
+            $get_quantity = "SELECT COUNT(rating) AS result FROM `sellbook` WHERE rating=4";
+            $response=$db->query($get_quantity);
+            if($response)
+            {
+               $data = $response->fetch_assoc();
+               echo $data['result'];
+
+            }
+            else{
+               echo "0";
+            }
+
+         ?></span>
       </div>
       <div class="custom-control custom-radio">
-         <input type="radio" class="custom-control-input star" id="three_star" name="star" value="three_star">
+         <input type="radio" class="custom-control-input star" id="three_star" name="star" value="3">
          <label class="custom-control-label" for="three_star"><span class="fa fa-star text-warning" style="font-size:16px"></span>
             <span class="fa fa-star text-warning" style="font-size:16px"></span>
             <span class="fa fa-star text-warning" style="font-size:16px"></span>
             <span class="fa fa-star-o" style="font-size:16px"></span>
             <span class="fa fa-star-o" style="font-size:16px"></span></label>
-         <span class="close" style="font-size:13px">2444</span>
+         <span class="close" style="font-size:13px"><?php
+            $get_quantity = "SELECT COUNT(rating) AS result FROM `sellbook` WHERE rating=3";
+            $response=$db->query($get_quantity);
+            if($response)
+            {
+               $data = $response->fetch_assoc();
+               echo $data['result'];
+
+            }
+            else{
+               echo "0";
+            }
+
+         ?></span>
       </div>
       <div class="custom-control custom-radio">
-         <input type="radio" class="custom-control-input star" id="two_star" name="star" value="two_star">
+         <input type="radio" class="custom-control-input star" id="two_star" name="star" value="2">
          <label class="custom-control-label" for="two_star"><span class="fa fa-star text-warning" style="font-size:16px"></span>
             <span class="fa fa-star text-warning" style="font-size:16px"></span>
             <span class="fa fa-star-o" style="font-size:16px"></span>
             <span class="fa fa-star-o" style="font-size:16px"></span>
             <span class="fa fa-star-o" style="font-size:16px"></span></label>
-         <span class="close" style="font-size:13px">2444</span>
+         <span class="close" style="font-size:13px"><?php
+            $get_quantity = "SELECT COUNT(rating) AS result FROM `sellbook` WHERE rating=2";
+            $response=$db->query($get_quantity);
+            if($response)
+            {
+               $data = $response->fetch_assoc();
+               echo $data['result'];
+
+            }
+            else{
+               echo "0";
+            }
+
+         ?></span>
       </div>
       <div class="custom-control custom-radio mb-3">
-         <input type="radio" class="custom-control-input star" id="one_star" name="star" value="one_star">
+         <input type="radio" class="custom-control-input star" id="one_star" name="star" value="1">
          <label class="custom-control-label" for="one_star"><span class="fa fa-star text-warning" style="font-size:16px"></span>
             <span class="fa fa-star-o" style="font-size:16px"></span>
             <span class="fa fa-star-o" style="font-size:16px"></span>
             <span class="fa fa-star-o" style="font-size:16px"></span>
             <span class="fa fa-star-o" style="font-size:16px"></span></label>
-         <span class="close" style="font-size:13px">2444</span>
+         <span class="close" style="font-size:13px"><?php
+            $get_quantity = "SELECT COUNT(rating) AS result FROM `sellbook` WHERE rating=1";
+            $response=$db->query($get_quantity);
+            if($response)
+            {
+               $data = $response->fetch_assoc();
+               echo $data['result'];
+
+            }
+            else{
+               echo "0";
+            }
+
+         ?></span>
       </div>
 
    </form>
@@ -239,7 +306,13 @@
          $(".star").each(function(){
             $(this).on("input",function(){
                var value = $(this).val();
-               alert(value);
+               var username = "<?php if(empty($username)){echo 'null';} else{echo 'present';} ?>";
+               if(username=='null'){
+                  window.location = "./local_ratingBook.php?rating="+value;
+               }else{
+                  window.location = "./ratingBook.php?rating="+value;
+               }
+               
             });
          });
       });

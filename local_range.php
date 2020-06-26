@@ -95,14 +95,22 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
                                      echo "<h5>".$book_title."</h5>";
                                      echo "<spna>by ".$book_author."</spna>";
                                      echo "<p class='mb-0'><del>Rs.".$mrp_price."</del><span class='text-primary'> Rs.".$selling_price ."</span></p><span class='border text-danger p-1 rounded'>".$discount."% OFF</span>
-                                     <div class='mt-2'>
-                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                                     <span class='fa fa-star-half-full text-warning' style='font-size:16px'></span>
-                                     <span>(34)</span>
-                                     </div>
+                                     <div class='mt-2'>";
+                                     if($data['rating']!=0){
+                                        for($i=1;$i<=$data['rating'];$i++){
+                                            echo "<span class='fa fa-star text-warning ml-1' style='font-size:16px'></span>"; 
+                                         }
+                                         for($i=5-$data['rating'];$i>0;$i--){
+                                            echo "<span class='fa fa-star-o ml-1' style='font-size:16px'></span>";
+                                         }
+                                     }else{
+                                        echo "<span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                                        <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                                        <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                                        <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                                        <span class='fa fa-star-o ml-1' style='font-size:16px'></span>";
+                                     }
+                                     echo "</div>
                                      </div>
                                 </div>
                             </div>";

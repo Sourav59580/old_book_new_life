@@ -3,7 +3,7 @@ require("./database/database.php");
 session_start();
 $username = $_SESSION['username'];
 if(empty($username)){
-    header("Location:local_range.php");
+    header("Location:local_ratingBook.php");
     exit;
 }
 ?>
@@ -80,9 +80,8 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
             <hr class="style-one">
            <div class="row p-2">
            <?php
-              $range = $_GET['discount'];
-              $minrange = $range-10;
-              $book_view = "SELECT * FROM sellbook WHERE discount BETWEEN '$minrange' and '$range'";
+              $rating = $_GET['rating'];
+              $book_view = "SELECT * FROM sellbook WHERE rating='$rating'";
               $response = $db->query($book_view);
               if($response){
                   while($data=$response->fetch_assoc()){
@@ -147,26 +146,28 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
    <script>
    //active class active
    $(document).ready(function(){
-       var active = sessionStorage.getItem('active');
-       if(active==10)
+    var url_string = window.location;
+    var url = new URL(url_string);
+    var active = url.searchParams.get("rating");
+       if(active==1)
        {
-           $("#zero_ten").attr('checked','checked');
+           $("#one_star").attr('checked','checked');
        }
-       if(active==20)
+       if(active==2)
        {
-           $("#ten_twenty").attr('checked','checked');
+           $("#two_star").attr('checked','checked');
        }
-       if(active==30)
+       if(active==3)
        {
-           $("#twenty_thirty").attr('checked','checked');
+           $("#three_star").attr('checked','checked');
        }
-       if(active==40)
+       if(active==4)
        {
-           $("#thirty_fourty").attr('checked','checked');
+           $("#four_star").attr('checked','checked');
        }
-       if(active==50)
+       if(active==5)
        {
-           $("#fourty_fifty").attr('checked','checked');
+           $("#five_star").attr('checked','checked');
        }
    });
    $(document).ready(function(){

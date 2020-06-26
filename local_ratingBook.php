@@ -1,11 +1,6 @@
 <?php
 require("./database/database.php");
-session_start();
-$username = $_SESSION['username'];
-if(empty($username)){
-    header("Location:local_range.php");
-    exit;
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -80,15 +75,14 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
             <hr class="style-one">
            <div class="row p-2">
            <?php
-              $range = $_GET['discount'];
-              $minrange = $range-10;
-              $book_view = "SELECT * FROM sellbook WHERE discount BETWEEN '$minrange' and '$range'";
+              $rating = $_GET['rating'];
+              $book_view = "SELECT * FROM sellbook WHERE rating='$rating'";
               $response = $db->query($book_view);
               if($response){
                   while($data=$response->fetch_assoc()){
                       $id = $data['id'];
                       $category = $data['book_category'];
-                      echo "<div class='col-md-3 book-view mb-3' bookid='".$id."' email='".$username."' category='".$category."' >
+                      echo "<div class='col-md-3 book-view mb-3' bookid='".$id."' category='".$category."' >
                                <div class='card border-0 p-0'>
                                    <div class='card-body p-1'>";
                                    $image = "data:image/png;base64,".base64_encode($data['book_image']);
@@ -116,7 +110,7 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
                                         <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
                                         <span class='fa fa-star-o ml-1' style='font-size:16px'></span>";
                                      }
-                                     echo "</div>
+                                    echo "</div>
                                      </div>
                                 </div>
                             </div>";
@@ -147,26 +141,28 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
    <script>
    //active class active
    $(document).ready(function(){
-       var active = sessionStorage.getItem('active');
-       if(active==10)
+    var url_string = window.location;
+    var url = new URL(url_string);
+    var active = url.searchParams.get("rating");
+       if(active==1)
        {
-           $("#zero_ten").attr('checked','checked');
+           $("#one_star").attr('checked','checked');
        }
-       if(active==20)
+       if(active==2)
        {
-           $("#ten_twenty").attr('checked','checked');
+           $("#two_star").attr('checked','checked');
        }
-       if(active==30)
+       if(active==3)
        {
-           $("#twenty_thirty").attr('checked','checked');
+           $("#three_star").attr('checked','checked');
        }
-       if(active==40)
+       if(active==4)
        {
-           $("#thirty_fourty").attr('checked','checked');
+           $("#four_star").attr('checked','checked');
        }
-       if(active==50)
+       if(active==5)
        {
-           $("#fourty_fifty").attr('checked','checked');
+           $("#five_star").attr('checked','checked');
        }
    });
    $(document).ready(function(){
@@ -177,7 +173,7 @@ background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
                var category = $(this).attr("category");
                sessionStorage.setItem("sent", bookid);
                sessionStorage.setItem("email",email);
-               window.open('./show_book_view_details.php?bookid='+bookid +'&category='+category,'_blank');
+               window.open('./local_show_book_view_details.php?bookid='+bookid +'&category='+category,'_blank');
                //var width = 20;
                //var height
                //window.location.href = "http://localhost/main.php?width=" + width + "&height=" + height;

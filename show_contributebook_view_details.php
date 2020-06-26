@@ -34,6 +34,25 @@ if (empty($username)) {
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <style>
+        .book-view:hover {
+        box-shadow: 0px 0px 2px 2px #ccc;
+        transform: scale(1.1);
+        z-index: 1;
+        transition: 1s;
+        cursor: pointer;
+        background: white;
+    }
+
+    .contributebook-view:hover {
+        box-shadow: 0px 0px 2px 2px #ccc;
+        transform: scale(1.1);
+        z-index: 1;
+        transition: 1s;
+        cursor: pointer;
+        background: white;
+    }
+    </style>
 </head>
 
 <body>
@@ -233,13 +252,21 @@ if (empty($username)) {
                    <div class='p-4 mb-4 bg-white'>
                    <h3>" . $book_title . "<span class='fa fa-heart-o close wishcart'></span></h3>";
                     echo "<h4>By " . $book_author . "</h4>
-                   <div class='mt-3'>
-                      <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                      <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                      <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                      <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                      <span class='fa fa-star-half-full text-warning' style='font-size:16px'></span>
-                      <span>(34)</span>";
+                   <div class='mt-3'>";
+                   if($data['rating']!=0){
+                    for($i=1;$i<=$data['rating'];$i++){
+                        echo "<span class='fa fa-star text-warning ml-1' style='font-size:16px'></span>"; 
+                     }
+                     for($i=5-$data['rating'];$i>0;$i--){
+                        echo "<span class='fa fa-star-o ml-1' style='font-size:16px'></span>";
+                     }
+                 }else{
+                    echo "<span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                    <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                    <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                    <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                    <span class='fa fa-star-o ml-1' style='font-size:16px'></span>";
+                 }
                     echo "<span class='close text-primary' style='font-size:12px;'>Sold by " . $seller_name . "</span>
                     </div>
                     <hr>";
@@ -247,7 +274,7 @@ if (empty($username)) {
                     echo "<h3 style='color:red;' >Rs. <span class='sell_price'>" . $selling_price . "</span></h3><span class='text-success'>(Cash on Delivery Charge)</span>
                     </div>
                        <div class='mt-4 ml-4 p-4'>
-                    <button class='btn btn-lg btn-danger rounded ml-4 mb-4' data-toggle='modal' data-target='#donateRequest'><i class='fas fa-hand-holding-heart mr-2'> </i>Donation Request </button>
+                    <button class='btn btn-lg btn-dark rounded ml-4 mb-4' data-toggle='modal' data-target='#donateRequest'><i class='fas fa-hand-holding-heart mr-2'> </i>Donation Request </button>
                     <div class='mt-4 row'>
                         <div class='col-2'>Delivery</div>
                         <div class='col-5 w-100'>
@@ -295,7 +322,7 @@ if (empty($username)) {
                             $image = "data:image/png;base64," . base64_encode($same_data['book_image']);
                             $price = $same_data['selling_price'];
                             echo "<div class='col-md-2 col-6 mb-3'>
-                       <div class='card'>
+                       <div class='card book-view' bookid='" . $same_data['id'] . "' email='" . $username . "' category='" . $category . "'>
                          <div class='card-body p-1'>
                             <div class='mb-1'><img src='" . $image . "' width='100%'></div>
                             <div class='rating'>
@@ -475,6 +502,24 @@ if (empty($username)) {
 
                 <?php include_once("./design/footer.php"); ?>
                 <script>
+                //related book view
+                $(document).ready(function() {
+        $(".book-view").each(function() {
+            $(this).click(function() {
+                var bookid = $(this).attr("bookid");
+                var email = $(this).attr("email");
+                var category = $(this).attr("category");
+                sessionStorage.setItem("sent", bookid);
+                sessionStorage.setItem("email", email);
+                window.open('./show_book_view_details.php?bookid=' + bookid + '&category=' +
+                    category, '_blank');
+                //var width = 20;
+                //var height
+                //window.location.href = "http://localhost/main.php?width=" + width + "&height=" + height;
+
+            });
+        });
+    });
                 //buy product
                 $(document).ready(function() {
                     $(".buy-btn").each(function() {

@@ -221,13 +221,21 @@ require("./database/database.php");
                    <div class='p-4 mb-4 bg-white'>
                    <h3>" . $book_title . "<span class='fa fa-heart-o close wishcart'></span></h3>";
                     echo "<h4>By " . $book_author . "</h4>
-                   <div class='mt-3'>
-                      <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                      <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                      <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                      <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                      <span class='fa fa-star-half-full text-warning' style='font-size:16px'></span>
-                      <span>(34)</span>";
+                   <div class='mt-3'>";
+                   if($data['rating']!=0){
+                    for($i=1;$i<=$data['rating'];$i++){
+                        echo "<span class='fa fa-star text-warning ml-1' style='font-size:16px'></span>"; 
+                     }
+                     for($i=5-$data['rating'];$i>0;$i--){
+                        echo "<span class='fa fa-star-o ml-1' style='font-size:16px'></span>";
+                     }
+                 }else{
+                    echo "<span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                    <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                    <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                    <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                    <span class='fa fa-star-o ml-1' style='font-size:16px'></span>";
+                 }
                     echo "<span class='close text-primary' style='font-size:12px;'>Sold by " . $seller_name . "</span>
                     </div>
                     <hr>";
@@ -235,8 +243,7 @@ require("./database/database.php");
                     echo "<h3 style='color:red;' >Rs. <span class='sell_price'>" . $selling_price . "</span></h3><span class='text-success'>(Cash on Delivery Charge)</span>
                     </div>
                        <div class='mt-4 ml-4 p-4'>
-                    <button class='btn btn-lg btn-dark rounded mb-4 cart-btn'><i class='fa fa-shopping-cart'> </i> ADD TO CART</button>
-                    <button class='btn btn-lg btn-danger rounded ml-4 mb-4 buy-btn'><i class='fa fa-shopping-bag'> </i> BUY NOW</button>
+                    <button class='btn btn-lg btn-dark rounded mb-4 cart-btn'><i class='fas fa-hand-holding-heart mr-2'> </i>Donation Request </button>
                     <div class='mt-4 row'>
                         <div class='col-2'>Delivery</div>
                         <div class='col-5 w-100'>

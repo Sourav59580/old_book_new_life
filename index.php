@@ -110,14 +110,23 @@ if (empty($username)) {
                             echo "<h5>" . $book_title . "</h5>";
                             echo "<spna>by " . $book_author . "</spna>";
                             echo "<p class='mb-0'><del>Rs." . $mrp_price . "</del> Rs." . $selling_price . "</p><span class='border text-danger p-1 rounded'>" . $discount . "% OFF</span>
-                                     <div class='mt-2'>
-                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                                     <span class='fa fa-star-half-full text-warning' style='font-size:16px'></span>
-                                     <span>(34)</span>
-                                     </div>
+                                     <div class='mt-2'>";
+                                     if($data['rating']!=0){
+                                        for($i=1;$i<=$data['rating'];$i++){
+                                            echo "<span class='fa fa-star text-warning ml-1' style='font-size:16px'></span>"; 
+                                         }
+                                         for($i=5-$data['rating'];$i>0;$i--){
+                                            echo "<span class='fa fa-star-o ml-1' style='font-size:16px'></span>";
+                                         }
+                                     }else{
+                                        echo "<span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                                        <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                                        <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                                        <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                                        <span class='fa fa-star-o ml-1' style='font-size:16px'></span>";
+                                     }
+                                     
+                                     echo "</div>
                                      </div>
                                 </div>
                             </div>";
@@ -146,14 +155,22 @@ if (empty($username)) {
                             echo "<h5>" . $book_title . "</h5>";
                             echo "<spna>by " . $book_author . "</spna>";
                             echo "<p class='mb-0 text-danger'>Rs. FREE</p>
-                                     <div class='mt-2'>
-                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                                     <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                                     <span class='fa fa-star-half-full text-warning' style='font-size:16px'></span>
-                                     <span>(34)</span>
-                                     </div>
+                                     <div class='mt-2'>";
+                                     if($data['rating']!=0){
+                                        for($i=1;$i<=$data['rating'];$i++){
+                                            echo "<span class='fa fa-star text-warning ml-1' style='font-size:16px'></span>"; 
+                                         }
+                                         for($i=5-$data['rating'];$i>0;$i--){
+                                            echo "<span class='fa fa-star-o ml-1' style='font-size:16px'></span>";
+                                         }
+                                     }else{
+                                        echo "<span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                                        <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                                        <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                                        <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                                        <span class='fa fa-star-o ml-1' style='font-size:16px'></span>";
+                                     }
+                                     echo "</div>
                                      </div>
                                 </div>
                             </div>";
@@ -194,7 +211,7 @@ if (empty($username)) {
                 $response = $db->query($get_book);
                 $data = $response->fetch_assoc();
                 echo "<div class='row mb-2'><div class='col-12 mb-3' bookid='" . $id . "' email='" . $username . "' category='" . $category . "' >
-                       <div class='card border-0 p-0'>
+                       <div class='card border-0 p-0 book-view' bookid='" . $bookid . "' email='" . $username . "' category='" . $category . "'>
                        <div class='card-body p-1'>";
                 $image = "data:image/png;base64," . base64_encode($data['book_image']);
                 $book_title = $data['book_title'];
@@ -206,13 +223,22 @@ if (empty($username)) {
                 echo "<h5>" . $book_title . "</h5>";
                 echo "<spna>by " . $book_author . "</spna>";
                 echo "<p class='mb-0'><del>Rs." . $mrp_price . "</del> Rs." . $selling_price . "</p><span class='border text-danger p-1 rounded'>" . $discount . "% OFF</span>
-                <div class='mt-2'>
-                  <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                  <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                  <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                  <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                  <span class='fa fa-star-half-full text-warning' style='font-size:16px'></span>
-                  <span>(34)</span>
+                <div class='mt-2'>";
+                if($data['rating']!=0){
+                    for($i=1;$i<=$data['rating'];$i++){
+                        echo "<span class='fa fa-star text-warning ml-1' style='font-size:16px'></span>"; 
+                     }
+                     for($i=5-$data['rating'];$i>0;$i--){
+                        echo "<span class='fa fa-star-o ml-1' style='font-size:16px'></span>";
+                     }
+                 }else{
+                    echo "<span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                    <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                    <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                    <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                    <span class='fa fa-star-o ml-1' style='font-size:16px'></span>";
+                 }
+                  echo "
                 </div>
             </div>
         </div>
@@ -235,7 +261,7 @@ if (empty($username)) {
                         $getShowData = "SELECT * FROM sellbook WHERE id='$specialId[$i]'";
                         $response = $db->query($getShowData);
                 $data = $response->fetch_assoc();
-                echo "<div class='row mb-2'><div class='col-12 mb-3' bookid='" . $id . "' email='" . $username . "' category='" . $category . "' >
+                echo "<div class='row mb-2'><div class='col-12 mb-3 book-view' bookid='" . $specialId[$i] . "' email='" . $username . "' category='" . $category . "' >
                        <div class='card border-0 p-0'>
                        <div class='card-body p-1'>";
                 $image = "data:image/png;base64," . base64_encode($data['book_image']);
@@ -248,14 +274,22 @@ if (empty($username)) {
                 echo "<h5>" . $book_title . "</h5>";
                 echo "<spna>by " . $book_author . "</spna>";
                 echo "<p class='mb-0'><del>Rs." . $mrp_price . "</del> Rs." . $selling_price . "</p><span class='border text-danger p-1 rounded'>" . $discount . "% OFF</span>
-                <div class='mt-2'>
-                  <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                  <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                  <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                  <span class='fa fa-star text-warning' style='font-size:16px'></span>
-                  <span class='fa fa-star-half-full text-warning' style='font-size:16px'></span>
-                  <span>(34)</span>
-                </div>
+                <div class='mt-2'>";
+                if($data['rating']!=0){
+                    for($i=1;$i<=$data['rating'];$i++){
+                        echo "<span class='fa fa-star text-warning ml-1' style='font-size:16px'></span>"; 
+                     }
+                     for($i=5-$data['rating'];$i>0;$i--){
+                        echo "<span class='fa fa-star-o ml-1' style='font-size:16px'></span>";
+                     }
+                 }else{
+                    echo "<span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                    <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                    <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                    <span class='fa fa-star-o ml-1' style='font-size:16px'></span>
+                    <span class='fa fa-star-o ml-1' style='font-size:16px'></span>";
+                 }
+                echo "</div>
             </div>
         </div>
     </div></div>";
