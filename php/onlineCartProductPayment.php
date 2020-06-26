@@ -1,4 +1,5 @@
 <?php
+
 require("../database/database.php");
 $bookid_obj = json_decode($_POST['bookid']);
 
@@ -14,7 +15,7 @@ for($i=0;$i<$length;$i++){
 
     $bookid = $bookid_obj[$i];
 
-    $updatePayment = "UPDATE buy SET delivery_status = 'processing', payment_method = 'COD', order_date ='$orderDate' WHERE bookid = '$bookid' AND email='$email'";
+    $updatePayment = "UPDATE buy SET delivery_status = 'processing', payment_method = 'Online', order_date ='$orderDate', payment_status='success' WHERE bookid = '$bookid' AND email='$email'";
     $response = $db->query($updatePayment);
     if($response){
         $delete_product = "DELETE FROM cart WHERE email='$email' AND bookid='$bookid' AND status_type='sellbook'";
@@ -32,5 +33,20 @@ for($i=0;$i<$length;$i++){
     }
 }
 echo $status;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ?>

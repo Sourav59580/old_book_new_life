@@ -1,7 +1,6 @@
 <?php
 require('./src/Instamojo.php');
 
-$bookid = $_GET['bookid'];
 $name = $_GET['name'];
 $email = $_GET['email'];
 $phone = $_GET['mobile'];

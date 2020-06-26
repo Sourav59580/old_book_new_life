@@ -150,7 +150,8 @@ if (empty($username)) {
 
                 var url_string = window.location;
                 var url = new URL(url_string);
-                var bookid = url.searchParams.get("bookid");
+                var bookidjson = url.searchParams.get("bookid");
+                var bookidsobj = JSON.parse(bookidjson);
                 var email = url.searchParams.get("email");
                 var name = url.searchParams.get("name");
                 var mobile = url.searchParams.get("mobile");
@@ -159,14 +160,15 @@ if (empty($username)) {
 
                 $.ajax({
                     type : "POST",
-                    url : "./php/onlinePayment.php",
+                    url : "./php/onlineCartProductPayment.php",
                     data : {
-                        bookid : bookid,
+                        bookid : JSON.stringify(bookidsobj),
                         email : email
                     },
                     success : function(response){
+                        
                         if(response.trim()=='success'){
-                            window.location.href = './onlinePayment.php?name='+name+'&email='+email+'&mobile='+mobile+'&sellprice='+sellprice+'&bookid='+bookid;
+                            window.location.href = './onlinePayment.php?name='+name+'&email='+email+'&mobile='+mobile+'&sellprice='+sellprice+'&bookid='+encodeURIComponent(JSON.stringify(bookidsobj));
                         }else{
                             alert(response);
                         }
