@@ -46,10 +46,14 @@ if (empty($username)) {
                     <div class="row">
                         <div class="col d-flex flex-row">
                             <div class="top_bar_contact_item">
-                                <div class="top_bar_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918577/phone.png" alt=""></div>+91 9823 132 111
+                                <div class="top_bar_icon"><img
+                                        src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918577/phone.png"
+                                        alt=""></div>+91 9823 132 111
                             </div>
                             <div class="top_bar_contact_item">
-                                <div class="top_bar_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918597/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">contact@bbbootstrap.com</a>
+                                <div class="top_bar_icon"><img
+                                        src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918597/mail.png"
+                                        alt=""></div><a href="mailto:fastsales@gmail.com">contact@bbbootstrap.com</a>
                             </div>
                             <div class="top_bar_content ml-auto">
                                 <div class="top_bar_menu">
@@ -71,7 +75,9 @@ if (empty($username)) {
                                     </ul>
                                 </div>
                                 <div class="top_bar_user">
-                                    <div class="user_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg" alt=""></div>
+                                    <div class="user_icon"><img
+                                            src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg"
+                                            alt=""></div>
                                     <div><a href="./signup.php" class="account">
                                             <?php
                                             if (empty($username)) {
@@ -98,16 +104,21 @@ if (empty($username)) {
                         <!-- Logo -->
                         <div class="col-lg-2 col-sm-3 col-3 order-1">
                             <div class="logo_container">
-                                <div class="logo"><a href="#"><img src="./photos/oldbooknewlifeLogo.svg" height="70px" /></a></div>
+                                <div class="logo pt-3"><a href="./index.php"><img src="./photos/oldbooknewlifeLogo.svg"
+                                            height="80px" /></a></div>
                             </div>
                         </div> <!-- Search -->
                         <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
                             <div class="header_search">
                                 <div class="header_search_content">
                                     <div class="header_search_form_container">
-                                        <form action="#" class="header_search_form clearfix"> <input type="search" required="required" class="header_search_input" placeholder="Search for products...">
+                                        <form action="#" class="header_search_form clearfix"> <input type="search"
+                                                required="required" class="header_search_input"
+                                                placeholder="Search for products...">
                                             <div class="custom_dropdown" style="display: none;">
-                                                <div class="custom_dropdown_list"> <span class="custom_dropdown_placeholder clc">All Categories</span> <i class="fas fa-chevron-down"></i>
+                                                <div class="custom_dropdown_list"> <span
+                                                        class="custom_dropdown_placeholder clc">All Categories</span> <i
+                                                        class="fas fa-chevron-down"></i>
                                                     <ul class="custom_list clc">
                                                         <li><a class="clc" href="#">All Categories</a></li>
                                                         <li><a class="clc" href="#">Computers</a></li>
@@ -117,7 +128,10 @@ if (empty($username)) {
                                                         <li><a class="clc" href="#">Smartphones</a></li>
                                                     </ul>
                                                 </div>
-                                            </div> <button type="submit" class="header_search_button trans_300" value="Submit"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918770/search.png" alt=""></button>
+                                            </div> <button type="submit" class="header_search_button trans_300"
+                                                value="Submit"><img
+                                                    src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918770/search.png"
+                                                    alt=""></button>
                                         </form>
                                     </div>
                                 </div>
@@ -126,7 +140,9 @@ if (empty($username)) {
                         <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
                             <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
                                 <div class="wishlist d-flex flex-row align-items-center justify-content-end">
-                                    <div class="wishlist_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918681/heart.png" alt=""></div>
+                                    <div class="wishlist_icon"><img
+                                            src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918681/heart.png"
+                                            alt=""></div>
                                     <div class="wishlist_content">
                                         <div class="wishlist_text"><a href="./wishlist_page.php">Wishlist</a></div>
                                         <div class="wishlist_count">
@@ -147,9 +163,12 @@ if (empty($username)) {
                                 </div> <!-- Cart -->
                                 <div class="cart">
                                     <div class="cart_container d-flex flex-row align-items-center justify-content-end">
-                                       <a href="./cart.php"> <div class="cart_icon"> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png" alt="">
-                                            <div class="cart_count"><span class="total_cart">
-                                                    <?php
+                                        <a href="./cart.php">
+                                            <div class="cart_icon"> <img
+                                                    src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png"
+                                                    alt="">
+                                                <div class="cart_count"><span class="total_cart">
+                                                        <?php
                                                     $get_data = "SELECT COUNT(bookid) AS result FROM cart WHERE email='$username'";
                                                     $response = $db->query($get_data);
                                                     if ($response) {
@@ -159,8 +178,9 @@ if (empty($username)) {
                                                         echo "0";
                                                     }
                                                     ?>
-                                                </span></div>
-                                        </div></a>
+                                                    </span></div>
+                                            </div>
+                                        </a>
                                         <div class="cart_content">
                                             <div class="cart_text"><a href="./cart.php">Cart</a></div>
                                             <div class="cart_price">
@@ -227,8 +247,7 @@ if (empty($username)) {
                     echo "<h3 style='color:red;' >Rs. <span class='sell_price'>" . $selling_price . "</span></h3><span class='text-success'>(Cash on Delivery Charge)</span>
                     </div>
                        <div class='mt-4 ml-4 p-4'>
-                    <button class='btn btn-lg btn-dark rounded mb-4 cart-btn'><i class='fa fa-shopping-cart'> </i> ADD TO CART</button>
-                    <button class='btn btn-lg btn-danger rounded ml-4 mb-4 buy-btn'><i class='fa fa-shopping-bag'> </i> BUY NOW</button>
+                    <button class='btn btn-lg btn-danger rounded ml-4 mb-4' data-toggle='modal' data-target='#donateRequest'><i class='fas fa-hand-holding-heart mr-2'> </i>Donation Request </button>
                     <div class='mt-4 row'>
                         <div class='col-2'>Delivery</div>
                         <div class='col-5 w-100'>
@@ -298,148 +317,193 @@ if (empty($username)) {
              </div>
             </div>";
                     }
-                    echo "<div class='row bg-white p-4 shadow-sm mb-3'>
-                 <div class='col-md-3 p-4'>
-                   <h4>Customer reviews</h4>
-                    <div class='customer-reviews'>
-                      <span class='fa fa-star checked text-warning' style='font-size:16px'></span>
-                      <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                      <span class='fa fa-star-o text-warning checked' style='font-size:16px'></span>
-                      <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                      <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                      <span class='ml-1'>3.7 out of 5</span>
-                    </div>
-                  </div>
-                  <div class='col-md-9'>
-
-                     <div>
-                       <i class='fa fa-user-circle-o' style='font-size:18px;'> </i><span> Sourav Santra</span>
-                        <div class='customer-reviews'>
-                          <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                          <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                          <span class='fa fa-star-o text-warning checked' style='font-size:16px'></span>
-                          <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                          <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                          <span class='font-weight-bold'> Must buy for AIIMS PREPARATION</span>
-                        </div>
-                        <div class='date_of_comment'><span>Reviewed in India on 24 July 2019</span></div>
-                        <p class='text-danger mb-1'>Verified Purchase</p>
-                        <div class='comment'>
-                        <span>Very good packaging and speedy delivery.. It is a quintessential book for AIIMS preparation.
-                        Explanations are descriptive as well as precise and updated according to latest edition of standard text books..
-                        Hats Off for the effort taken by Dr Pritesh Singh and others behind it</span>
-                        </div> 
-                     </div>
-                     <hr>
-                     <div>
-                       <i class='fa fa-user-circle-o' style='font-size:18px;'> </i><span> Sourav Santra</span>
-                        <div class='customer-reviews'>
-                        <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                        <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                        <span class='fa fa-star-o text-warning checked' style='font-size:16px'></span>
-                        <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                        <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                        <span class='font-weight-bold'> Must buy for AIIMS PREPARATION</span>
-                      </div>
-                      <div class='date_of_comment'><span>Reviewed in India on 24 July 2019</span></div>
-                      <p class='text-danger mb-1'>Verified Purchase</p>
-                      <div class='comment'>
-                      <span>Very good packaging and speedy delivery.. It is a quintessential book for AIIMS preparation.
-                      Explanations are descriptive as well as precise and updated according to latest edition of standard text books..
-                      Hats Off for the effort taken by Dr Pritesh Singh and others behind it</span>
-                      </div> 
-                     </div>
-                  </div>
-              </div>
-        </div>";
+                    echo "</div>";
                 }
                 ?>
+                <div class="modal fade" id="donateRequest" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Request for Donate Book</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                            <form>
+                    <!--1st row-->
+                    <div class="row">
+                        
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-warning border border-warning">
+                                        <i class="fa fa-user" style="color:white;"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="firstname" placeholder="First name" class="form-control border-left-0 border-warning">
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <input type="text" name="lastname" placeholder="Last name" class="form-control border-right-0 border-warning">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-warning border border-warning">
+                                        <i class="fa fa-user" style="color: white;"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <!--2nd row-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-danger border border-danger text-light"><i class="fa fa-intersex"></i></span>
+                                </div>
+                                <select class="form-control border-left-0 border-danger">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="input-group input-append" id="datetimepicker4"> 
+                                
+                                
+                                 
+                                <input class="form-control border-right-0 border-danger" type="date" placeholder="dd/mm/yyyy" id="">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-danger border border-danger add-on">
+                                        <i class="fa fa-calendar" style="color: white; cursor: pointer;"></i>
+                                        
+                                    </span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!--3rd row-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-warning border border-warning">
+                                        <i class="fa fa-phone" style="color:white;"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="phonenumber" placeholder="Phone number" class="form-control border-left-0 border-warning">
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control border-right-0 border-warning" placeholder="Another number">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-warning border border-warning">
+                                        <i class="fa fa-phone" style="color:white;"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--4th row-->
+                    <div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-danger border border-danger">
+                                    <i class="fa fa-envelope" style="color:white;"></i>
+                                </span>
+                            </div>
+                            <input type="email" name="email" placeholder="Email" class="form-control border-left-0 border-danger">
+                        </div>
+                    </div>
+                    <!--5th row-->
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item bg-success text-light">Occupation</li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" name="Occupation" id="student" class="custom-control-input">
+                                <label class="custom-control-label" for="student">Student</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" name="Occupation" id="proffesional" class="custom-control-input">
+                                <label class="custom-control-label" for="proffesional">Proffesional</label>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal mb-3">
+                        <li class="list-group-item">Income</li>
+                        <li class="list-group-item w-100">
+                            <input type="range" min="0" max="100" class="custom-range">
+                        </li>
+                    </ul>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-danger text-light">Address</span>
+                        </div>
+                        <textarea name="address" class="form-control"></textarea>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-info text-light">Message</span>
+                        </div>
+                        <textarea name="address" class="form-control" rows="5" placeholder="Why we donate you?"></textarea>
+                    </div>
+                    
 
+                    <div class="custom-control custom-switch float-left">
+                        <input type="checkbox" class="custom-control-input" id="accept-check">
+                        <label class="custom-control-label" for="accept-check">I accept terms & condition</label>
+                    </div>
+                    
+                    <button class="btn bg-primary float-right text-light mb-3">Request</button>   
+                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <?php include_once("./design/footer.php"); ?>
                 <script>
-                    //buy product
-                    $(document).ready(function() {
-                        $(".buy-btn").each(function() {
-                            $(this).click(function(){
-                                var id = sessionStorage.getItem("sent");
-                                var email = sessionStorage.getItem("email");
-                                var sell_price = parseInt($(".sell_price").html());
-                            
-                                $.ajax({
-                                    type : "POST",
-                                    url : "./php/buy.php",
-                                    data : {
-                                        bookid : id,
-                                        email : email,
-                                        sell_price: sell_price
-                                    },
-                                    success : function(response){
-                                        if(response.trim()=='success')
-                                        { 
-                                            $.ajax({
-                                                type : "POST",
-                                                url : "./php/totalsell.php",
-                                                data :{
-                                                    bookid : id
-                                                },
-                                                success : function(response){
-                                                  alert(response);
-                                                }
-                                            });
+                //buy product
+                $(document).ready(function() {
+                    $(".buy-btn").each(function() {
+                        $(this).click(function() {
+                            var id = sessionStorage.getItem("sent");
+                            var email = sessionStorage.getItem("email");
+                            var sell_price = parseInt($(".sell_price").html());
 
-                                        }
-                                        else
-                                        {
-                                            alert(response);
-                                        }
-                                    }
-                                });
-                            });  
-                        });
-                    });
-                    //cart item
-                    $(document).ready(function() {
-                        var id = sessionStorage.getItem("sent");
-                        var email = sessionStorage.getItem("email");
-                        var cart = $(".total_cart").html();
-                        var cart_price = parseInt($(".cart_price").html());
-                        var sell_price = parseInt($(".sell_price").html());
-                        var status = "contributebook";
-                        $(".cart-btn").click(function(e) {
-                            //var id = sessionStorage.getItem("sent");
-                            e.preventDefault();
                             $.ajax({
                                 type: "POST",
-                                url: "./php/cart.php",
+                                url: "./php/buy.php",
                                 data: {
                                     bookid: id,
                                     email: email,
-                                    status : status,
                                     sell_price: sell_price
                                 },
                                 success: function(response) {
                                     if (response.trim() == 'success') {
-                                        cart = parseInt(cart) + 1;
-                                        $(".total_cart").html(cart);
-                                        $(".cart_price").html(cart_price + sell_price);
-                                        swal({
-                                            type: "success",
-                                            title: "Shopping Cart",
-                                            text: "Success You have added 1 item to your shopping cart",
-                                            timer: 2000,
-                                            showConfirmButton: false
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "./php/totalsell.php",
+                                            data: {
+                                                bookid: id
+                                            },
+                                            success: function(response) {
+                                                alert(response);
+                                            }
                                         });
 
-                                    } else if (response.trim() == 'update') {
-                                        $(".cart_price").html(cart_price + sell_price);
-                                        swal({
-                                            type: "success",
-                                            title: "Update Cart Quantity",
-                                            text: "Success You have updated 1 item to your shopping cart",
-                                            timer: 2000,
-                                            showConfirmButton: false
-                                        });
                                     } else {
                                         alert(response);
                                     }
@@ -447,65 +511,117 @@ if (empty($username)) {
                             });
                         });
                     });
+                });
+                //cart item
+                $(document).ready(function() {
+                    var id = sessionStorage.getItem("sent");
+                    var email = sessionStorage.getItem("email");
+                    var cart = $(".total_cart").html();
+                    var cart_price = parseInt($(".cart_price").html());
+                    var sell_price = parseInt($(".sell_price").html());
+                    var status = "contributebook";
+                    $(".cart-btn").click(function(e) {
+                        //var id = sessionStorage.getItem("sent");
+                        e.preventDefault();
+                        $.ajax({
+                            type: "POST",
+                            url: "./php/cart.php",
+                            data: {
+                                bookid: id,
+                                email: email,
+                                status: status,
+                                sell_price: sell_price
+                            },
+                            success: function(response) {
+                                if (response.trim() == 'success') {
+                                    cart = parseInt(cart) + 1;
+                                    $(".total_cart").html(cart);
+                                    $(".cart_price").html(cart_price + sell_price);
+                                    swal({
+                                        type: "success",
+                                        title: "Shopping Cart",
+                                        text: "Success You have added 1 item to your shopping cart",
+                                        timer: 2000,
+                                        showConfirmButton: false
+                                    });
 
-                    //wish list item
-                    $(document).ready(function() {
-                        $(".wishcart").click(function() {
-                            var id = sessionStorage.getItem("sent");
-                            var email = sessionStorage.getItem("email");
-                            var wishlist_count = parseInt($(".wishlist_count").html());
-                            // alert();
-                            $.ajax({
-                                type: "POST",
-                                url: "./php/wish.php",
-                                data: {
-                                    bookid: id,
-                                    email: email
-                                },
-                                success: function(response) {
-                                    if (response.trim() == "success") {
-                                        $(".wishcart").removeClass('fa-heart-o');
-                                        $(".wishcart").addClass("fa-heart");
-                                        $(".wishcart").css('color', 'red');
-                                        $(".wishlist_count").html(wishlist_count + 1);
-                                    } else {
-                                        alert(response);
-                                    }
+                                } else if (response.trim() == 'update') {
+                                    $(".cart_price").html(cart_price + sell_price);
+                                    swal({
+                                        type: "success",
+                                        title: "Update Cart Quantity",
+                                        text: "Success You have updated 1 item to your shopping cart",
+                                        timer: 2000,
+                                        showConfirmButton: false
+                                    });
+                                } else {
+                                    alert(response);
                                 }
-
-                            });
+                            }
                         });
                     });
+                });
 
-                    //delivary pincode
-                    $(document).ready(function() {
-                        $(".pincode-form").submit(function(e) {
-                            e.preventDefault();
-                            var pincode = $("#pincode").val();
-                            $.ajax({
-                                type: "GET",
-                                url: 'https://api.postalpincode.in/pincode/' + pincode,
-                                success: function(response) {
-                                    $(".pincode-address").html("");
-                                    $(".delivary_status").html("");
-                                    console.log(response[0].PostOffice.length);
-                                    var length = response[0].PostOffice.length;
-                                    if (length > 0) {
-                                        $(".delivary_status").html("Generally delivered in 11 - 13 days");
-                                        for (var i = 0; i <= length; i++) {
-                                            console.log(response[0].PostOffice[i].Name);
-                                            var a = document.createElement("A");
-                                            a.className = 'ml-2';
-                                            var text = document.createTextNode(response[0].PostOffice[i].Name);
-                                            a.append(text);
-                                            $(".pincode-address").append(a);
-                                        }
-                                    }
-                                    //console.log(response[0].PostOffice[i].Name);
+                //wish list item
+                $(document).ready(function() {
+                    $(".wishcart").click(function() {
+                        var id = sessionStorage.getItem("sent");
+                        var email = sessionStorage.getItem("email");
+                        var wishlist_count = parseInt($(".wishlist_count").html());
+                        // alert();
+                        $.ajax({
+                            type: "POST",
+                            url: "./php/wish.php",
+                            data: {
+                                bookid: id,
+                                email: email
+                            },
+                            success: function(response) {
+                                if (response.trim() == "success") {
+                                    $(".wishcart").removeClass('fa-heart-o');
+                                    $(".wishcart").addClass("fa-heart");
+                                    $(".wishcart").css('color', 'red');
+                                    $(".wishlist_count").html(wishlist_count + 1);
+                                } else {
+                                    alert(response);
                                 }
-                            });
-                        })
+                            }
+
+                        });
                     });
+                });
+
+                //delivary pincode
+                $(document).ready(function() {
+                    $(".pincode-form").submit(function(e) {
+                        e.preventDefault();
+                        var pincode = $("#pincode").val();
+                        $.ajax({
+                            type: "GET",
+                            url: 'https://api.postalpincode.in/pincode/' + pincode,
+                            success: function(response) {
+                                $(".pincode-address").html("");
+                                $(".delivary_status").html("");
+                                console.log(response[0].PostOffice.length);
+                                var length = response[0].PostOffice.length;
+                                if (length > 0) {
+                                    $(".delivary_status").html(
+                                        "Generally delivered in 11 - 13 days");
+                                    for (var i = 0; i <= length; i++) {
+                                        console.log(response[0].PostOffice[i].Name);
+                                        var a = document.createElement("A");
+                                        a.className = 'ml-2';
+                                        var text = document.createTextNode(response[0]
+                                            .PostOffice[i].Name);
+                                        a.append(text);
+                                        $(".pincode-address").append(a);
+                                    }
+                                }
+                                //console.log(response[0].PostOffice[i].Name);
+                            }
+                        });
+                    })
+                });
                 </script>
 
 </body>

@@ -87,7 +87,7 @@ if (empty($username)) {
                         <!-- Logo -->
                         <div class="col-lg-2 col-sm-3 col-3 order-1">
                             <div class="logo_container">
-                                <div class="logo pt-3"><a href="#"><img src="./photos/oldbooknewlifeLogo.svg" height="80px" /></a></div>
+                                <div class="logo pt-3"><a href="./index.php"><img src="./photos/oldbooknewlifeLogo.svg" height="80px" /></a></div>
                             </div>
                         </div> <!-- Search -->
                         <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
@@ -290,11 +290,8 @@ if (empty($username)) {
              </div>
             </div>";
                     }
-                    echo "<div class='row bg-white p-4 shadow-sm mb-1'>
+                    echo "<div class='row bg-white p-4 shadow-sm mb-3'>
                  <div class='col-md-3 p-4'>
-
-                  <button class='btn btn-md mb-3 feedback-btn' email='".$username."'>Give your feedback</button>
-
                    <h4>Customer reviews</h4>
                     <div class='customer-reviews mb-3'>
                       <span class='fa fa-star checked text-warning' style='font-size:16px'></span>
@@ -312,86 +309,126 @@ if (empty($username)) {
                     
                   </div>
                   <div class='col-md-9'>";
+                  $bookid = $_GET['bookid'];
 
-
-
-                    echo " <div>
-                       <i class='fa fa-user-circle-o' style='font-size:18px;'> </i><span> Sourav Santra</span>
-                        <div class='customer-reviews'>
-                          <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                          <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                          <span class='fa fa-star-o text-warning checked' style='font-size:16px'></span>
-                          <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                          <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                          <span class='font-weight-bold'> Must buy for AIIMS PREPARATION</span>
-                        </div>
-                        <div class='date_of_comment'><span>Reviewed in India on 24 July 2019</span></div>
-                        <p class='text-danger mb-1'>Verified Purchase</p>
-                        <div class='comment'>
-                        <span>Very good packaging and speedy delivery.. It is a quintessential book for AIIMS preparation.
-                        Explanations are descriptive as well as precise and updated according to latest edition of standard text books..
-                        Hats Off for the effort taken by Dr Pritesh Singh and others behind it</span>
-                        </div> 
-                     </div>
-                     <hr>
-                     <div>
-                       <i class='fa fa-user-circle-o' style='font-size:18px;'> </i><span> Sourav Santra</span>
-                        <div class='customer-reviews'>
-                        <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                        <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                        <span class='fa fa-star-o text-warning checked' style='font-size:16px'></span>
-                        <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                        <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                        <span class='font-weight-bold'> Must buy for AIIMS PREPARATION</span>
+                  $getReview = "SELECT * FROM buy WHERE bookid = '$bookid'";
+                  $reviewResponse = $db->query($getReview);
+                  while($reviewData = $reviewResponse->fetch_assoc()){
+                    if($reviewData['review']){
+                        echo "<div>
+                        <i class='fa fa-user-circle-o' style='font-size:18px;'> </i><span> ".$reviewData['fullname']."</span>
+                         <div class='customer-reviews'>";
+                         for($i=1;$i<=$reviewData['rating'];$i++){
+                            echo "<span class='fa fa-star text-warning ml-1' style='font-size:16px'></span>"; 
+                         }
+                         for($i=5-$reviewData['rating'];$i>0;$i--){
+                            echo "<span class='fa fa-star-o ml-1' style='font-size:16px'></span>";
+                         }
+                         echo "<div class='date_of_comment'><span>Reviewed in India on ".$reviewData['review_date']."</span></div>
+                         <p class='text-danger mb-1'>Verified Purchase</p>
+                         <div class='comment'><span>".$reviewData['review']."</span>
+                         </div> 
                       </div>
-                      <div class='date_of_comment'><span>Reviewed in India on 24 July 2019</span></div>
-                      <p class='text-danger mb-1'>Verified Purchase</p>
-                      <div class='comment'>
-                      <span>Very good packaging and speedy delivery.. It is a quintessential book for AIIMS preparation.
-                      Explanations are descriptive as well as precise and updated according to latest edition of standard text books..
-                      Hats Off for the effort taken by Dr Pritesh Singh and others behind it</span>
-                      </div> 
-                     </div>
-                  </div>
+                      <hr>";
+                    }
+                  }
+                    echo "</div>
               </div>
         </div>";
                 }
                 ?>
-                <div class="container bg-light px-4">
-                <div class="row bg-white p-4 shadow-sm mb-3">
+                <div class="container-fluid bg-light p-0">
+                <div class="row bg-white p-4 shadow-sm ">
                     <div class="col-md-12">
                         <h4>Customer questions & answers</h4>
-                        <form>
+                        
                             <div class="input-group mb-3 w-75">
-                                <input type="text" class="form-control" placeholder="Have a question? Write here">
-                                <div class="input-group-append" style="cursor: pointer">
+                                <input type="text" id="question" class="form-control" placeholder="Have a question? Write here">
+                                <div class="input-group-append q-btn" style="cursor: pointer">
                                     <span class="input-group-text" id="basic-addon2"><i class="fa fa-send-o"></i></span>
                                 </div>
                             </div>
+                        <?php
+                          $bookid = $_GET['bookid'];
+                          $category = $_GET['category'];
+                          
+                          $getqueansData = "SELECT * FROM queans WHERE bookid='$bookid' AND category='$category'";
+                          $response = $db->query($getqueansData);
+                          while($queans=$response->fetch_assoc()){
+                              echo "<div>
+                                        <h6><span>Q: </span>".$queans['question']."</h6>
+                                        <p class='mb-1'><span>A:</span>".$queans['answer']."</p>
+                                        <p class='m-0'>James Halemanu</p>
+                                        <p><i class='fa fa-user mr-1'></i>Manager</p>
+                                    </div>";
+
+                          }
 
 
-                        </form>
-                        <div>
+
+                        ?>
+                        <!-- <div>
                             <h6><span>Q: </span> Is the product good or bad?</h6>
-                            <p class="mb-3"><span>A:</span> The new iQOO UI introduces semi-open icons, low-saturation color matching and smooth transition animations. It also has a Monster mode with enhanced CPU performance for performance enthusiasts</p>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p class="m-0">Sourav Santra</p>
-                                    <p><i class="fa fa-user mr-1"></i>Manager</p>
+                            <p class='mb-1'><span>A:</span> The new iQOO UI introduces semi-open icons, low-saturation color matching and smooth transition animations. It also has a Monster mode with enhanced CPU performance for performance enthusiasts</p>
+                            <p class='m-0'>Sourav Santra</p>
+                            <p><i class='fa fa-user mr-1'></i>Manager</p> -->
+                            <!-- <div class='row'>
+                                <div class='col-md-6'>
+                                    <p class='m-0'>Sourav Santra</p>
+                                    <p><i class='fa fa-user mr-1'></i>Manager</p>
                                 </div>
                                 <div class="col-md-4"></div>
-                                <div class="col-md-2 mb-2 d-flex flex-end">
-                                    <p class="mr-3" style="cursor: pointer"><span class="fa fa-thumbs-down mr-1"></span>644</p>
-                                    <p style="cursor: pointer"><span class="fa fa-thumbs-up mr-1"></span>4</p>
-                                </div>
-                            </div>
+                                <div class="col-md-2 mb-2 d-flex flex-end"> -->
+                                    <!-- <p class="mr-3" style="cursor: pointer"><span class="fa fa-thumbs-down mr-1"></span>644</p>
+                                    <p style="cursor: pointer"><span class="fa fa-thumbs-up mr-1"></span>4</p> -->
+                                <!-- </div>
+                            </div> -->
+                        <!-- </div>
+                        <hr> -->
+                        <div class="newquestion">
+
                         </div>
-                        <hr>
+
                     </div>
                 </div>
                 </div>
+            </div>
                 <?php include_once("./design/footer.php"); ?>
                 <script>
+                 //Question answere page
+                 $(document).ready(function(){
+                     $(".q-btn").click(function(){
+                        var url_string = window.location;
+                        var url = new URL(url_string);
+                        var bookid = url.searchParams.get('bookid');
+                        var category = url.searchParams.get('category');
+                        var email = sessionStorage.getItem("email");
+                        var question = $("#question").val();
+                        $.ajax({
+                            type : "POST",
+                            url : "./php/questionSubmit.php",
+                            data : {
+                                bookid : bookid,
+                                category : category,
+                                email : email,
+                                question : question
+                            },
+                            success : function(response){
+                                if(response.trim()=='failed')
+                                {
+                                    alert(response);
+                                }
+                                else{
+                                    $(".newquestion").html("<h6><span>Q: </span>"+response+"</h6><hr>")
+                                }
+                            }
+
+                        })
+                        
+                     })
+                     
+                 })
+                
                 //feedback page
                 $(document).ready(function(){
                     $(".feedback-btn").click(function(){
