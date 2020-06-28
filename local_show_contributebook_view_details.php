@@ -28,6 +28,25 @@ require("./database/database.php");
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <style>
+        .book-view:hover {
+        box-shadow: 0px 0px 2px 2px #ccc;
+        transform: scale(1.1);
+        z-index: 1;
+        transition: 1s;
+        cursor: pointer;
+        background: white;
+    }
+
+    .contributebook-view:hover {
+        box-shadow: 0px 0px 2px 2px #ccc;
+        transform: scale(1.1);
+        z-index: 1;
+        transition: 1s;
+        cursor: pointer;
+        background: white;
+    }
+    </style>
 </head>
 
 <body>
@@ -291,7 +310,7 @@ require("./database/database.php");
                             $image = "data:image/png;base64," . base64_encode($same_data['book_image']);
                             $price = $same_data['selling_price'];
                             echo "<div class='col-md-2 col-6 mb-3'>
-                       <div class='card'>
+                       <div class='card book-view' bookid='" . $same_data['id'] . "' category='" . $category . "'>
                          <div class='card-body p-1'>
                             <div class='mb-1'><img src='" . $image . "' width='100%'></div>
                             <div class='rating'>
@@ -313,66 +332,30 @@ require("./database/database.php");
              </div>
             </div>";
                     }
-                    echo "<div class='row bg-white p-4 shadow-sm mb-3'>
-                 <div class='col-md-3 p-4'>
-                   <h4>Customer reviews</h4>
-                    <div class='customer-reviews'>
-                      <span class='fa fa-star checked text-warning' style='font-size:16px'></span>
-                      <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                      <span class='fa fa-star-o text-warning checked' style='font-size:16px'></span>
-                      <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                      <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                      <span class='ml-1'>3.7 out of 5</span>
-                    </div>
-                  </div>
-                  <div class='col-md-9'>
-
-                     <div>
-                       <i class='fa fa-user-circle-o' style='font-size:18px;'> </i><span> Sourav Santra</span>
-                        <div class='customer-reviews'>
-                          <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                          <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                          <span class='fa fa-star-o text-warning checked' style='font-size:16px'></span>
-                          <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                          <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                          <span class='font-weight-bold'> Must buy for AIIMS PREPARATION</span>
-                        </div>
-                        <div class='date_of_comment'><span>Reviewed in India on 24 July 2019</span></div>
-                        <p class='text-danger mb-1'>Verified Purchase</p>
-                        <div class='comment'>
-                        <span>Very good packaging and speedy delivery.. It is a quintessential book for AIIMS preparation.
-                        Explanations are descriptive as well as precise and updated according to latest edition of standard text books..
-                        Hats Off for the effort taken by Dr Pritesh Singh and others behind it</span>
-                        </div> 
-                     </div>
-                     <hr>
-                     <div>
-                       <i class='fa fa-user-circle-o' style='font-size:18px;'> </i><span> Sourav Santra</span>
-                        <div class='customer-reviews'>
-                        <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                        <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                        <span class='fa fa-star-o text-warning checked' style='font-size:16px'></span>
-                        <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                        <span class='fa fa-star-o text-warning' style='font-size:16px'></span>
-                        <span class='font-weight-bold'> Must buy for AIIMS PREPARATION</span>
-                      </div>
-                      <div class='date_of_comment'><span>Reviewed in India on 24 July 2019</span></div>
-                      <p class='text-danger mb-1'>Verified Purchase</p>
-                      <div class='comment'>
-                      <span>Very good packaging and speedy delivery.. It is a quintessential book for AIIMS preparation.
-                      Explanations are descriptive as well as precise and updated according to latest edition of standard text books..
-                      Hats Off for the effort taken by Dr Pritesh Singh and others behind it</span>
-                      </div> 
-                     </div>
-                  </div>
-              </div>
-        </div>";
+                    echo "</div>";
                 }
                 ?>
 
 
                 <?php include_once("./design/footer.php"); ?>
                 <script>
+                    //related local book view
+                $(document).ready(function() {
+                    $(".book-view").each(function() {
+                        $(this).click(function() {
+                            var bookid = $(this).attr("bookid");
+                            var category = $(this).attr("category");
+                            window.open('./local_show_book_view_details.php?bookid=' + bookid +
+                                '&category=' +
+                                category, '_blank');
+                            //var width = 20;
+                            //var height
+                            //window.location.href = "http://localhost/main.php?width=" + width + "&height=" + height;
+
+                        });
+                    });
+                });
+
                     //buy product
                     $(document).ready(function() {
                         $(".buy-btn").each(function() {

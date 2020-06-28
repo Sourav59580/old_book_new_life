@@ -54,7 +54,7 @@ require("./database/database.php");
             <img src="./photos/21-woman-girl-png-image.png" width="250px;">
         </div>
     </div>
-    <div class="container-fluid" style="height: 900px;">
+    <div class="container-fluid" style="min-height: 900px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

@@ -21,7 +21,7 @@ if (isset($_POST['blogString'])) {
     }else{
         $create_table = "CREATE TABLE artical(
             id INT(10) NOT NULL AUTO_INCREMENT,
-            blogstring MEDIUMTEXT,
+            blogstring LONGTEXT,
             PRIMARY KEY(id)
         )";
         $response = $db->query($create_table);

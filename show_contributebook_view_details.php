@@ -35,7 +35,7 @@ if (empty($username)) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <style>
-        .book-view:hover {
+    .book-view:hover {
         box-shadow: 0px 0px 2px 2px #ccc;
         transform: scale(1.1);
         z-index: 1;
@@ -358,140 +358,155 @@ if (empty($username)) {
                                 </button>
                             </div>
                             <div class="modal-body">
-                            <form>
-                    <!--1st row-->
-                    <div class="row">
-                        
-                        <div class="col-md-6">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text bg-warning border border-warning">
-                                        <i class="fa fa-user" style="color:white;"></i>
-                                    </span>
-                                </div>
-                                <input type="text" name="firstname" placeholder="First name" class="form-control border-left-0 border-warning">
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <div class="input-group mb-3">
-                                <input type="text" name="lastname" placeholder="Last name" class="form-control border-right-0 border-warning">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-warning border border-warning">
-                                        <i class="fa fa-user" style="color: white;"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <!--2nd row-->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text bg-danger border border-danger text-light"><i class="fa fa-intersex"></i></span>
-                                </div>
-                                <select class="form-control border-left-0 border-danger">
-                                    <option>Male</option>
-                                    <option>Female</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="input-group input-append" id="datetimepicker4"> 
-                                
-                                
-                                 
-                                <input class="form-control border-right-0 border-danger" type="date" placeholder="dd/mm/yyyy" id="">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-danger border border-danger add-on">
-                                        <i class="fa fa-calendar" style="color: white; cursor: pointer;"></i>
-                                        
-                                    </span>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <!--3rd row-->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text bg-warning border border-warning">
-                                        <i class="fa fa-phone" style="color:white;"></i>
-                                    </span>
-                                </div>
-                                <input type="text" name="phonenumber" placeholder="Phone number" class="form-control border-left-0 border-warning">
-                            </div>
-                            
-                        </div>
-                        <div class="col-md-6">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control border-right-0 border-warning" placeholder="Another number">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-warning border border-warning">
-                                        <i class="fa fa-phone" style="color:white;"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--4th row-->
-                    <div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text bg-danger border border-danger">
-                                    <i class="fa fa-envelope" style="color:white;"></i>
-                                </span>
-                            </div>
-                            <input type="email" name="email" placeholder="Email" class="form-control border-left-0 border-danger">
-                        </div>
-                    </div>
-                    <!--5th row-->
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item bg-success text-light">Occupation</li>
-                        <li class="list-group-item">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" name="Occupation" id="student" class="custom-control-input">
-                                <label class="custom-control-label" for="student">Student</label>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" name="Occupation" id="proffesional" class="custom-control-input">
-                                <label class="custom-control-label" for="proffesional">Proffesional</label>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal mb-3">
-                        <li class="list-group-item">Income</li>
-                        <li class="list-group-item w-100">
-                            <input type="range" min="0" max="100" class="custom-range">
-                        </li>
-                    </ul>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-danger text-light">Address</span>
-                        </div>
-                        <textarea name="address" class="form-control"></textarea>
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-info text-light">Message</span>
-                        </div>
-                        <textarea name="address" class="form-control" rows="5" placeholder="Why we donate you?"></textarea>
-                    </div>
-                    
+                                <form>
+                                    <!--1st row-->
+                                    <div class="row">
 
-                    <div class="custom-control custom-switch float-left">
-                        <input type="checkbox" class="custom-control-input" id="accept-check">
-                        <label class="custom-control-label" for="accept-check">I accept terms & condition</label>
-                    </div>
-                    
-                    <button class="btn bg-primary float-right text-light mb-3">Request</button>   
-                </form>
+                                        <div class="col-md-6">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text bg-warning border border-warning">
+                                                        <i class="fa fa-user" style="color:white;"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="text" name="firstname" placeholder="First name"
+                                                    class="form-control border-left-0 border-warning">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="input-group mb-3">
+                                                <input type="text" name="lastname" placeholder="Last name"
+                                                    class="form-control border-right-0 border-warning">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text bg-warning border border-warning">
+                                                        <i class="fa fa-user" style="color: white;"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!--2nd row-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span
+                                                        class="input-group-text bg-danger border border-danger text-light"><i
+                                                            class="fa fa-intersex"></i></span>
+                                                </div>
+                                                <select class="form-control border-left-0 border-danger">
+                                                    <option>Male</option>
+                                                    <option>Female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="input-group input-append" id="datetimepicker4">
+
+
+
+                                                <input class="form-control border-right-0 border-danger" type="date"
+                                                    placeholder="dd/mm/yyyy" id="">
+                                                <div class="input-group-append">
+                                                    <span
+                                                        class="input-group-text bg-danger border border-danger add-on">
+                                                        <i class="fa fa-calendar"
+                                                            style="color: white; cursor: pointer;"></i>
+
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!--3rd row-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text bg-warning border border-warning">
+                                                        <i class="fa fa-phone" style="color:white;"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="text" name="phonenumber" placeholder="Phone number"
+                                                    class="form-control border-left-0 border-warning">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control border-right-0 border-warning"
+                                                    placeholder="Another number">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text bg-warning border border-warning">
+                                                        <i class="fa fa-phone" style="color:white;"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--4th row-->
+                                    <div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-danger border border-danger">
+                                                    <i class="fa fa-envelope" style="color:white;"></i>
+                                                </span>
+                                            </div>
+                                            <input type="email" name="email" placeholder="Email"
+                                                class="form-control border-left-0 border-danger">
+                                        </div>
+                                    </div>
+                                    <!--5th row-->
+                                    <ul class="list-group mb-3">
+                                        <li class="list-group-item bg-success text-light">Occupation</li>
+                                        <li class="list-group-item">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" name="Occupation" id="student"
+                                                    class="custom-control-input">
+                                                <label class="custom-control-label" for="student">Student</label>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" name="Occupation" id="proffesional"
+                                                    class="custom-control-input">
+                                                <label class="custom-control-label"
+                                                    for="proffesional">Proffesional</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-group list-group-horizontal mb-3">
+                                        <li class="list-group-item">Income</li>
+                                        <li class="list-group-item w-100">
+                                            <input type="range" min="0" max="100" class="custom-range">
+                                        </li>
+                                    </ul>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-danger text-light">Address</span>
+                                        </div>
+                                        <textarea name="address" class="form-control"></textarea>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-info text-light">Message</span>
+                                        </div>
+                                        <textarea name="address" class="form-control" rows="5"
+                                            placeholder="Why we donate you?"></textarea>
+                                    </div>
+
+
+                                    <div class="custom-control custom-switch float-left">
+                                        <input type="checkbox" class="custom-control-input" id="accept-check">
+                                        <label class="custom-control-label" for="accept-check">I accept terms &
+                                            condition</label>
+                                    </div>
+
+                                    <button class="btn bg-primary float-right text-light mb-3">Request</button>
+                                </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -504,22 +519,23 @@ if (empty($username)) {
                 <script>
                 //related book view
                 $(document).ready(function() {
-        $(".book-view").each(function() {
-            $(this).click(function() {
-                var bookid = $(this).attr("bookid");
-                var email = $(this).attr("email");
-                var category = $(this).attr("category");
-                sessionStorage.setItem("sent", bookid);
-                sessionStorage.setItem("email", email);
-                window.open('./show_book_view_details.php?bookid=' + bookid + '&category=' +
-                    category, '_blank');
-                //var width = 20;
-                //var height
-                //window.location.href = "http://localhost/main.php?width=" + width + "&height=" + height;
+                    $(".book-view").each(function() {
+                        $(this).click(function() {
+                            var bookid = $(this).attr("bookid");
+                            var email = $(this).attr("email");
+                            var category = $(this).attr("category");
+                            sessionStorage.setItem("sent", bookid);
+                            sessionStorage.setItem("email", email);
+                            window.open('./show_book_view_details.php?bookid=' + bookid +
+                                '&category=' +
+                                category, '_blank');
+                            //var width = 20;
+                            //var height
+                            //window.location.href = "http://localhost/main.php?width=" + width + "&height=" + height;
 
-            });
-        });
-    });
+                        });
+                    });
+                });
                 //buy product
                 $(document).ready(function() {
                     $(".buy-btn").each(function() {
