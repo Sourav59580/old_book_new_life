@@ -116,7 +116,7 @@ require("./database/database.php");
                         </div> <!-- Search -->
                         <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
                             <div class="header_search">
-                                <div class="header_search_content">
+                                <div class="header_search_content d-none">
                                     <div class="header_search_form_container">
                                         <form action="#" class="header_search_form clearfix"> <input type="search" required="required" class="header_search_input" placeholder="Search for products...">
                                             <div class="custom_dropdown" style="display: none;">
